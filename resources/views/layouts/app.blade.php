@@ -24,8 +24,16 @@
                 <!-- Navbar content -->
                 <div class="collapse navbar-collapse navbars justify-content-end" id="secondaryNavbar">
                     <div class="navbar-nav flex-row">
-                        <a class="nav-link pr-3" href="{{ route('login') }}">Είσοδος</a>
-                        <a class="nav-link pl-3" href="{{ route('register') }}">Εγγραφή</a>
+                        @if (auth()->user())
+                            <a class="nav-link pr-3" href="#">{{ auth()->user()->username }}</a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="nav-link btn btn-link pl-3">Έξοδος</button>
+                            </form>
+                        @else
+                            <a class="nav-link pr-3" href="#" data-toggle="modal" data-target="#loginModal">Είσοδος</a>
+                            <a class="nav-link pl-3" href="{{ route('register') }}">Εγγραφή</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -74,6 +82,41 @@
     </header>
     <div class="section">
         @yield('content')
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Σύνδεση</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="loginForm" action="{{ route('login') }}" method="post">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label for="inputUsername" class="sr-only">Username</label>
+                            <input type="text" class="form-control" name="username" id="inputUsername" placeholder="Username" value="{{ old('username') }}">
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="rememberCheck">
+                            <label class="custom-control-label" for="rememberCheck">Remember me</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Είσοδος</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

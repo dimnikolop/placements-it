@@ -17,9 +17,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
+        'role',
     ];
 
     /**
@@ -40,4 +40,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the company record associated with the user.
+     */
+    public function company()
+    {
+        return $this->hasOne('App\Models\Company');
+    }
 }

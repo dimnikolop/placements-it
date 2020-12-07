@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\DashboardController;
 
@@ -15,10 +17,6 @@ use App\Http\Controllers\Auth\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/posts', function () {
     return view('posts.index');
@@ -48,16 +46,17 @@ Route::get('/professor_questionnaire', function() {
     return view('main.professor_questionnaire');
 })->name('professor_questionnaire');
 
-Route::get('/company_register', function() {
-    return view('main.company_register');
-})->name('company_register');
+Route::get('/company_register', [CompanyController::class, 'index'])->name('company_register');
+Route::post('/company_register', [CompanyController::class, 'store']);
 
 Route::get('/graduate_register', function() {
     return view('main.graduate_register');
 })->name('graduate_register');
 
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/auth/login', [LoginController::class, 'index'])->name('login');
-Route::post('/auth/login', [LoginController::class, 'store']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
