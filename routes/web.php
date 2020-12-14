@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\GraduateController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -18,8 +19,8 @@ use App\Http\Controllers\Auth\DashboardController;
 |
 */
 
-Route::get('/posts', function () {
-    return view('posts.index');
+Route::get('/welcome', function () {
+    return view('welcome');
 });
 
 Route::get('/', function() {
@@ -34,28 +35,29 @@ Route::get('/questionnaires', function() {
     return view('main.questionnaires');
 })->name('questionnaires');
 
-Route::get('/student_questionnaire', function() {
+Route::get('/questionnaires/student', function() {
     return view('main.student_questionnaire');
 })->name('student_questionnaire');
 
-Route::get('/company_questionnaire', function() {
+Route::get('/questionnaires/company', function() {
     return view('main.company_questionnaire');
 })->name('company_questionnaire');
 
-Route::get('/professor_questionnaire', function() {
+Route::get('/questionnaires/professor', function() {
     return view('main.professor_questionnaire');
 })->name('professor_questionnaire');
 
-Route::get('/company_register', [CompanyController::class, 'index'])->name('company_register');
-Route::post('/company_register', [CompanyController::class, 'store']);
+Route::get('/register/company', [CompanyController::class, 'create'])->name('company_register');
+Route::post('/register/company', [CompanyController::class, 'store']);
 
-Route::get('/graduate_register', function() {
-    return view('main.graduate_register');
-})->name('graduate_register');
+Route::get('/register/graduate', [GraduateController::class, 'create'])->name('graduate_register');
+Route::post('/register/graduate', [GraduateController::class, 'store']);
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/company', [CompanyController::class, 'index'])->name('company')->middleware('auth');
+
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
