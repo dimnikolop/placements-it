@@ -7,15 +7,13 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fontawesome-free-5.15.1/css/all.min.css') }}"></link>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"></link>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
     <header>
@@ -24,16 +22,28 @@
                 <!-- Navbar content -->
                 <div class="collapse navbar-collapse navbars justify-content-end" id="secondaryNavbar">
                     <div class="navbar-nav flex-row">
-                        @if (auth()->user())
-                            <a class="nav-link pr-3" href="#">{{ auth()->user()->username }}</a>
-                            <form action="{{ route('logout') }}" method="post">
-                                @csrf
-                                <button type="submit" class="nav-link btn btn-link pl-3">Έξοδος</button>
-                            </form>
-                        @else
+                        @auth
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    My Account ({{ auth()->user()->username }})
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
+                                    <h6 class="dropdown-header">Manage Account</h6>
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="{{ route('company.dashboard') }}">Dashboard</a>
+                                    <div class="dropdown-divider"></div>
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item btn btn-link">Έξοδος</button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endauth
+
+                        @guest
                             <a class="nav-link pr-3" href="#" data-toggle="modal" data-target="#loginModal">Είσοδος</a>
                             <a class="nav-link pl-3" href="{{ route('register') }}">Εγγραφή</a>
-                        @endif
+                        @endguest
                     </div>
                 </div>
             </div>
@@ -57,11 +67,11 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Πληροφορίες
+                                Πληροφορίες
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('requirements') }}">Προϋποθέσεις</a>
-                                <a class="dropdown-item" href="#">Οδηγοί Πρακτικής Άσκησης</a>
+                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Οδηγοί Πρακτικής Άσκησης</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
@@ -107,7 +117,7 @@
                             <div class="invalid-feedback"></div>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="rememberCheck">
+                            <input type="checkbox" class="custom-control-input" name="remember" id="rememberCheck">
                             <label class="custom-control-label" for="rememberCheck">Remember me</label>
                         </div>
                     </div>
@@ -118,5 +128,20 @@
             </div>
         </div>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    @if (session('openLogin'))
+        //js function that will open hidden login modal
+        <script>
+            $('#loginModal').modal('show');
+            var message = 
+                "<div class='alert alert-danger w-100' role='alert'>" +
+                    "<i class='fas fa-times-circle'></i> {{ session('openLogin') }}" +
+                "</div>";
+            $(".modal-body").prepend(message);
+        </script>
+    @endif
 </body>
 </html>

@@ -14,7 +14,7 @@
         <form id="companyRegisterForm" action="{{ route('company_register') }}" method="post" class="m-3">
             @csrf
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputCompany">Επωνυμία Εταιρείας :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputCompany">Επωνυμία:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <input class="form-control @error('company_name') is-invalid @enderror" type="text" id="inputCompany" name="company_name" value="{{ old('company_name') }}"/>
                     @error('company_name')
@@ -24,7 +24,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputDescription">Περιγραφή Εταιρείας :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputDescription">Περιγραφή:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <textarea class="form-control @error('description') is-invalid @enderror" id="inputDescription" name="description" rows="5">{{ old('description') }}</textarea>
                     @error('description')
@@ -34,9 +34,9 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputCategory">Κατηγορία :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputSector">Τομέας:<span class="required">*</span></label>
                 <div class="col-md-8">
-                    <select id="inputCategory" class="custom-select @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}">
+                    <select id="inputSector" class="custom-select @error('sector') is-invalid @enderror" name="sector" value="{{ old('sector') }}">
                         <option selected disabled>Παρακαλώ διαλέξτε μια από τις παρακάτω επιλογές</option>
                         <option>Δημόσιος Τομέας - Περιφέρεια, Δήμος</option>
                         <option>Δημόσιος Τομέας - ΑΕΙ, ΤΕΙ</option>
@@ -44,14 +44,14 @@
                         <option>Ιδιωτικός Τομέας - Μη σχετικό με τεχνολογίες Πληροφορικής</option>
                         <option>Άλλο - Τράπεζα</option>
                     </select>
-                    @error('category')
+                    @error('sector')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputAddress">Διεύθυνση :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputAddress">Διεύθυνση:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <input class="form-control @error('address') is-invalid @enderror" type="text" id="inputAddress" name="address" value="{{ old('address') }}"/>
                     @error('address')
@@ -61,7 +61,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputLocation">Τοποθεσία :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputLocation">Τοποθεσία:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <select id="inputLocation" class="custom-select @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}">
                         <option selected disabled>Παρακαλώ διαλέξτε μια από τις παρακάτω επιλογές</option>
@@ -77,7 +77,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputWebsite">Ιστότοπος :</label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputWebsite">Ιστότοπος:</label>
                 <div class="col-md-8">
                     <input class="form-control @error('website') is-invalid @enderror" type="text" id="inputWebsite" name="website" value="{{ old('website') }}"/>
                     @error('website')
@@ -87,7 +87,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputContactPerson">Άτομο επικοινωνίας :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputContactPerson">Υπεύθυνος επικοινωνίας:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <input class="form-control @error('contact_person') is-invalid @enderror" type="text" id="inputContactPerson" name="contact_person" value="{{ old('contact_person') }}"/>
                     @error('contact_person')
@@ -97,7 +97,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputPhone">Τηλέφωνο :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputPhone">Τηλέφωνο:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <input class="form-control @error('phone') is-invalid @enderror" type="text" id="inputPhone" name="phone" value="{{ old('phone') }}"/>
                     @error('phone')
@@ -107,7 +107,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputEmail">E-mail :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputEmail">E-mail:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <input class="form-control @error('email') is-invalid @enderror" type="email" id="inputEmail" name="email" value="{{ old('email') }}"/>
                     @error('email')
@@ -117,7 +117,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputNotes">Σημειώσεις / Σχόλια :</label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputNotes">Σημειώσεις / Σχόλια:</label>
                 <div class="col-md-8">
                     <textarea class="form-control @error('notes') is-invalid @enderror" id="inputNotes" name="notes" value="{{ old('notes') }}" rows="5"></textarea>
                     @error('notes')
@@ -129,7 +129,7 @@
             <h5 class="font-weight-light text-center">Στοιχεία Λογαριασμού</h5>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputUsername">Όνομα Χρήστη :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputUsername">Όνομα Χρήστη:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <input class="form-control @error('username') is-invalid @enderror" type="text" id="inputUsername" name="username" value="{{ old('username') }}"/>
                     @error('username')
@@ -139,7 +139,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputPassword">Κωδικός Πρόσβασης :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputPassword">Κωδικός Πρόσβασης:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <input class="form-control @error('password') is-invalid @enderror" type="text" id="inputPassword" name="password" value="{{ old('password') }}"/>
                     @error('password')
@@ -149,7 +149,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputPasswordConfirmation">Επιβεβαίωση :<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputPasswordConfirmation">Επιβεβαίωση:<span class="required">*</span></label>
                 <div class="col-md-8">
                     <input class="form-control @error('password_confirmation') is-invalid @enderror" type="text" id="inputPasswordConfirmation" name="password_confirmation" value="{{ old('password_confirmation') }}"/>
                     @error('password_confirmation')

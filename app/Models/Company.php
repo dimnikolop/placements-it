@@ -18,7 +18,7 @@ class Company extends Model
         'name',
         'user_id',
         'description',
-        'category',
+        'sector',
         'address',
         'location',
         'website',

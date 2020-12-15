@@ -41,7 +41,7 @@ class CompanyController extends Controller
         $request->validate([
             'company_name' => 'required|unique:companies,name',
             'description' => 'required',
-            'category' => 'required',
+            'sector' => 'required',
             'address' => 'required',
             'location' => 'required',
             'website' => 'max:45',
@@ -62,7 +62,7 @@ class CompanyController extends Controller
             'name' => $request->company_name,
             'user_id' => $user->id,
             'description' => $request->description,
-            'category' => $request->category,
+            'sector' => $request->sector,
             'address' => $request->address,
             'location' => $request->location,
             'website' => $request->website,
@@ -73,5 +73,30 @@ class CompanyController extends Controller
         ]);
 
         return redirect()->route('company_register')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Display the company dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard()
+    {
+        $company = auth()->user()->company;
+
+        return view('main.company_dashboard', [
+            'company' => $company
+        ]);
     }
 }
