@@ -39,7 +39,7 @@ class CompanyController extends Controller
     {
         // Validate the request...
         $request->validate([
-            'company_name' => 'required|unique:companies,name',
+            'name' => 'required|unique:companies,name',
             'description' => 'required',
             'sector' => 'required',
             'address' => 'required',
@@ -59,7 +59,7 @@ class CompanyController extends Controller
         ]);
 
         $company = Company::create([
-            'name' => $request->company_name,
+            'name' => $request->name,
             'user_id' => $user->id,
             'description' => $request->description,
             'sector' => $request->sector,
@@ -84,6 +84,44 @@ class CompanyController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Company $company)
+    {
+        // Validate the request...
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'sector' => 'required',
+            'address' => 'required',
+            'location' => 'required',
+            'website' => 'nullable|url|max:45',
+            'contact_person' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email|max:60'
+        ]);
+
+        $company->update($validatedData);
+
+        return redirect()->route('company.dashboard')->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
     }
 
     /**

@@ -29,7 +29,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
                                     <h6 class="dropdown-header">Manage Account</h6>
-                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="#"></a>
                                     <a class="dropdown-item" href="{{ route('company.dashboard') }}">Dashboard</a>
                                     <div class="dropdown-divider"></div>
                                     <form action="{{ route('logout') }}" method="post">
@@ -141,6 +141,12 @@
                     "<i class='fas fa-times-circle'></i> {{ session('openLogin') }}" +
                 "</div>";
             $(".modal-body").prepend(message);
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+            $('#editCompanyModal').modal('show');
         </script>
     @endif
 </body>

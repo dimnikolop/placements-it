@@ -56,6 +56,7 @@ Route::post('/register/graduate', [GraduateController::class, 'store']);
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('auth');
+Route::patch('/company/{company}', [CompanyController::class, 'update'])->name('company.update')->middleware('auth');
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
