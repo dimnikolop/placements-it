@@ -14,10 +14,10 @@
         <form id="companyRegisterForm" action="{{ route('company_register') }}" method="post" class="m-3">
             @csrf
             <div class="form-group row">
-                <label class="col-md-3 col-form-label text-md-right" for="inputCompany">Επωνυμία:<span class="required">*</span></label>
+                <label class="col-md-3 col-form-label text-md-right" for="inputName">Επωνυμία:<span class="required">*</span></label>
                 <div class="col-md-8">
-                    <input class="form-control @error('company_name') is-invalid @enderror" type="text" id="inputCompany" name="company_name" value="{{ old('company_name') }}"/>
-                    @error('company_name')
+                    <input class="form-control @error('name') is-invalid @enderror" type="text" id="inputName" name="name" value="{{ old('name') }}"/>
+                    @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -36,13 +36,13 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label text-md-right" for="inputSector">Τομέας:<span class="required">*</span></label>
                 <div class="col-md-8">
-                    <select id="inputSector" class="custom-select @error('sector') is-invalid @enderror" name="sector" value="{{ old('sector') }}">
+                    <select class="custom-select @error('sector') is-invalid @enderror" id="inputSector" name="sector">
                         <option selected disabled>Παρακαλώ διαλέξτε μια από τις παρακάτω επιλογές</option>
-                        <option>Δημόσιος Τομέας - Περιφέρεια, Δήμος</option>
-                        <option>Δημόσιος Τομέας - ΑΕΙ, ΤΕΙ</option>
-                        <option>Ιδιωτικός Τομέας - Σχετικό με τεχνολογίες Πληροφορικής</option>
-                        <option>Ιδιωτικός Τομέας - Μη σχετικό με τεχνολογίες Πληροφορικής</option>
-                        <option>Άλλο - Τράπεζα</option>
+                        <option @if (old('sector') == 'Δημόσιος Τομέας - Περιφέρεια, Δήμος') selected @endif>Δημόσιος Τομέας - Περιφέρεια, Δήμος</option>
+                        <option @if (old('sector') == 'Δημόσιος Τομέας - ΑΕΙ, ΤΕΙ') selected @endif>Δημόσιος Τομέας - ΑΕΙ, ΤΕΙ</option>
+                        <option @if (old('sector') == 'Ιδιωτικός Τομέας - Σχετικό με τεχνολογίες Πληροφορικής') selected @endif>Ιδιωτικός Τομέας - Σχετικό με τεχνολογίες Πληροφορικής</option>
+                        <option @if (old('sector') == 'Ιδιωτικός Τομέας - Μη σχετικό με τεχνολογίες Πληροφορικής') selected @endif>Ιδιωτικός Τομέας - Μη σχετικό με τεχνολογίες Πληροφορικής</option>
+                        <option @if (old('sector') == 'Άλλο - Τράπεζα') selected @endif>Άλλο - Τράπεζα</option>
                     </select>
                     @error('sector')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -63,12 +63,12 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label text-md-right" for="inputLocation">Τοποθεσία:<span class="required">*</span></label>
                 <div class="col-md-8">
-                    <select id="inputLocation" class="custom-select @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}">
+                    <select class="custom-select @error('location') is-invalid @enderror" id="inputLocation" name="location">
                         <option selected disabled>Παρακαλώ διαλέξτε μια από τις παρακάτω επιλογές</option>
-                        <option>Θεσσαλονίκη</option>
-                        <option>Αθήνα</option>
-                        <option>Υπόλοιπη Ελλάδα</option>
-                        <option>Εξωτερικό</option>
+                        <option @if (old('location') == 'Θεσσαλονίκη') selected @endif>Θεσσαλονίκη</option>
+                        <option @if (old('location') == 'Αθήνα') selected @endif>Αθήνα</option>
+                        <option @if (old('location') == 'Υπόλοιπη Ελλάδα') selected @endif>Υπόλοιπη Ελλάδα</option>
+                        <option @if (old('location') == 'Εξωτερικό') selected @endif>Εξωτερικό</option>
                     </select>
                     @error('location')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -120,9 +120,6 @@
                 <label class="col-md-3 col-form-label text-md-right" for="inputNotes">Σημειώσεις / Σχόλια:</label>
                 <div class="col-md-8">
                     <textarea class="form-control @error('notes') is-invalid @enderror" id="inputNotes" name="notes" value="{{ old('notes') }}" rows="5"></textarea>
-                    @error('notes')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
             </div>
 
