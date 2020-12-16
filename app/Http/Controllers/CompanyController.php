@@ -98,7 +98,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified company in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -122,6 +122,17 @@ class CompanyController extends Controller
         $company->update($validatedData);
 
         return redirect()->route('company.dashboard')->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
+    }
+
+    /**
+     * Remove the specified company from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Company $company)
+    {
+        $company->delete();
     }
 
     /**
