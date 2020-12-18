@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\Admin\AnnouncementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,8 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('auth');
 Route::patch('/company/{company}', [CompanyController::class, 'update'])->name('company.update')->middleware('auth');
 Route::delete('/company/{company}', [CompanyController::class, 'destroy'])->name('company.destroy')->middleware('auth');
+
+Route::get('announcement/create', [AnnouncementController::class, 'create'])->name('announcement.create')->middleware(['auth','admin']);
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('login');

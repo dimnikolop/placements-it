@@ -27,10 +27,19 @@ class LoginController extends Controller
         ]);
 
         // attempt to log in
-        if(auth()->attempt($request->only('username', 'password'))) {
-            return response()->json(['success'=>'Logged in!', 'url' => route('home')]);
-        }
+        if(auth()->attempt($request->only('username', 'password'), $request->remember)) {
+            
+            $request->session()->regenerate();
 
+            // to admin dashboard
+            if (auth()->user()->role == 'admin') {
+                return response()->json(['success'=>'Admin is logged in!', 'url' => route('admin.dashboard')]);
+            }
+            else {
+                return response()->json(['success'=>'Logged in!', 'url' => route('home')]);
+            }
+        }
+        
         return response()->json(['error' => 'Password is incorrect']);
     }
 }
