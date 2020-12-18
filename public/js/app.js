@@ -37276,6 +37276,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./custom.js */ "./resources/js/custom.js");
 
+__webpack_require__(/*! ./custom-admin.js */ "./resources/js/custom-admin.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37317,6 +37319,21 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/custom-admin.js":
+/*!**************************************!*\
+  !*** ./resources/js/custom-admin.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(function () {
+  $("#sidebarToggler").on('click', function () {
+    $(".sidebar").toggle();
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/custom.js":
 /*!********************************!*\
   !*** ./resources/js/custom.js ***!
@@ -37335,6 +37352,9 @@ $("#loginForm").on('submit', function (event) {
     dataType: "JSON",
     success: function success(response) {
       if (response.error) {
+        // Clean error message templates from previous errors
+        $(".invalid-feedback").text('');
+        $("#inputUsername").removeClass("is-invalid");
         $("#inputPassword").addClass("is-invalid");
         $("#inputPassword").next().text(response.error);
       } else {

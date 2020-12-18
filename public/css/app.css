@@ -10919,10 +10919,10 @@ header .nav-bottom {
   position: relative;
 }
 
-#secondaryNavbar .navbar-nav > a:first-child::after {
+#secondaryNavbar .navbar-nav > .nav-link + .nav-link::before {
   content: "";
   position: absolute;
-  right: 0;
+  left: 0;
   top: 12px;
   width: 1px;
   height: 20px;
@@ -11041,5 +11041,98 @@ h6,
 
 .modal-login {
   max-width: 25rem;
+}
+
+.form-section {
+  display: none;
+  margin-bottom: 4rem;
+}
+
+.form-section.current {
+  display: inherit;
+}
+
+.form-navigation .btn {
+  display: none;
+}
+
+/* Company Dashboard */
+
+.nav-tabs {
+  background: #e0e1e7;
+}
+
+.nav-tabs a {
+  color: #495057;
+}
+
+/* Header - Navbar */
+
+.header-navbar {
+  background: #2c3e50;
+  /* Flat able */
+}
+
+.mobile-header .navbar-toggler,
+.mobile-header #sidebarToggler {
+  color: #fff;
+  border: none;
+  box-shadow: none;
+}
+
+.mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 991.98px) {
+  .mobile-header {
+    width: 100%;
+  }
+}
+
+/* Sidebar - Navbar */
+
+.sidebar {
+  background: #2c3e50;
+  width: 235px;
+  min-height: calc(100vh - 71px);
+}
+
+.sidebar .nav-item .nav-link {
+  padding: 1rem;
+  color: #d0dcda;
+}
+
+.sidebar .nav-item:hover a {
+  color: #1abc9c;
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+/* Main Container */
+
+#main-container {
+  display: flex;
+}
+
+#content-wrapper {
+  background: #e9e9e9;
+  width: 100%;
+  padding: 1rem;
+  color: #37474f;
+}
+
+#content-wrapper a {
+  color: #37474f;
+}
+
+.page-header .breadcrumb {
+  background: transparent;
 }
 
