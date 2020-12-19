@@ -48,6 +48,7 @@ Route::get('/questionnaires/professor', function() {
     return view('main.professor_questionnaire');
 })->name('professor_questionnaire');
 
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/register/company', [CompanyController::class, 'create'])->name('company_register');
 Route::post('/register/company', [CompanyController::class, 'store']);
 
@@ -60,7 +61,8 @@ Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name(
 Route::patch('/company/{company}', [CompanyController::class, 'update'])->name('company.update')->middleware('auth');
 Route::delete('/company/{company}', [CompanyController::class, 'destroy'])->name('company.destroy')->middleware('auth');
 
-Route::get('announcement/create', [AnnouncementController::class, 'create'])->name('announcement.create')->middleware(['auth','admin']);
+Route::get('/announcement/create', [AnnouncementController::class, 'create'])->name('announcement.create')->middleware(['auth','admin']);
+Route::post('/announcements', [AnnouncementController::class, 'store'])->name('announcement.store')->middleware(['auth','admin']);
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
