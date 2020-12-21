@@ -9,6 +9,9 @@ $("#loginForm").on('submit', function (event) {
         dataType: "JSON",
         success: function (response) {
             if (response.error) {
+                // Clean error message templates from previous errors
+                $(".invalid-feedback").text('');
+                $("#inputUsername").removeClass("is-invalid");
                 $("#inputPassword").addClass("is-invalid");
                 $("#inputPassword").next().text(response.error);
             }

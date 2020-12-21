@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('fontawesome-free-5.15.1/css/all.min.css') }}"></link>
+    <link rel="stylesheet" href="{{ asset('fontawesome-free-5.15.1/css/all.min.css') }}">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"></link>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 </head>
 <body>
@@ -25,16 +25,20 @@
                         @auth
                             <div class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    My Account ({{ auth()->user()->username }})
+                                    {{ auth()->user()->username }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
                                     <h6 class="dropdown-header">Manage Account</h6>
                                     <a class="dropdown-item" href="#"></a>
-                                    <a class="dropdown-item" href="{{ route('company.dashboard') }}">Dashboard</a>
+                                    @if (auth()->user()->role == 'admin')
+                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                    @else
+                                        <a class="dropdown-item" href="{{ route('company.dashboard') }}">Dashboard</a>
+                                    @endif
                                     <div class="dropdown-divider"></div>
                                     <form action="{{ route('logout') }}" method="post">
                                         @csrf
-                                        <button type="submit" class="dropdown-item btn btn-link">Έξοδος</button>
+                                        <button type="submit" class="dropdown-item btn btn-link"><i class="fas fa-sign-out-alt"></i> Έξοδος</button>
                                     </form>
                                 </div>
                             </div>
@@ -77,10 +81,10 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Φορείς Απασχόλησης</a>
+                            <a class="nav-link" href="{{ route('companies.index') }}">Φορείς Απασχόλησης</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Ανακοινώσεις</a>
+                            <a class="nav-link" href="{{ route('announcements.index') }}">Ανακοινώσεις</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Επικοινωνία</a>

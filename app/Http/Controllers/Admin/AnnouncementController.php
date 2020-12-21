@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class AnnouncementController extends Controller
 {
@@ -15,7 +16,18 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        //
+        $announcements = Announcement::orderBy('created_at')->get();
+
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            return view('announcements.index', [
+                'announcements' => $announcements
+            ]);
+        }
+        else {
+            return view('main.announcements', [
+                'announcements' => $announcements
+            ]);
+        }
     }
 
     /**
@@ -25,7 +37,7 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        return view('admin.new_announcement');
+        return view('announcements.create');
     }
 
     /**
@@ -48,41 +60,50 @@ class AnnouncementController extends Controller
         $announcement->title = $request->title;
         $announcement->content = $request->content;
 
-        if($request->hasFile('attachment')) {
+        // Handle file upload
+        if($request->hasFile('attachment') && $request->file('attachment')->isValid()) {
             $fileName = time() . '_' . $request->file('attachment')->getClientOriginalName();
             $filePath = $request->file('attachment')->storeAs('uploads', $fileName, 'public');
             $announcement->attachment = $filePath;
+            $request->session()->flash('success', 'Η ανακοίνωση και το αρχείο με όνομα ('.$request->file('attachment')->getClientOriginalName().') καταχωρήθηκαν επιτυχώς');
+        }
+        else {
+            $request->session()->flash('success', 'Η ανακοίνωση καταχωρήθηκε επιτυχώς');
         }
         
         $announcement->save();
 
-        return back()->with('success', 'Η ανακοίνωση και το αρχείο με όνομα () καταχωρήθηκε επιτυχώς');
+        return redirect()->route('announcements.index');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified announcement.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $announcement = Announcement::find($id);
+
+        return view('announcements.show', compact('announcement'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified announcement.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $announcement = Announcement::find($id);
+
+        return view('announcements.edit', compact('announcement'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified announcement in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -90,17 +111,68 @@ class AnnouncementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $announcement = Announcement::find($id);
+
+        $announcement->title = $request->title;
+        $announcement->content = $request->content;
+
+        // Handle file upload
+        if ($request->hasFile('attachment') && $request->file('attachment')->isValid()) {
+            
+            // If a new file has been set, delete the old file from storage if any
+            if (Storage::disk('public')->exists($announcement->attachment)) {
+                Storage::disk('public')->delete($announcement->attachment);
+            }
+            
+            $fileName = time() . '_' . $request->file('attachment')->getClientOriginalName();
+            $filePath = $request->file('attachment')->storeAs('uploads', $fileName, 'public');
+            $announcement->attachment = $filePath;
+            $request->session()->flash('success', 'Η ανακοίνωση και το αρχείο με όνομα ('.$request->file('attachment')->getClientOriginalName().') καταχωρήθηκαν επιτυχώς');
+        }
+        else {
+            $request->session()->flash('success', 'Η ανακοίνωση ανανεώθηκε επιτυχώς');
+        }
+
+        $announcement->save();
+
+        return redirect()->route('announcements.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified announcement from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $announcement = Announcement::find($id);
+        
+        // Delete attachments if any from storage
+        if (Storage::disk('public')->exists($announcement->attachment)) {
+            Storage::disk('public')->delete($announcement->attachment);
+        }
+
+        $announcement->delete();
+
+        return redirect()->route('announcements.index')->with('success', 'Announcement has been deleted successfully');
+    }
+
+    /**
+     * Download the specified announcement's file from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadFile($id)
+    {
+        $announcement = Announcement::find($id);
+
+        return Storage::disk('public')->download($announcement->attachment);
     }
 }

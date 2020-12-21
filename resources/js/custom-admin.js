@@ -8,4 +8,18 @@ $(function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    $('[data-toggle="popover"]').popover()
+
+    // Get announcement id to delete
+    $("#deleteBtn").on('click', function() {
+        const url = $(this).data('url');
+        $('#deleteForm').attr('action', url);
+    });
+
+    
+    $('#announcementsTable').DataTable({
+        //responsive: true
+        "order": [[ 0, 'desc' ]]
+    });
 });

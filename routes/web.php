@@ -61,8 +61,14 @@ Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name(
 Route::patch('/company/{company}', [CompanyController::class, 'update'])->name('company.update')->middleware('auth');
 Route::delete('/company/{company}', [CompanyController::class, 'destroy'])->name('company.destroy')->middleware('auth');
 
-Route::get('/announcement/create', [AnnouncementController::class, 'create'])->name('announcement.create')->middleware(['auth','admin']);
-Route::post('/announcements', [AnnouncementController::class, 'store'])->name('announcement.store')->middleware(['auth','admin']);
+Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
+Route::get('/admin/announcement/create', [AnnouncementController::class, 'create'])->name('announcement.create')->middleware(['auth','admin']);
+Route::post('/admin/announcements', [AnnouncementController::class, 'store'])->name('announcement.store')->middleware(['auth','admin']);
+Route::get('/announcement/{id}', [AnnouncementController::class, 'show'])->name('announcement.show');
+Route::get('/admin/announcement/{id}/edit', [AnnouncementController::class, 'edit'])->name('announcement.edit')->middleware(['auth','admin']);
+Route::patch('/admin/announcement/{id}', [AnnouncementController::class, 'update'])->name('announcement.update')->middleware(['auth','admin']);
+Route::delete('/admin/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy')->middleware(['auth','admin']);
+Route::get('/announcements/download/file/{id}', [AnnouncementController::class, 'downloadFile'])->name('announcements.download.file');
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('login');

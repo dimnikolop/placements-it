@@ -18,16 +18,6 @@
 
     <style>
         /* General */
-        .card {
-            box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-            transition: box-shadow 0.2s ease-in-out;
-            border-top: 3px solid #8CDDCD;
-        }
-
-        .card .card-header {
-            background-color: #ffffff;
-        }
 
         .card .card-header h5 {
             margin-bottom: 0;
@@ -36,7 +26,40 @@
             display: inline-block;
         }
 
+        .page-header h6 {
+            margin-bottom: 15px;
+            color: #37474f;
+        }
+
+        .page-header:not(.breadcumb-sticky) .page-header-title + nav .breadcrumb > .breadcrumb-item a {
+            font-size: 13px;
+        }
+
+        .page-header .page-header-title + nav .breadcrumb > .breadcrumb-item a {
+            color: #373a3c;
+            font-weight: 400;
+        }
+
+        .page-header .page-header-title + nav .breadcrumb > .breadcrumb-item:last-child a {
+            color: #37474f;
+            font-weight: 600;
+        }
+
+        .page-header .page-header-title + nav .breadcrumb > .breadcrumb-item::before {
+            color: rgba(55, 58, 60, 0.6);
+            font-size: 13px;
+        }
+
         /* Bootstrap Overwrite */
+
+        .text-primary {
+            color: #1abc9c !important;
+        }
+
+        a.text-primary:hover, 
+        a.text-primary:focus {
+            color: #117964 !important;
+        }
 
         .btn-primary {
             color: #fff;
@@ -62,6 +85,15 @@
             color: #fff;
             background-color: #148f77;
             border-color: #12846e;
+        }
+        
+        .table {
+            color: #37474f;
+        }
+
+        .table thead th {
+            border-bottom: 1px solid #e2e5e8;
+            background: #f6f6f6;
         }
         
     </style>
@@ -93,7 +125,10 @@
                             <a class="dropdown-item" href="#">Profile</a>
                             <a class="dropdown-item" href="#">My Messages</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button type="submit" class="dropdown-item btn btn-link"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                            </form>
                         </div>
                     </li>
                 </ul>
@@ -104,10 +139,13 @@
         <div class="sidebar">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href=""><i class="fas fa-home fa-fw"></i> Dashboard</a>
+                    <a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="fas fa-home fa-fw"></i> Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href=""><i class="far fa-file-alt fa-fw"></i> New Announcement</a>
+                    <a class="nav-link" href="{{ route('announcement.create') }}"><i class="far fa-file-alt fa-fw"></i> New Announcement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('announcements.index') }}"><i class="fas fa-list-ul fa-fw"></i> Announcements</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Students Table</a>

@@ -55,13 +55,24 @@
     width: 100%;
     min-height: calc(100vh - 71px);
     padding: 1rem;
-    color: #37474f;
 }
 
-#content-wrapper a {
+/* #content-wrapper a {
     color: #37474f;
-}
+}*/
 
 .page-header .breadcrumb {
     background: transparent;
+}
+
+/* General */
+.card {
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    transition: box-shadow 0.2s ease-in-out;
+    border-top: 3px solid #8CDDCD;
+}
+
+.card .card-header {
+    background-color: #ffffff;
 }
