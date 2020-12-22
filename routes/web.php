@@ -51,6 +51,7 @@ Route::get('/questionnaires/professor', function() {
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/register/company', [CompanyController::class, 'create'])->name('company_register');
 Route::post('/register/company', [CompanyController::class, 'store']);
+Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
 
 Route::get('/register/graduate', [GraduateController::class, 'create'])->name('graduate_register');
 Route::post('/register/graduate', [GraduateController::class, 'store']);

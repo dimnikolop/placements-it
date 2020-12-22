@@ -45,7 +45,7 @@
                         @endauth
 
                         @guest
-                            <a class="nav-link pr-3" href="#" data-toggle="modal" data-target="#loginModal">Είσοδος</a>
+                            <a class="nav-link pr-3" href="#" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt"></i> Είσοδος</a>
                             <a class="nav-link pl-3" href="{{ route('register') }}">Εγγραφή</a>
                         @endguest
                     </div>
