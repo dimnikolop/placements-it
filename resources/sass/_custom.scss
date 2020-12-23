@@ -81,15 +81,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin-right: 1rem;
 }
 
-.col-form-label {
-    font-weight: 600;
-}
-
-.btn-primary {
-    outline: 0;
-    background: #1C0113;
-}
-
 .btn-success {
     background: #11766D;
 }
@@ -117,9 +108,21 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 #registerForm {
     position: relative;
-    background-color: #f0f0f5;
-    padding: 3.5rem 0;
-    border: 5px solid #e6e6e6;
+    padding: 3.5rem 2.5rem;
+    background: #f6fafd;
+    border: 3px solid #e6e6e6;
+}
+
+#registerForm label:not(.custom-file-label) {
+    font-weight: 600;
+}
+
+.register-header::before,
+.register-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.125);
 }
 
 .modal-login {

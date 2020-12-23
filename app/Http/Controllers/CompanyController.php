@@ -49,10 +49,11 @@ class CompanyController extends Controller
             'address' => 'required',
             'zip_code' => 'required|max:8',
             'location' => 'required',
-            'website' => 'max:45',
-            'contact_person' => 'required',
-            'phone' => 'required',
+            'website' => 'url|max:45',
+            'contact_person' => 'required|max:45',
+            'phone' => 'required|max:20',
             'email' => 'required|email|max:60|unique:companies',
+            'logo' => 'image|mimes:jpg,bmp,png',
             'username' => 'required|max:30|unique:users',
             'password' => 'required|min:8|max:25|confirmed'
         ]);
@@ -117,11 +118,13 @@ class CompanyController extends Controller
             'description' => 'required',
             'sector' => 'required',
             'address' => 'required',
+            'zip_code' => 'required|max:8',
             'location' => 'required',
             'website' => 'nullable|url|max:45',
-            'contact_person' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email|max:60'
+            'contact_person' => 'required|max:45',
+            'phone' => 'required|max:20',
+            'email' => 'required|email|max:60|unique:companies',
+            'logo' => 'image|mimes:jpg,bmp,png'
         ]);
 
         $company->update($validatedData);

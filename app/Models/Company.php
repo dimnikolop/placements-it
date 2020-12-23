@@ -20,6 +20,7 @@ class Company extends Model
         'description',
         'sector',
         'address',
+        'zip_code',
         'location',
         'website',
         'contact_person',

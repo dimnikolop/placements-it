@@ -47,6 +47,10 @@ $("#loginForm").on('submit', function (event) {
 });
 
 $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+
+$(function () {
     var sections = $('.form-section');
 
     function navigateTo(index) {
