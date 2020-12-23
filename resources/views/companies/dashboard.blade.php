@@ -2,18 +2,14 @@
 
 @section('content')
 <div class="container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                aria-controls="profile" aria-selected="true">Στοιχεία Εταιρείας :</a>
+                aria-controls="profile" aria-selected="true">Προφίλ :</a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="jobs-tab" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs"
                 aria-selected="false">Θέσεις Απασχόλησης :</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-                aria-selected="false">Contact</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -26,77 +22,80 @@
                     </p>
                 </div>
             @endif
-            <div class="row">
-                <div class="col-md-2">
-                    <h6>Επωνυμία:</h6>
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <h5 class="border-bottom py-3 text-primary">Γενικές Πληροφορίες</h5>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-6">
+                    <h6>Επωνυμία</h6>
                     <p>{{ $company->name }}</p>
                 </div>
-
-                <div class="col-md-2">
-                    <h6>Περιγραφή:</h6>
+                <div class="col-md-6">
+                    <h6>Logo</h6>
+                    <img src="{{ asset('img/company-1-45x45.png') }}" width="30" height="30" alt="...">
                 </div>
-                <div class="col-md-10">
-                    <p>{{ $company->description }}</p>
-                </div>
-
-                <div class="col-md-2">
-                    <h6>Τομέας:</h6>
-                </div>
-                <div class="col-md-10">
+                <div class="col-md-6">
+                    <h6>Τομέας</h6>
                     <p>{{ $company->sector }}</p>
                 </div>
-
-                <div class="col-md-2">
-                    <h6>Διεύθυνση:</h6>
-                </div>
-                <div class="col-md-10">
-                    <p>{{ $company->address }}</p>
-                </div>
-
-                <div class="col-md-2">
-                    <h6>Τοποθεσία:</h6>
-                </div>
-                <div class="col-md-10">
-                    <p>{{ $company->location }}</p>
-                </div>
-
-                <div class="col-md-2">
-                    <h6>Ιστότοπος:</h6>
-                </div>
-                <div class="col-md-10">
+                <div class="col-md-6">
+                    <h6>Ιστότοπος</h6>
                     <p>{{ $company->website }}</p>
                 </div>
-
-                <div class="col-md-2">
-                    <h6>Υπεύθυνος Επικοινωνίας:</h6>
+                <div class="col-md-6">
+                    <h6>Διεύθυνση</h6>
+                    <p>{{ $company->address }}, {{ $company->zip_code }}</p>
                 </div>
-                <div class="col-md-10">
-                    <p>{{ $company->contact_person }}</p>
+                <div class="col-md-6">
+                    <h6>Τοποθεσία</h6>
+                    <p>{{ $company->location }}</p>
                 </div>
-
-                <div class="col-md-2">
-                    <h6>Τηλέφωνο:</h6>
+                <div class="col-md-12 mb-3">
+                    <h6>Περιγραφή</h6>
+                    <div class="shadow-sm p-3"><p>{{ $company->description }}</p></div>
                 </div>
-                <div class="col-md-10">
-                    <p>{{ $company->phone }}</p>
-                </div>
-
-                <div class="col-md-2">
-                    <h6>E-mail:</h6>
-                </div>
-                <div class="col-md-10">
-                    <p>{{ $company->email }}</p>
-                </div>
-
-                <div class="col-md-2">
-                    <h6>Σημειώσεις:</h6>
-                </div>
-                <div class="col-md-10">
-                    <p>{{ $company->notes }}</p>
+                <div class="col-md-12">
+                    <h6>Σημειώσεις / Σχόλια</h6>
+                    <div class="shadow-sm p-3"><p>{{ $company->notes }}</p></div>
                 </div>
             </div>
+
+            <div class="contact-info row mb-5">
+                <div class="col-md-12">
+                    <h5 class="border-bottom py-3 text-primary">Στοιχεία Επικοινωνίας</h5>
+                </div>
+                <div class="col-md-6">
+                    <h6>Υπεύθυνος Επικοινωνίας</h6>
+                    <p>{{ $company->contact_person }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6>Τηλέφωνο</h6>
+                    <p>{{ $company->phone }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6>E-mail</h6>
+                    <p>{{ $company->email }}</p>
+                </div>
+            </div>
+
+            <div class="social-media-info row mb-5">
+                <div class="col-md-12">
+                    <h5 class="border-bottom py-3 text-primary">Σύνδεσμοι Social Media</h5>
+                </div>
+                <div class="col-md-6">
+                    <h6>Facebook</h6>
+                    <p></p>
+                </div>
+                <div class="col-md-6">
+                    <h6>Twitter</h6>
+                    <p></p>
+                </div>
+                <div class="col-md-6">
+                    <h6>LinkedIn</h6>
+                    <p></p>
+                </div>
+            </div>
+           
             <div class="row justify-content-end">
                 <!-- Button trigger edit modal -->
                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#editCompanyModal">
@@ -110,7 +109,6 @@
             </div>
         </div>
         <div class="tab-pane fade" id="jobs" role="tabpanel" aria-labelledby="jobs-tab"></div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
     </div>
 </div>
 
@@ -130,7 +128,7 @@
                     @method('PATCH')
                     <div class="form-froup">
                         <label for="inputName">Επωνυμία:<span class="required">*</span></label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputName" name="name" value="{{ old('name') ?? $company->name }}" aria-describedby="nameHelp">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputName" value="{{ old('name') ?? $company->name }}" aria-describedby="nameHelp" disabled>
                         <small id="nameHelp" class="form-text text-muted">Η επωνυμία της εταιρείας</small>
                     </div>
                     <div class="form-group">
@@ -151,6 +149,16 @@
                     <div class="form-group">
                         <label for="inputAddress">Διεύθυνση:<span class="required">*</span></label>
                         <input type="text" class="form-control @error('address') is-invalid @enderror" id="inputAddress" name="address" value="{{ old('address') ?? $company->address }}">
+                        @error('address')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="inputZipCode">Ταχυδρομικός Κώδικας:<span class="required">*</span></label>
+                        <input type="text" class="form-control @error('zip_code') is-invalid @enderror" id="inputZipCode" name="zip_code" value="{{ old('zip_code') ?? $company->zip_code }}"/>
+                        @error('zip_code')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="inputLocation">Τοποθεσία:<span class="required">*</span></label>
@@ -163,7 +171,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="inputWebsite">Ιστότοπος:<span class="required">*</span></label>
+                        <label for="inputWebsite">Ιστότοπος:</label>
                         <input type="text" class="form-control @error('website') is-invalid @enderror" id="inputWebsite" name="website" value="{{ old('website') ?? $company->website }}">
                         @error('website')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -191,7 +199,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="inputNotes">Σημειώσεις / Σχόλια:<span class="required">*</span></label>
+                        <label for="inputNotes">Σημειώσεις / Σχόλια:</label>
                         <textarea class="form-control @error('notes') is-invalid @enderror" id="inputNotes" name="notes" rows="5">{{ old('notes') ?? $company->notes }}</textarea>
                     </div>
                 </div>
@@ -222,7 +230,7 @@
                 <form action="{{ route('company.destroy', $company->id) }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="submit"  class="btn btn-primary">Delete</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
                 </form>
             </div>
         </div>

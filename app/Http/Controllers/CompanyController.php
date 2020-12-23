@@ -10,13 +10,17 @@ use Illuminate\Support\Facades\Hash;
 class CompanyController extends Controller
 {
     /**
-     * Show the register form for the company.
+     * Display a listing of all companies.
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        
+        $companies = Company::get();
+
+        return view('companies.index', [
+            'companies' => $companies
+        ]);
     }
 
     /**
@@ -43,6 +47,7 @@ class CompanyController extends Controller
             'description' => 'required',
             'sector' => 'required',
             'address' => 'required',
+            'zip_code' => 'required|max:8',
             'location' => 'required',
             'website' => 'max:45',
             'contact_person' => 'required',
@@ -64,6 +69,7 @@ class CompanyController extends Controller
             'description' => $request->description,
             'sector' => $request->sector,
             'address' => $request->address,
+            'zip_code' => $request->zip_code,
             'location' => $request->location,
             'website' => $request->website,
             'contact_person' => $request->contact_person,
@@ -76,39 +82,38 @@ class CompanyController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified company.
      *
-     * @param  int  $id
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Company $company)
+    {
+        return view('companies.show', compact('company'));
+    }
+
+    /**
+     * Show the form for editing the specified company.
+     *
+     * @param  \App\Models\Company  $company
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Company $company)
     {
         //
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified company in storage.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Company $company)
     {
         // Validate the request...
         $validatedData = $request->validate([
-            'name' => 'required',
             'description' => 'required',
             'sector' => 'required',
             'address' => 'required',
@@ -125,9 +130,9 @@ class CompanyController extends Controller
     }
 
     /**
-     * Remove the specified company from storage.
+     * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function destroy(Company $company)
@@ -144,7 +149,7 @@ class CompanyController extends Controller
     {
         $company = auth()->user()->company;
 
-        return view('main.company_dashboard', [
+        return view('companies.dashboard', [
             'company' => $company
         ]);
     }
