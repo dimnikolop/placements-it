@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\QuestionnairesController;
 use App\Http\Controllers\Admin\AnnouncementController;
 
 /*
@@ -32,21 +33,13 @@ Route::get('/requirements', function() {
     return view('main.requirements');
 })->name('requirements');
 
-Route::get('/questionnaires', function() {
-    return view('main.questionnaires');
-})->name('questionnaires');
-
-Route::get('/questionnaires/student', function() {
-    return view('main.student_questionnaire');
-})->name('student_questionnaire');
-
-Route::get('/questionnaires/company', function() {
-    return view('main.company_questionnaire');
-})->name('company_questionnaire');
-
-Route::get('/questionnaires/professor', function() {
-    return view('main.professor_questionnaire');
-})->name('professor_questionnaire');
+Route::get('/questionnaires', [QuestionnairesController::class, 'index'])->name('questionnaires.index');
+Route::get('/questionnaires/student', [QuestionnairesController::class, 'studentCreate'])->name('questionnaires.student.create');
+Route::get('/questionnaires/company', [QuestionnairesController::class, 'companyCreate'])->name('questionnaires.company.create');
+Route::get('/questionnaires/professor', [QuestionnairesController::class, 'professorCreate'])->name('questionnaires.professor.create');
+Route::post('/questionnaires/student', [QuestionnairesController::class, 'studentStore'])->name('questionnaires.student.store');
+Route::post('/questionnaires/company', [QuestionnairesController::class, 'companyStore'])->name('questionnaires.company.store');
+Route::post('/questionnaires/professor', [QuestionnairesController::class, 'professorStore'])->name('questionnaires.professor.store');
 
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/register/company', [CompanyController::class, 'create'])->name('company_register');

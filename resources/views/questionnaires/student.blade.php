@@ -5,6 +5,13 @@
     <div id="" class="card">
         <div class="card-body">
             <div class="card-title my-5 text-center"><h5>ΕΡΩΤΗΜΑΤΟΛΟΓΙΟ ΑΞΙΟΛΟΓΗΣΗΣ ΤΗΣ ΠΡΑΚΤΙΚΗΣ ΑΣΚΗΣΗΣ <br> ΑΠΟ ΤΟΝ ΑΣΚΟΥΜΕΝΟ ΦΟΙΤΗΤΗ</h5></div>
+            @if (session('success'))
+                <div class="alert alert-success text-center" role="alert">
+                    <p class="mb-0"><i class="fas fa-check-circle"></i> <strong>Success!</strong>
+                        {{ session('success') }}
+                    </p>
+                </div>
+            @endif
             <form id="studentQuestionnaireForm" action="{{ route('questionnaires.student.store') }}" method="post">
                 @csrf
                 <div class="form-group row">
@@ -20,30 +27,34 @@
                 <div class="form-group row">
                     <label class="col-md-12 col-lg-3 col-form-label text-lg-right">Διάρκεια Απασχόλησης :<span class="required">*</span></label>
                     <label class="col-3 col-lg-1 offset-sm-1 offset-lg-0 col-form-label">Από:</label>
-                    <div class="col-9 col-sm-7 col-lg-3 mb-1 mb-lg-0 input-group"> 
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    <div class="col-9 col-sm-7 col-lg-3 mb-1 mb-lg-0">
+                        <div class="input-group" data-toggle="tooltip" title="Ημερομηνία έναρξης"> 
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                            <input class="form-control @error('start_date') is-invalid @enderror" type="text" id="startDate" name="start_date" placeholder="DD/MM/YYYY"/>
+                            @error('start_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <input class="form-control @error('date_from') is-invalid @enderror" type="date" id="dateFrom" name="date_from" placeholder="dd-mm-yyyy"/>
-                        @error('date_from')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                     <label class="col-3 col-lg-auto col-xl-1 offset-sm-1 offset-lg-0 col-form-label">Μέχρι:</label>
-                    <div class="col-9 col-sm-7 col-lg-3 input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    <div class="col-9 col-sm-7 col-lg-3">
+                        <div class="input-group" data-toggle="tooltip" title="Ημερομηνία λήξης">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                            <input class="form-control @error('end_date') is-invalid @enderror" type="text" id="endDate" name="end_date" placeholder="DD/MM/YYYY"/>
+                            @error('end_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <input class="form-control @error('date_to') is-invalid @enderror" id="dateTo" name="date_to" placeholder="DD-MM-YYYY" type="date"/>
-                        @error('date_to')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
                 </div>
             
-                <div class="form-group row align-items-center">
+                <div class="form-group row">
                     <label class="col-md-2 col-lg-3 col-form-label text-lg-right">Εξάμηνο :<span class="required">*</span></label>
-                    <div class="col-md-auto mb-1">
+                    <div class="col-md-auto mb-1 my-auto">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input class="custom-control-input @error('semester') is-invalid @enderror" type="radio" id="radio1Semester" name="semester" value="Χειμερινό">
                             <label class="custom-control-label" for="radio1Semester">Χειμερινό</label>
@@ -52,6 +63,9 @@
                             <input class="custom-control-input @error('semester') is-invalid @enderror" type="radio" id="radio2Semester" name="semester" value="Εαρινό">
                             <label class="custom-control-label" for="radio2Semester">Εαρινό</label>
                         </div>
+                        @error('semester')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-5 col-sm-4 col-md-2">
                         <div class="input-group"> 
@@ -110,7 +124,7 @@
                         <label class="custom-control-label" for="radio1VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer1')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
     
@@ -137,7 +151,7 @@
                         <label class="custom-control-label" for="radio2VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer2')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -164,7 +178,7 @@
                         <label class="custom-control-label" for="radio3VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer3')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -232,7 +246,7 @@
                         <label class="custom-control-label" for="radio5VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer5')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -259,7 +273,7 @@
                         <label class="custom-control-label" for="radio6VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer6')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -286,7 +300,7 @@
                         <label class="custom-control-label" for="radio7VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer7')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -313,7 +327,7 @@
                         <label class="custom-control-label" for="radio8VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer8')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -340,7 +354,7 @@
                         <label class="custom-control-label" for="radio9VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer9')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -367,7 +381,7 @@
                         <label class="custom-control-label" for="radio10VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer10')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -394,7 +408,7 @@
                         <label class="custom-control-label" for="radio11VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer11')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -409,7 +423,7 @@
                         <label class="custom-control-label" for="radio12No">Όχι</label>
                     </div>
                     @error('answer12')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -424,7 +438,7 @@
                         <label class="custom-control-label" for="radio13No">Όχι</label>
                     </div>
                     @error('answer13')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -531,7 +545,7 @@
                         <label class="custom-control-label" for="radio16VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer16')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -558,7 +572,7 @@
                         <label class="custom-control-label" for="radio17VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer17')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -585,7 +599,7 @@
                         <label class="custom-control-label" for="radio18VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer18')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -612,7 +626,7 @@
                         <label class="custom-control-label" for="radio19VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer19')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -639,7 +653,7 @@
                         <label class="custom-control-label" for="radio20VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer20')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -734,7 +748,7 @@
                 </div>
             
                 <div class="form-group">
-                    <label class="d-block">22. Επιλέξτε μέχρι 3 θεματικά αντικείμενα που <mark><u>δεν</u></mark> διδαχθήκατε και που από την εμπειρία που αποκτήσατε στην πρακτική σας άσκηση θεωρείτε πως είναι απαραίτητο να προστεθούν στο Πρόγραμμα Σπουδών του Τμήματος.</label>
+                    <label class="d-block">22. Επιλέξτε μέχρι 3 θεματικά αντικείμενα που <mark>δεν</mark> διδαχθήκατε και που από την εμπειρία που αποκτήσατε στην πρακτική σας άσκηση θεωρείτε πως είναι απαραίτητο να προστεθούν στο Πρόγραμμα Σπουδών του Τμήματος.</label>
                     <div class="row align-items-center">
                         <label class="col-form-label col-auto">1.</label>
                         <div class="col col-xl-8">
@@ -781,7 +795,7 @@
                         <label class="custom-control-label" for="radio23VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer23')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -808,7 +822,7 @@
                         <label class="custom-control-label" for="radio24VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer24')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -823,7 +837,7 @@
                         <label class="custom-control-label" for="radio25No">Όχι</label>
                     </div>
                     @error('answer25')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
@@ -850,7 +864,7 @@
                         <label class="custom-control-label" for="radio26VeryMuch">Πάρα πολύ</label>
                     </div>
                     @error('answer26')
-                        <div class="invalid-feedback d-block d-md-inline">{{ $message }}</div>
+                        <div class="invalid-feedback d-block d-lg-inline">{{ $message }}</div>
                     @enderror
                 </div>
             
