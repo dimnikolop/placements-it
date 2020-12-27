@@ -42,18 +42,17 @@ Route::post('/questionnaires/company', [QuestionnairesController::class, 'compan
 Route::post('/questionnaires/professor', [QuestionnairesController::class, 'professorStore'])->name('questionnaires.professor.store');
 
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
-Route::get('/register/company', [CompanyController::class, 'create'])->name('company_register');
-Route::post('/register/company', [CompanyController::class, 'store']);
+Route::get('/register/company', [CompanyController::class, 'create'])->name('companies.create');
+Route::post('/register/company', [CompanyController::class, 'store'])->name('company.register');
 Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
-
-Route::get('/register/graduate', [GraduateController::class, 'create'])->name('graduate_register');
-Route::post('/register/graduate', [GraduateController::class, 'store']);
-
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
-
-Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('auth');
 Route::patch('/company/{company}', [CompanyController::class, 'update'])->name('company.update')->middleware('auth');
 Route::delete('/company/{company}', [CompanyController::class, 'destroy'])->name('company.destroy')->middleware('auth');
+Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('auth');
+
+Route::get('/register/graduate', [GraduateController::class, 'create'])->name('graduates.create');
+Route::post('/register/graduate', [GraduateController::class, 'store'])->name('graduate.register');
+
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
 Route::get('/admin/announcement/create', [AnnouncementController::class, 'create'])->name('announcement.create')->middleware(['auth','admin']);

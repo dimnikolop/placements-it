@@ -11225,8 +11225,6 @@ h6,
 }
 
 #registerForm {
-  position: relative;
-  padding: 3.5rem 2.5rem;
   background: #f6fafd;
   border: 3px solid #e6e6e6;
 }
@@ -11260,7 +11258,7 @@ form label:not(.custom-file-label):not(.custom-control-label) {
   display: none;
 }
 
-/* Company Dashboard */
+/* --- Company Dashboard --- */
 
 .nav-tabs {
   background: #e0e1e7;
@@ -11270,7 +11268,7 @@ form label:not(.custom-file-label):not(.custom-control-label) {
   color: #495057;
 }
 
-/* Company info */
+/* --- Company info --- */
 
 .heading-decorated_1::before {
   content: "";
