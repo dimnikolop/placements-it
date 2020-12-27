@@ -22,4 +22,9 @@ $(function () {
         //responsive: true
         "order": [[ 0, 'desc' ]]
     });
+
+    $('#companiesTable').DataTable({
+        //responsive: true
+        "order": [[ 4, 'desc' ]]
+    });
 });

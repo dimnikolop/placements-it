@@ -16,11 +16,18 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::get();
-
-        return view('companies.index', [
-            'companies' => $companies
-        ]);
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            $companies = Company::all();
+            return view('admin.companies', [
+                'companies' => $companies
+            ]);
+        }
+        else {
+            $companies = Company::where('status', 'approved')->get();
+            return view('companies.index', [
+                'companies' => $companies
+            ]);
+        }
     }
 
     /**
@@ -47,15 +54,15 @@ class CompanyController extends Controller
             'description' => 'required',
             'sector' => 'required',
             'address' => 'required',
-            'zip_code' => 'required|max:8',
+            'zip_code' => 'required',
             'location' => 'required',
-            'website' => 'url|max:45',
-            'contact_person' => 'required|max:45',
-            'phone' => 'required|max:20',
-            'email' => 'required|email|max:60|unique:companies',
-            'logo' => 'image|mimes:jpg,bmp,png',
-            'username' => 'required|max:30|unique:users',
-            'password' => 'required|min:8|max:25|confirmed'
+            'website' => 'nullable|url',
+            'contact_person' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email|unique:companies',
+            'logo' => 'nullable|image',
+            'username' => 'required|unique:users',
+            'password' => 'required|min:8|max:20|confirmed'
         ]);
 
         $user = User::create([
@@ -79,7 +86,7 @@ class CompanyController extends Controller
             'notes' => $request->notes
         ]);
 
-        return redirect()->route('company_register')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
+        return redirect()->route('company.register')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
     }
 
     /**
@@ -113,23 +120,32 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        // Validate the request...
-        $validatedData = $request->validate([
-            'description' => 'required',
-            'sector' => 'required',
-            'address' => 'required',
-            'zip_code' => 'required|max:8',
-            'location' => 'required',
-            'website' => 'nullable|url|max:45',
-            'contact_person' => 'required|max:45',
-            'phone' => 'required|max:20',
-            'email' => 'required|email|max:60|unique:companies',
-            'logo' => 'image|mimes:jpg,bmp,png'
-        ]);
+        if ($request->has('status')) {
+            $company->status = $request->status;
+            $company->save();
+            
+            return back()->with('success', "Ο φορέας απασχόλησης " .$company->name. " έγινε αποδεκτός στο σύστημα επιτυχώς!");
+        }
+        else {
+            // Validate the request...
+            $validatedData = $request->validate([
+                'description' => 'required',
+                'sector' => 'required',
+                'address' => 'required',
+                'zip_code' => 'required',
+                'location' => 'required',
+                'website' => 'nullable|url',
+                'contact_person' => 'required',
+                'phone' => 'required',
+                'email' => 'required|email|unique:companies',
+                'logo' => 'image'
+            ]);
+            
+            $company->update($validatedData);
 
-        $company->update($validatedData);
-
-        return redirect()->route('company.dashboard')->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
+            return redirect()->route('company.dashboard')->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
+        }
+        
     }
 
     /**
@@ -141,6 +157,7 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
+        return back()->with('success', 'Company ' .$company->name. ' has been deleted successfully.');
     }
 
     /**

@@ -148,6 +148,9 @@
                     <a class="nav-link" href="{{ route('announcements.index') }}"><i class="fas fa-list-ul fa-fw"></i> Announcements</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('companies.index') }}"><i class="fas fa-list-ul fa-fw"></i> Companies Table</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Students Table</a>
                 </li>
                 <li class="nav-item">
