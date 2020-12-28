@@ -5,15 +5,15 @@
     <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                aria-controls="profile" aria-selected="true">Προφίλ :</a>
+                aria-controls="profile" aria-selected="true">Προφίλ</a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="jobs-tab" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs"
-                aria-selected="false">Θέσεις Απασχόλησης :</a>
+                aria-selected="false">Θέσεις Απασχόλησης</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active p-4" id="profile" role="tabpanel"
+        <div class="tab-pane fade show active py-5" id="profile" role="tabpanel"
             aria-labelledby="profile-tab">
             @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
@@ -108,7 +108,21 @@
                 </button>
             </div>
         </div>
-        <div class="tab-pane fade" id="jobs" role="tabpanel" aria-labelledby="jobs-tab">
+        <div class="tab-pane fade py-5" id="jobs" role="tabpanel" aria-labelledby="jobs-tab">
+            <div class="list-group">
+                @foreach ($jobs as $job)
+                    <a href="{{ route('companies.jobs.show', [$company, $job]) }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ $job->title }}</h5>
+                            <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>
+                        </div>
+                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
+                            varius blandit.
+                        </p>
+                        <small class="text-muted">Donec id elit non mi porta.</small>
+                    </a>
+                @endforeach
+            </div>
             <div class="well d-flex flex-column justify-content-center align-items-center">
                 <h6>Προσθέστε νέα θέση απασχόλησης</h6>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addJobModal">
@@ -129,7 +143,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="addJobForm" action="{{ route('jobs.store') }}" method="post">
+            <form id="addJobForm" action="{{ route('companies.jobs.store', $company) }}" method="post">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">

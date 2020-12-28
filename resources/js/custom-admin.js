@@ -25,6 +25,10 @@ $(function () {
 
     $('#companiesTable').DataTable({
         //responsive: true
+    });
+
+    $('#companiesTableAdmin').DataTable({
+        //responsive: true
         "order": [[ 4, 'desc' ]]
     });
 });

@@ -55110,7 +55110,9 @@ $(function () {
     //responsive: true
     "order": [[0, 'desc']]
   });
-  $('#companiesTable').DataTable({
+  $('#companiesTable').DataTable({//responsive: true
+  });
+  $('#companiesTableAdmin').DataTable({
     //responsive: true
     "order": [[4, 'desc']]
   });

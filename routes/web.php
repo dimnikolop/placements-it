@@ -50,7 +50,9 @@ Route::patch('/company/{company}', [CompanyController::class, 'update'])->name('
 Route::delete('/company/{company}', [CompanyController::class, 'destroy'])->name('company.destroy')->middleware('auth');
 Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('auth');
 
-Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store')->middleware('auth');
+Route::get('/companies/{company}/jobs', [JobController::class, 'index'])->name('companies.jobs.index')->middleware('auth');
+Route::post('/companies/{company}/jobs', [JobController::class, 'store'])->name('companies.jobs.store')->middleware('auth');
+Route::get('/companies/{company}/jobs/{job}', [JobController::class, 'show'])->name('companies.jobs.show');
 
 Route::get('/register/graduate', [GraduateController::class, 'create'])->name('graduates.create');
 Route::post('/register/graduate', [GraduateController::class, 'store'])->name('graduate.register');

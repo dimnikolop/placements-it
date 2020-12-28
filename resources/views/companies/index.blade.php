@@ -6,8 +6,8 @@
         <div class="card-body">
             @if ($companies->isNotEmpty())
                 <div class="table-responsive">
-                    <table id="companiesTable" class="table table-bordered text-center">
-                        <thead>
+                    <table id="companiesTable" class="table table-bordered">
+                        <thead class="text-center">
                             <tr>
                                 <th scope="col">Επωνυμία</th>
                                 <th scope="col">Τομέας</th>

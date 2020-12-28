@@ -97,7 +97,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        return view('companies.show', compact('company'));
+        $jobs = $company->jobs;
+        return view('companies.show', compact('company', 'jobs'));
     }
 
     /**
@@ -128,7 +129,7 @@ class CompanyController extends Controller
         }
         else {
             // Validate the request...
-            $validatedData = $request->validate([
+            $validatedData = $request->validateWithBag('company', [
                 'description' => 'required',
                 'sector' => 'required',
                 'address' => 'required',
@@ -168,9 +169,11 @@ class CompanyController extends Controller
     public function dashboard()
     {
         $company = auth()->user()->company;
+        $jobs = $company->jobs;
 
         return view('companies.dashboard', [
-            'company' => $company
+            'company' => $company,
+            'jobs' => $jobs
         ]);
     }
 }
