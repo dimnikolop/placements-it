@@ -148,9 +148,15 @@
         </script>
     @endif
 
-    @if ($errors->any())
+    @if ($errors->company->any())
         <script>
             $('#editCompanyModal').modal('show');
+        </script>
+    @endif
+
+    @if ($errors->job->any())
+        <script>
+            $('#addJobModal').modal('show');
         </script>
     @endif
 </body>

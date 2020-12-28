@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GraduateController;
 use App\Http\Controllers\Auth\LoginController;
@@ -48,6 +49,8 @@ Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('co
 Route::patch('/company/{company}', [CompanyController::class, 'update'])->name('company.update')->middleware('auth');
 Route::delete('/company/{company}', [CompanyController::class, 'destroy'])->name('company.destroy')->middleware('auth');
 Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('auth');
+
+Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store')->middleware('auth');
 
 Route::get('/register/graduate', [GraduateController::class, 'create'])->name('graduates.create');
 Route::post('/register/graduate', [GraduateController::class, 'store'])->name('graduate.register');

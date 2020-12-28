@@ -46,4 +46,12 @@ class Company extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    /**
+     * Get the jobs offered by the company.
+     */
+    public function jobs()
+    {
+        return $this->hasMany('App\Models\Job');
+    }
 }
