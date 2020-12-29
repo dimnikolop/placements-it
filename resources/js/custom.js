@@ -46,6 +46,17 @@ $("#loginForm").on('submit', function (event) {
     });
 });
 
+$('.edit-job').on('click', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var job = $(this).data('job') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    $('#editJobForm').attr('action', '/jobs/' + job.id);
+    $('#jobTitle').val(job.title);
+    $('#jobDescription').val(job.description);
+    $('#jobRequirements').val(job.requirements);
+});
+
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });

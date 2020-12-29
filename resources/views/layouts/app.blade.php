@@ -159,5 +159,11 @@
             $('#addJobModal').modal('show');
         </script>
     @endif
+
+    @if ($errors->edit_job->any())
+        <script>
+            $('#editJobModal').modal('show');
+        </script>
+    @endif
 </body>
 </html>

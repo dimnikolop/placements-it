@@ -96,33 +96,36 @@
                 </div>
             </div>
            
-            <div class="row justify-content-end">
+            <div class="d-flex justify-content-end">
                 <!-- Button trigger edit modal -->
                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#editCompanyModal">
                     <i class="far fa-edit"></i> Επεξεργασία
                 </button>
                 <!-- Button trigger delete modal -->
-                <button type="button" class="btn btn-danger btn-sm ml-3" data-toggle="modal" data-target="#deleteCompanyModal"
-                    data-id="">
+                <button type="button" class="btn btn-danger btn-sm ml-3 deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('company.destroy', $company) }}">
                     <i class="far fa-trash-alt"></i> Διαγραφή
                 </button>
             </div>
         </div>
         <div class="tab-pane fade py-5" id="jobs" role="tabpanel" aria-labelledby="jobs-tab">
-            <div class="list-group">
-                @foreach ($jobs as $job)
-                    <a href="{{ route('companies.jobs.show', [$company, $job]) }}" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">{{ $job->title }}</h5>
-                            <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>
+            @foreach ($jobs as $job)
+                <div class="card job-card">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{{ route('companies.jobs.show', [$company, $job]) }}" class="text-reset">{{ $job->title }}</a></h5>
+                        <div class="d-flex">
+                            <!-- Button trigger edit modal -->
+                            <button type="button" class="btn btn-secondary btn-sm edit-job" data-toggle="modal" data-target="#editJobModal" data-job="{{ $job }}">
+                                <i class="fas fa-pencil-alt fa-sm"></i> Επεξεργασία
+                            </button>
+                            <!-- Button trigger delete modal -->
+                            <button type="button" class="btn btn-danger btn-sm ml-3 deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('jobs.destroy', $job) }}">
+                                <i class="far fa-trash-alt fa-sm"></i> Διαγραφή
+                            </button>
+                            <p class="card-text ml-auto"><small class="text-muted">Δημοσιεύτηκε: {{ $job->created_at->diffForHumans() }}</small></p>
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                            varius blandit.
-                        </p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
-                @endforeach
-            </div>
+                    </div>
+                </div>
+            @endforeach
             <div class="well d-flex flex-column justify-content-center align-items-center">
                 <h6>Προσθέστε νέα θέση απασχόλησης</h6>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addJobModal">
@@ -148,21 +151,21 @@
                     @csrf
                     <div class="form-group">
                         <label for="inputTitle">Τίτλος:<span class="required">*</span></label>
-                        <input type="text" class="form-control @if($errors->job->has('title')) is-invalid @endif" id="inputTitle" name="title" value="{{ old('title') ?? $job->title ?? '' }}">
+                        <input type="text" class="form-control @if($errors->job->has('title')) is-invalid @endif" id="inputTitle" name="title" value="{{ old('title') }}">
                         @if ($errors->job->has('title'))
                             <div class="invalid-feedback">{{ $errors->job->first('title') }}</div>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="inputJobDescription">Περιγραφή:<span class="required">*</span></label>
-                        <textarea class="form-control @if($errors->job->has('description')) is-invalid @endif" id="inputJobDescription" name="description" rows="7">{{ old('description') ?? $job->description ?? '' }}</textarea>
+                        <textarea class="form-control @if($errors->job->has('description')) is-invalid @endif" id="inputJobDescription" name="description" rows="7">{{ old('description') }}</textarea>
                         @if ($errors->job->has('description'))
                             <div class="invalid-feedback">{{ $errors->job->first('description') }}</div>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="inputJobRequirements">Απαιτήσεις:<span class="required">*</span></label>
-                        <textarea class="form-control @if($errors->job->has('requirements')) is-invalid @endif" id="inputJobRequirements" name="requirements" rows="5">{{ old('requirements') ?? $job->requirements ?? '' }}</textarea>
+                        <textarea class="form-control @if($errors->job->has('requirements')) is-invalid @endif" id="inputJobRequirements" name="requirements" rows="5">{{ old('requirements') }}</textarea>
                         @if ($errors->job->has('requirements'))
                             <div class="invalid-feedback">{{ $errors->job->first('requirements') }}</div>
                         @endif
@@ -171,6 +174,51 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-file-upload"></i> Προσθήκη</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Job Modal-->
+<div class="modal fade" id="editJobModal" tabindex="-1" aria-labelledby="editJobModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editJobModalLabel">Επεξεργασία θέσης απασχόλησης</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editJobForm" action="" method="post">
+                <div class="modal-body">
+                    @csrf
+                    @method('PATCH')
+                    <div class="form-group">
+                        <label for="jobTitle">Τίτλος:<span class="required">*</span></label>
+                        <input type="text" class="form-control @if($errors->edit_job->has('title')) is-invalid @endif" id="jobTitle" name="title" value="{{ old('title') }}">
+                        @if ($errors->edit_job->has('title'))
+                            <div class="invalid-feedback">{{ $errors->edit_job->first('title') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="jobDescription">Περιγραφή:<span class="required">*</span></label>
+                        <textarea class="form-control @if($errors->edit_job->has('description')) is-invalid @endif" id="jobDescription" name="description" rows="7">{{ old('description') }}</textarea>
+                        @if ($errors->edit_job->has('description'))
+                            <div class="invalid-feedback">{{ $errors->edit_job->first('description') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="jobRequirements">Απαιτήσεις:<span class="required">*</span></label>
+                        <textarea class="form-control @if($errors->edit_job->has('requirements')) is-invalid @endif" id="jobRequirements" name="requirements" rows="5">{{ old('requirements') }}</textarea>
+                        @if ($errors->edit_job->has('requirements'))
+                            <div class="invalid-feedback">{{ $errors->edit_job->first('requirements') }}</div>
+                        @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Αποθήκευση</button>
                 </div>
             </form>
         </div>
@@ -280,12 +328,12 @@
     </div>
 </div>
 
-<!-- Delete Company Modal-->
-<div class="modal fade" id="deleteCompanyModal" tabindex="-1" role="dialog" aria-labelledby="deleteCompanyModalLabel" aria-hidden="true">
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteCompanyModalLabel">Are you sure?</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -295,7 +343,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <form action="{{ route('company.destroy', $company->id) }}" method="post">
+                <form id="deleteForm" action="" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-primary">Delete</button>

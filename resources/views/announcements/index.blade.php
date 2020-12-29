@@ -49,7 +49,7 @@
                                         <a class="btn btn-sm btn-outline-info" href="{{ route('announcement.edit', $announcement->id) }}">
                                             <i class="far fa-edit"></i> Edit
                                         </a>
-                                        <button id="deleteBtn" type="button" class="btn btn-sm btn-outline-danger ml-3" data-toggle="modal" data-target="#deleteAnnouncementModal" data-url="{{ route('announcement.destroy', $announcement->id) }}">
+                                        <button type="button" class="btn btn-sm btn-outline-danger ml-3 deleteBtn" data-toggle="modal" data-target="#deleteAnnouncementModal" data-url="{{ route('announcement.destroy', $announcement->id) }}">
                                             <i class="far fa-trash-alt"></i> Delete
                                         </button>
                                     </td>

@@ -12,7 +12,7 @@ $(function () {
     $('[data-toggle="popover"]').popover()
 
     // Get announcement id to delete
-    $("#deleteBtn").on('click', function() {
+    $(".deleteBtn").on('click', function() {
         const url = $(this).data('url');
         $('#deleteForm').attr('action', url);
     });

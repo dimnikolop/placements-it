@@ -42,7 +42,7 @@ class JobController extends Controller
         $request->validateWithBag('job', [
             'title' => 'required',
             'description' => 'required',
-            'requirements' => 'required',
+            'requirements' => 'required'
         ]);
         
         Job::create([
@@ -89,7 +89,15 @@ class JobController extends Controller
      */
     public function update(Request $request, Company $company, Job $job)
     {
-        //
+        $validatedData = $request->validateWithBag('edit_job', [
+            'title' => 'required',
+            'description' => 'required',
+            'requirements' => 'required'
+        ]);
+
+        $job->update($validatedData);
+
+        return redirect()->route('company.dashboard')->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς.');
     }
 
     /**
@@ -101,6 +109,7 @@ class JobController extends Controller
      */
     public function destroy(Company $company, Job $job)
     {
-        //
+        $job->delete();
+        return redirect()->route('company.dashboard')->with('success', 'Job with title: ' .$job->title. ' has been deleted successfully.');
     }
 }

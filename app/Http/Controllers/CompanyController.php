@@ -113,7 +113,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified company in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Company  $company
@@ -145,12 +145,11 @@ class CompanyController extends Controller
             $company->update($validatedData);
 
             return redirect()->route('company.dashboard')->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
-        }
-        
+        }  
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified company from storage.
      *
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
@@ -158,7 +157,7 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return back()->with('success', 'Company ' .$company->name. ' has been deleted successfully.');
+        return redirect()->route('home');
     }
 
     /**
