@@ -94,6 +94,9 @@
             </div>
         </nav>
     </header>
+    <div class="banner-section">
+        @yield('banner')
+    </div>
     <div class="section">
         @yield('content')
     </div>

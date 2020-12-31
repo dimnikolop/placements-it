@@ -1,7 +1,7 @@
 /* Custom Styles */
 
 .section {
-    padding: 7rem 0;
+    padding: 5rem 0;
 }
 
 
@@ -24,6 +24,39 @@ header .nav-bottom {
     height: 20px;
     background-color: #a0a6ac;
 }
+
+/* --- banner --- */
+    .carousel-item {
+        height: 40vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        .carousel-item {
+            height: 60vh;
+        }
+    }
+
+    .carousel-item-overlay {
+        background-color: rgba(30, 49, 66, 0.75);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: calc(.25rem - 1px);
+    }
+    
+    .carousel-item .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+    }
 
 
 /* --- box --- */
