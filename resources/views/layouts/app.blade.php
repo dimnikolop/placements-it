@@ -7,7 +7,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fontawesome-free-5.15.1/css/all.min.css') }}">
 
@@ -17,38 +17,34 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <!-- Navbar content -->
-                <div class="collapse navbar-collapse navbars justify-content-end" id="secondaryNavbar">
-                    <div class="navbar-nav flex-row">
-                        @auth
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ auth()->user()->username }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
-                                    <h6 class="dropdown-header">Manage Account</h6>
-                                    <a class="dropdown-item" href="#"></a>
-                                    @if (auth()->user()->role == 'admin')
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                                    @else
-                                        <a class="dropdown-item" href="{{ route('company.dashboard') }}">Dashboard</a>
-                                    @endif
-                                    <div class="dropdown-divider"></div>
-                                    <form action="{{ route('logout') }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item btn btn-link"><i class="fas fa-sign-out-alt"></i> Έξοδος</button>
-                                    </form>
-                                </div>
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <div class="container px-2">
+                <div class="navbar-nav mx-auto mr-lg-0" id="secondaryNavbar">
+                    @auth
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                {{ auth()->user()->username }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="userDropdown">
+                                <h6 class="dropdown-header">Manage Account</h6>
+                                @if (auth()->user()->role == 'admin')
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                @else
+                                    <a class="dropdown-item" href="{{ route('company.dashboard') }}">Dashboard</a>
+                                @endif
+                                <div class="dropdown-divider"></div>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt fa-fw"></i> Έξοδος</button>
+                                </form>
                             </div>
-                        @endauth
+                        </div>
+                    @endauth
 
-                        @guest
-                            <a class="nav-link pr-3" href="#" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt"></i> Είσοδος</a>
-                            <a class="nav-link pl-3" href="{{ route('register') }}">Εγγραφή</a>
-                        @endguest
-                    </div>
+                    @guest
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt fa-fw"></i> Είσοδος</a>
+                        <a class="nav-link border-left" href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Εγγραφή</a>
+                    @endguest
                 </div>
             </div>
         </nav>
@@ -60,11 +56,11 @@
                 <a class="navbar-brand d-none d-lg-block" href="{{ route('home') }}">
                     <img src="{{ asset('img/logo.png') }}" alt="" loading="lazy">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbars" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse navbars" id="mainNavbar">
+                <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ route('home') }}">Αρχική <span class="sr-only">(current)</span></a>
@@ -143,7 +139,7 @@
         //js function that will open hidden login modal
         <script>
             $('#loginModal').modal('show');
-            var message = 
+            var message =
                 "<div class='alert alert-danger w-100' role='alert'>" +
                     "<i class='fas fa-times-circle'></i> {{ session('openLogin') }}" +
                 "</div>";
