@@ -97,6 +97,41 @@
         @yield('content')
     </div>
 
+    <footer id="site-footer" class="bg-dark">
+        <div class="container">
+            <div class="row mb-4" id="main-footer">
+                <div class="col-md-8">
+                    <h5 class="mb-5">Χρήσιμοι Σύνδεσμοι</h5>
+                    <a href="https://www.espa.gr/el/Pages/default.aspx"><img src="{{ asset('img/logo_espa_2013.jpg') }}" class="img-fluid mb-4" alt=""></a>
+				    <a href="http://praktiki.teithe.gr/"><img src="{{ asset('img/praktiki_full.jpg') }}" class="img-fluid" alt=""></a>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-5">Στοιχεία Eπικοινωνίας</h5>
+                    <p class="lead">Γραφείο Πρακτικής Άσκησης</p>
+                    <p><strong>Διεύθυνση:</strong> Αλεξάνδρειο ΤΕΙ Θεσσαλονίκης
+                        Σχολή Τεχνολογικών Εφαρμογών
+                        Τμήμα Μηχανικών Πληροφορικής Τ.Ε - 1ος όροφος
+                        Τ.Θ. 141, Σίνδος
+                        Τ.Κ. 57400 - Θεσσαλονίκης
+                    </p> 
+                    <p><strong>Τηλέφωνο:</strong> 2310 - 013 414</p>
+                    <p><strong>E-mail:</strong> <a class="text-reset" href="mailto:placemnt@it.teithe.gr" target="_top">placemnt@it.teithe.gr</a></p>
+                </div>
+            </div>
+            <div class="row" id="sub-footer">
+				<div class="col-md-12 text-center">
+					<div class="copyright">
+						<p class="mb-1">
+                            Copyright &copy; 2018 - <script>document.write(new Date().getFullYear());</script> <a href="http://www.it.teithe.gr" class="text-reset">Τμήμα Μηχανικών Πληροφορικής ΑΤΕΙΘ</a>, All rights reserved.</p>
+						<p>Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset">Built with Bootstrap</a></p>
+					</div>
+				</div>
+				<div class="col-lg-6">
+				</div>
+			</div>
+        </div>
+    </footer>
+
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-login">
             <div class="modal-content">

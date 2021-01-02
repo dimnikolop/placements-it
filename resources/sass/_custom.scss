@@ -31,38 +31,56 @@
 }
 
 /* --- banner --- */
+
+.carousel-item {
+    height: 40vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
     .carousel-item {
-        height: 40vh;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
+        height: 60vh;
     }
+}
 
-    @media (min-width: 576px) and (max-width: 767.98px) {
-        .carousel-item {
-            height: 60vh;
-        }
-    }
+.carousel-item-overlay {
+    background-color: rgba(30, 49, 66, 0.75);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: calc(.25rem - 1px);
+}
 
-    .carousel-item-overlay {
-        background-color: rgba(30, 49, 66, 0.75);
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        border-radius: calc(.25rem - 1px);
-    }
-    
-    .carousel-item .container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        text-align: center;
-    }
+.carousel-item .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
 
+/* --- Footer --- */
+
+#site-footer {
+    padding: 3rem 0 0 0;
+    color: #dee2e6;
+}
+
+#site-footer h5 {
+    padding-left: 1.5rem;
+    color: #f8f9fa;
+    border-left: 1px solid #dee2e6;
+}
+
+#sub-footer {
+    padding-top: 1rem;
+    border-top: 3px solid #9fbedf;
+}
 
 /* --- box --- */
 

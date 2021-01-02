@@ -11177,6 +11177,24 @@ a.text-dark:focus {
   text-align: center;
 }
 
+/* --- Footer --- */
+
+#site-footer {
+  padding: 3rem 0 0 0;
+  color: #dee2e6;
+}
+
+#site-footer h5 {
+  padding-left: 1.5rem;
+  color: #f8f9fa;
+  border-left: 1px solid #dee2e6;
+}
+
+#sub-footer {
+  padding-top: 1rem;
+  border-top: 3px solid #9fbedf;
+}
+
 /* --- box --- */
 
 .box {
