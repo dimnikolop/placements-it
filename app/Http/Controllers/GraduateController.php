@@ -6,6 +6,8 @@ use App\Models\Graduate;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\GraduateQuestionnaire;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreGraduateRequest;
 
 class GraduateController extends Controller
 {
@@ -35,53 +37,29 @@ class GraduateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGraduateRequest $request)
     {
-        // Validate the request...
-        $request->validate([
-            'surname' => 'required',
-            'name' => 'required',
-            'father_name' => 'required',
-            'graduation_year' => 'required|date_format:"Y"|after:1989|before:2050',
-            'diploma' => 'required',
-            'phone' => 'required_without:email',
-            'email' => 'required|email|unique:graduates',
-            'website' => 'nullable|url',
-            'job' => 'required',
-            'employer' => 'required',
-            'work_address' => 'required',
-            'postal_code' => 'required',
-            'city' => 'required',
-            'answer1' => 'nullable|digits_between:1,2',
-            'answer4' => 'nullable|digits_between:1,2',
-            'other7' => 'required_if:answer7,Άλλο',
-            'answer8a' => 'required_if:answer8,Ναι',
-            'other8a' => 'required_if:answer8a,Άλλο',
-            'answer8b' => 'required_if:answer8,Ναι',
-            'other8b' => 'required_if:answer8b,Άλλο',
-            'answer8c' => 'required_if:answer8,Ναι',
-            'answer25' => 'array|between:1,5'
-        ]);
+        // Retrieve the validated input data...
+        $validated = $request->validated();
         
         // Array to store answers of the questionnaire
         $questionnaire = [];
 
         // Find the answers of the questionnaire from request and store them to questionnaire array
         foreach ($request->all() as $key => $value) {
-            if (Str::contains($key, ['answer', 'other'])) {
+            if (Str::contains($key, ['question', 'other'])) {
                 $questionnaire[$key] = $value;
             }
         }
-
         
-        $diploma = collect($request->diploma)->implode(',');
+        $request->diploma = implode(',', $request->diploma);
         
         $graduate = Graduate::create([
             'surname' => $request->surname,
             'name' => $request->name,
             'father_name' => $request->father_name,
             'graduation_year' => $request->graduation_year,
-            'diploma' => $diploma,
+            'diploma' => $request->diploma,
             'phone' => $request->phone,
             'email' => $request->email,
             'website' => $request->website,
@@ -96,21 +74,22 @@ class GraduateController extends Controller
             'longitude' => $request->input('longitude', '1')
         ]);
 
-        if ($request->has('answer2')) {
-            $questionnaire['answer2'] = collect($questionnaire['answer2'])->implode(',');
+        if ($request->has('question2')) {
+            $questionnaire['question2'] = implode(',', $questionnaire['question2']);
         }
-        if ($request->has('answer8c')) {
-            $questionnaire['answer8c'] = collect($questionnaire['answer8c'])->implode(',');
+        if ($request->has('question8c')) {
+            $questionnaire['question8c'] = implode(',', $questionnaire['question8c']);
         }
-        if ($request->has('answer25')) {
-            $questionnaire['answer25'] = collect($questionnaire['answer25'])->implode(',');
+        if ($request->has('question25')) {
+            $questionnaire['question25'] = implode(',', $questionnaire['question25']);
+        }
+        
+        if (!empty(array_filter($questionnaire))) {
+            $questionnaire['graduate_id'] = $graduate->id;
+            GraduateQuestionnaire::create($questionnaire);
         }
 
-        $questionnaire['graduate_id'] = $graduate->id;
-
-        GraduateQuestionnaire::create($questionnaire);
-
-        return redirect()->route('graduate.register')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
+        return redirect()->route('graduates.create')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
     }
 
     /**
