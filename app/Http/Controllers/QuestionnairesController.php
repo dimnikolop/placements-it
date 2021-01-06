@@ -46,43 +46,43 @@ class QuestionnairesController extends Controller
             'semester' => 'required',
             'year_from' => 'required|date_format:"Y"|after:2010|before:2050',
             'year_to' => 'required|date_format:"Y"|after:year_from|before:2050',
-            'answer1' => 'required',
-            'answer2' => 'required',
-            'answer3' => 'required',
-            'answer4' => 'required',
-            'other4' => 'required_if:answer4,Άλλο',
-            'answer5' => 'required',
-            'answer6' => 'required',
-            'answer7' => 'required',
-            'answer8' => 'required',
-            'answer9' => 'required',
-            'answer10' => 'required',
-            'answer11' => 'required',
-            'answer12' => 'required',
-            'answer13' => 'required',
-            'answer14' => 'required',
-            'answer15' => 'required',
-            'other15' => 'required_if:answer15,Άλλο',
-            'answer16' => 'required',
-            'answer17' => 'required',
-            'answer18' => 'required',
-            'answer19' => 'required',
-            'answer20' => 'required',
-            'answer21' => 'required|array|between:1,5',
-            'answer23' => 'required',
-            'answer24' => 'required',
-            'answer25' => 'required',
-            'answer26' => 'required'
+            'question1' => 'required',
+            'question2' => 'required',
+            'question3' => 'required',
+            'question4' => 'required',
+            'other4' => 'required_if:question4,Άλλο',
+            'question5' => 'required',
+            'question6' => 'required',
+            'question7' => 'required',
+            'question8' => 'required',
+            'question9' => 'required',
+            'question10' => 'required',
+            'question11' => 'required',
+            'question12' => 'required',
+            'question13' => 'required',
+            'question14' => 'required',
+            'question15' => 'required',
+            'other15' => 'required_if:question15,Άλλο',
+            'question16' => 'required',
+            'question17' => 'required',
+            'question18' => 'required',
+            'question19' => 'required',
+            'question20' => 'required',
+            'question21' => 'required|array|between:1,5',
+            'question23' => 'required',
+            'question24' => 'required',
+            'question25' => 'required',
+            'question26' => 'required'
         ]);
 
         $validatedData['season'] = $validatedData['year_from'] . ' &mdash; ' . $validatedData['year_to'];
 
         $validatedData = Arr::except($validatedData, ['year_from', 'year_to']);
+        
+        $validatedData['question21'] = implode(',', $validatedData['question21']);
 
-        $validatedData['answer21'] = collect($validatedData['answer21'])->implode(',');
-
-        if (!empty($request->answer22[0])) {
-            $validatedData['answer22'] = collect($request->answer22)->implode(',');
+        if (!empty(array_filter($request->question22))) {
+            $validatedData['question22'] = implode(',', $request->question22);
         }
         
         StudentQuestionnaire::create($validatedData);
@@ -115,20 +115,20 @@ class QuestionnairesController extends Controller
             'company' => 'required',
             'start_date' => 'required|date_format:"d/m/Y"|after:01/01/2010|before:31/12/2049',
             'end_date' => 'required|date_format:"d/m/Y"|after:start_date|before:31/12/2049',
-            'answer1' => 'required',
-            'answer2' => 'required',
-            'answer3' => 'required',
-            'other3' => 'required_if:answer3,Άλλο',
-            'answer4' => 'required',
-            'answer5' => 'required',
-            'answer6' => 'required',
-            'answer7' => 'required',
-            'answer8' => 'required',
-            'answer9' => 'required',
-            'answer10' => 'required',
-            'answer11' => 'required',
-            'answer12' => 'required',
-            'answer13' => 'required'
+            'question1' => 'required',
+            'question2' => 'required',
+            'question3' => 'required',
+            'other3' => 'required_if:question3,Άλλο',
+            'question4' => 'required',
+            'question5' => 'required',
+            'question6' => 'required',
+            'question7' => 'required',
+            'question8' => 'required',
+            'question9' => 'required',
+            'question10' => 'required',
+            'question11' => 'required',
+            'question12' => 'required',
+            'question13' => 'required'
         ]);
 
         CompanyQuestionnaire::create($validatedData);
@@ -162,18 +162,18 @@ class QuestionnairesController extends Controller
             'supervisor' => 'required',
             'start_date' => 'required|date_format:"d/m/Y"|after:01/01/2010|before:31/12/2049',
             'end_date' => 'required|date_format:"d/m/Y"|after:start_date|before:31/12/2049',
-            'answer1' => 'required',
-            'answer2' => 'required',
-            'answer3' => 'required',
-            'answer4' => 'required',
-            'answer5' => 'required',
-            'answer6' => 'required',
-            'answer7' => 'required',
-            'answer8' => 'required',
-            'answer9' => 'required',
-            'answer10' => 'required',
-            'answer11' => 'required',
-            'answer12' => 'required'
+            'question1' => 'required',
+            'question2' => 'required',
+            'question3' => 'required',
+            'question4' => 'required',
+            'question5' => 'required',
+            'question6' => 'required',
+            'question7' => 'required',
+            'question8' => 'required',
+            'question9' => 'required',
+            'question10' => 'required',
+            'question11' => 'required',
+            'question12' => 'required'
         ]);
 
         ProfessorQuestionnaire::create($validatedData);

@@ -6,7 +6,6 @@ use App\Models\Graduate;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\GraduateQuestionnaire;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreGraduateRequest;
 
 class GraduateController extends Controller
