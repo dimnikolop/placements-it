@@ -13,9 +13,6 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <style>
         /* General */
 
@@ -156,8 +153,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Graduates Table</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><i class="far fa-chart-bar fa-fw"></i> Statistics</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-chart-bar fa-fw"></i> Evaluation Results</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('statistics.student') }}"><i class="fas fa-chevron-right fa-xs"></i> Student</a>
+                        <a class="dropdown-item" href="{{ route('statistics.graduate') }}"><i class="fas fa-chevron-right fa-xs"></i> Graduate</a>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -165,6 +166,11 @@
             @yield('content')
         </div>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
+    
 </body>
 
 </html>

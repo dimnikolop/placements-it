@@ -8,7 +8,10 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
+    
+    var Chart = require('chart.js');
+    require('chartjs-plugin-datalabels');
+    
     require('bootstrap');
     require( 'datatables.net-bs4' )();
     require( 'datatables.net-buttons-bs4' )();
