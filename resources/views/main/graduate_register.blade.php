@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div id="" class="card">
+    <div id="" class="card custom-main-card">
         <div class="card-body">
             <div class="card-title my-5 text-center"><h4>Εγγραφή Απόφοιτου Τμήματος</h4></div>
             @if (session('success'))
@@ -963,9 +963,9 @@
                 </div>
                 
                 <div class="form-navigation d-flex justify-content-around px-lg-5">
-                    <button id="previousBtn" type="button" name="previous_btn" class="previous btn btn-success rounded-pill"><i class="fas fa-chevron-left"></i> Πίσω</button>
-                    <button id="submitBtn" type="submit" name="submit_btn" class="btn btn-success rounded-pill">Υποβολή <i class="far fa-paper-plane"></i></button>
-                    <button id="nextBtn" type="button" name="next_btn" class="next btn btn-success rounded-pill">Επόμενο</button>
+                    <button id="previousBtn" type="button" name="previous_btn" class="previous btn btn-primary rounded-pill"><i class="fas fa-chevron-left"></i> Πίσω</button>
+                    <button id="submitBtn" type="submit" name="submit_btn" class="btn btn-primary rounded-pill">Υποβολή <i class="far fa-paper-plane"></i></button>
+                    <button id="nextBtn" type="button" name="next_btn" class="next btn btn-primary rounded-pill">Επόμενο</button>
                 </div>
                 
             </form>

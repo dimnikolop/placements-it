@@ -14,7 +14,7 @@
             </ol>
         </nav>
     </div>
-    <div class="card">
+    <div class="card custom-admin-card">
         <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success w-50 mx-auto text-center" role="alert">

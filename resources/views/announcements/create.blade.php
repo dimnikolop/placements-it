@@ -13,7 +13,7 @@
             </ol>
         </nav>
     </div>
-    <div class="card">
+    <div class="card custom-admin-card">
         <div class="card-header">
             <h5>New Announcement</h5>
         </div>

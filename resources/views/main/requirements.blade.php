@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="card">
+    <div class="card custom-main-card">
         <h5 class="card-header">Προϋποθέσεις για την πραγματοποίηση πρακτικής άσκησης</h5>
         <div class="card-body">
             <h5 class="card-title"></h5>

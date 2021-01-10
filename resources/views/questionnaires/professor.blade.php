@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div id="" class="card">
+    <div id="" class="card custom-main-card">
         <div class="card-body">
             <div class="card-title my-5 text-center"><h5>ΕΡΩΤΗΜΑΤΟΛΟΓΙΟ ΑΞΙΟΛΟΓΗΣΗΣ ΤΗΣ ΠΡΑΚΤΙΚΗΣ ΑΣΚΗΣΗΣ ΦΟΙΤΗΤΗ<br/>ΑΠΟ ΤΟΝ ΑΚΑΔΗΜΑΙΚΟ ΕΠΟΠΤΗ ΤΟΥ ΤΜΗΜΑΤΟΣ</h5></div>
             @if (session('success'))
@@ -414,7 +414,7 @@
                 </div>
     
                 <div class="text-center mb-4">
-                    <button id="submitBtn" type="submit" name="submit_btn" class="btn btn-success">Υποβολή  <i class="far fa-paper-plane"></i></button>
+                    <button id="submitBtn" type="submit" name="submit_btn" class="btn btn-primary">Υποβολή  <i class="far fa-paper-plane"></i></button>
                 </div>
                 
                 <h5 class="text-center">Σας ευχαριστούμε για τον χρόνο που διαθέσατε!</h5>

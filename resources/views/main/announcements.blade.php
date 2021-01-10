@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <div class="card">
+    <div class="card custom-main-card">
         <div class="card-body">
             @if ($announcements->isNotEmpty())
                 <div class="table-responsive">
-                    <table id="announcementsTable" class="table table-bordered text-center align-middle">
-                        <thead>
+                    <table id="announcementsTable" class="table table-bordered">
+                        <thead class="text-center">
                             <tr>
                                 <th scope="col">Προστέθηκε</th>
                                 <th scope="col">Τίτλος</th>
@@ -18,7 +18,7 @@
                             @foreach ($announcements as $announcement)
                                 <tr>
                                     <td>{{ $announcement->created_at->format('d/m/Y H:i') }}</td>
-                                    <td><a class="text-primary" href="{{ route('announcement.show', $announcement->id) }}" target="_blank">{{ $announcement->title }}</a></td>
+                                    <td><a href="{{ route('announcement.show', $announcement->id) }}" target="_blank">{{ $announcement->title }}</a></td>
                                     <td>
                                         @if (Storage::disk('public')->exists($announcement->attachment))
                                             <a href="{{ Storage::url($announcement->attachment) }}" target="_blank">Προβολή</a>

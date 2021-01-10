@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="card">
+    <div class="card custom-main-card">
         <div class="card-body">
             @if ($companies->isNotEmpty())
                 <div class="table-responsive">

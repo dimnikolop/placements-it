@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="card">
+    <div class="card custom-main-card">
         <div class="card-header">
             <h5>{{ $announcement->title }}</h5>
         </div>

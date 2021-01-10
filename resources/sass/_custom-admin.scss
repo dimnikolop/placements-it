@@ -74,35 +74,20 @@
     padding: 1rem;
 }
 
-/* #content-wrapper a {
-    color: #37474f;
-}*/
-
 .page-header .breadcrumb {
     background: transparent;
 }
 
 /* General */
-.custom-card {
+.custom-admin-card {
     box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
     transition: box-shadow 0.2s ease-in-out;
     border-top: 3px solid #8CDDCD;
 }
 
-.job-card {
-    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
-    transition: box-shadow 0.2s ease-in-out;
-    border-left: 5px solid #c4ede5;
-}
-
-.job-card:hover {
-    border-left-color: #62d0ba;
-}
-
-.card .card-header {
-    background-color: #ffffff;
+.table-responsive {
+    padding: 0.25rem;
 }
 
 .table > tbody > tr > td {

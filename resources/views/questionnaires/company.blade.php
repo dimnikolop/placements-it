@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div id="" class="card">
+    <div id="" class="card custom-main-card">
         <div class="card-body">
             <h5 class="card-title my-5 text-center">ΕΡΩΤΗΜΑΤΟΛΟΓΙΟ ΑΞΙΟΛΟΓΗΣΗΣ ΤΗΣ ΠΡΑΚΤΙΚΗΣ ΑΣΚΗΣΗΣ<br/>ΑΠΟ ΤΟΝ ΕΡΓΑΣΙΑΚΟ ΕΠΙΒΛΕΠΟΝΤΑ</h5>
             @if (session('success'))
