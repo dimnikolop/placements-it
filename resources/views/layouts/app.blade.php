@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand navbar-dark bg-dark">
             <div class="container px-2">
@@ -43,7 +43,7 @@
 
                     @guest
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt fa-fw"></i> Είσοδος</a>
-                        <a class="nav-link border-left" href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Εγγραφή</a>
+                        <a class="nav-link border-left" href="#" data-toggle="modal" data-target="#registerModal"><i class="fas fa-user-plus"></i> Εγγραφή</a>
                     @endguest
                 </div>
             </div>
@@ -62,7 +62,7 @@
 
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item {{ request()->path() === '/' ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('home') }}">Αρχική <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown">
@@ -70,16 +70,16 @@
                                 Πληροφορίες
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('requirements') }}">Προϋποθέσεις</a>
+                                <a class="dropdown-item {{ request()->path() === 'requirements' ? 'active' : ''}}" href="{{ route('requirements') }}">Προϋποθέσεις</a>
                                 <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Οδηγοί Πρακτικής Άσκησης</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->path() === 'companies' ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('companies.index') }}">Φορείς Απασχόλησης</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->path() === 'announcements' ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('announcements.index') }}">Ανακοινώσεις</a>
                         </li>
                         <li class="nav-item">
@@ -90,23 +90,23 @@
             </div>
         </nav>
     </header>
-    <div class="banner-section">
-        @yield('banner')
-    </div>
-    <div class="section">
+    
+    @yield('banner')
+    
+    <div class="section flex-grow-1">
         @yield('content')
     </div>
 
     <footer id="site-footer" class="bg-dark">
         <div class="container">
             <div class="row mb-4" id="main-footer">
-                <div class="col-md-8">
-                    <h5 class="mb-5">Χρήσιμοι Σύνδεσμοι</h5>
+                <div class="col-md-7 col-lg-8 mb-5 mb-lg-0">
+                    <h5 class="mb-3">Χρήσιμοι Σύνδεσμοι</h5>
                     <a href="https://www.espa.gr/el/Pages/default.aspx"><img src="{{ asset('img/logo_espa_2013.jpg') }}" class="img-fluid mb-4" alt=""></a>
 				    <a href="http://praktiki.teithe.gr/"><img src="{{ asset('img/praktiki_full.jpg') }}" class="img-fluid" alt=""></a>
                 </div>
-                <div class="col-md-4">
-                    <h5 class="mb-5">Στοιχεία Eπικοινωνίας</h5>
+                <div class="col-md-5 col-lg-4">
+                    <h5 class="mb-3">Στοιχεία Eπικοινωνίας</h5>
                     <p class="lead">Γραφείο Πρακτικής Άσκησης</p>
                     <p><strong>Διεύθυνση:</strong> Αλεξάνδρειο ΤΕΙ Θεσσαλονίκης
                         Σχολή Τεχνολογικών Εφαρμογών
@@ -115,14 +115,14 @@
                         Τ.Κ. 57400 - Θεσσαλονίκης
                     </p> 
                     <p><strong>Τηλέφωνο:</strong> 2310 - 013 414</p>
-                    <p><strong>E-mail:</strong> <a class="text-reset" href="mailto:placemnt@it.teithe.gr" target="_top">placemnt@it.teithe.gr</a></p>
+                    <p><strong>E-mail:</strong> <a class="text-info" href="mailto:placemnt@it.teithe.gr" target="_top">placemnt@it.teithe.gr</a></p>
                 </div>
             </div>
             <div class="row" id="sub-footer">
 				<div class="col-md-12 text-center">
 					<div class="copyright">
 						<p class="mb-1">
-                            Copyright &copy; 2018 - <script>document.write(new Date().getFullYear());</script> <a href="http://www.it.teithe.gr" class="text-reset">Τμήμα Μηχανικών Πληροφορικής ΑΤΕΙΘ</a>, All rights reserved.</p>
+                            Copyright &copy; 2018 - <script>document.write(new Date().getFullYear());</script> <a href="http://www.it.teithe.gr" class="text-info">Τμήμα Μηχανικών Πληροφορικής ΑΤΕΙΘ</a>, All rights reserved.</p>
 						<p>Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset">Built with Bootstrap</a></p>
 					</div>
 				</div>
@@ -132,6 +132,7 @@
         </div>
     </footer>
 
+    <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-login">
             <div class="modal-content">
@@ -163,6 +164,28 @@
                         <button type="submit" class="btn btn-primary btn-block">Είσοδος</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Εγγραφή</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('img/register_icon.png') }}" class="img-fluid" alt="...">
+                    <p class="">Για να εγγραφείτε στο σύστημα, επιλέξτε την κατηγορία χρήστη που ανήκετε:</p>
+                    <a href="{{ route('companies.create') }}" class="btn btn-outline-primary">Φορέας Απασχόλησης</a>
+                    <a href="{{ route('graduates.create') }}" class="btn btn-outline-primary">Απόφοιτος Τμήματος</a>
+                    <hr>
+                    <p>Σημείωση: Οι <u><b>Προπτυχιακοί Φοιτητές</b></u> δεν χρειάζεται να συνδεθούν στο σύστημα για την έναρξη της Πρακτικής τους Άσκησης</p>
+                </div>
             </div>
         </div>
     </div>
