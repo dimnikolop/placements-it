@@ -17,7 +17,8 @@ class GraduateController extends Controller
      */
     public function index()
     {
-        //
+        $graduates = Graduate::orderBy('created_at', 'desc')->get();
+        return view('admin.graduates', compact('graduates'));
     }
 
     /**
@@ -122,7 +123,11 @@ class GraduateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $graduate = Graduate::find($id);
+        $graduate->status = $request->status;
+        $graduate->save();
+            
+        return back()->with('success', "Ο απόφοιτος " .$graduate->surname. " " .$graduate->name. " έγινε αποδεκτός στο σύστημα επιτυχώς!");
     }
 
     /**
@@ -133,6 +138,8 @@ class GraduateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $graduate = Graduate::find($id);
+        $graduate->delete();
+        return back()->with('success', 'Graduate has been successfully deleted.');
     }
 }
