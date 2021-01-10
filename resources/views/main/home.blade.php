@@ -35,11 +35,12 @@
 
 @section('content')
 <div class="container">
-    <div class="row mt-5">
-		<div class="col-lg-6">
+    <div class="row">
+        <div class="col-12 mb-2"><h3>Λίγα λόγια...</h3></div>
+		<div class="col-md-6">
 			<div class="text-justify">
 				<p>Η Πρακτική Άσκηση αποτελεί σημείο αναφοράς  στις σπουδές του φοιτητή.
-					Η επιλογή για το χώρο εργασίας του φοιτητή πρέπει να γίνεται με σύνεση και 
+					Η επιλογή για το χώρο εργασίας του φοιτητή πρέπει να γίνεται με σύνεση και
 					είναι ουσιαστικής σημασίας να σχετίζεται με το αντικείμενο των σπουδών του.
                 </p>
                 <p>Η ένταξη Πρακτικής Ασκησης στο Πρόγραμμα Σπουδών, δείχνει και την βαρύτητα που
@@ -49,14 +50,14 @@
                     αντικείμενο του Τμήματος και σε πρακτικό επίπεδο.
                 </p>
                 <p>Η Πρακτική Ασκηση είναι υποχρεωτική, έχει εξάμηνη διάρκεια (ημερολογιακό  εξάμηνο),
-                    διεξάγεται το τελευταίο εξάμηνο των σπουδών και είναι απαραίτητη προϋπόθεση για την λήψη του πτυχίου. 
+                    διεξάγεται το τελευταίο εξάμηνο των σπουδών και είναι απαραίτητη προϋπόθεση για την λήψη του πτυχίου.
                 </p>
-                <p>Το τμήμα Μηχανικών Πληροφορικής σχεδίασε αυτό το δικτυακό χώρο με βασικό στόχο να παρέχει 
+                <p>Το τμήμα Μηχανικών Πληροφορικής σχεδίασε αυτό το δικτυακό χώρο με βασικό στόχο να παρέχει
 					πλήρη υποστήριξη στην επιλογή του φοιτητή αλλά και σημαντική βοήθεια σε διαδικαστικά θέματα.
                 </p>	
 			</div>					
 		</div>
-		<div class="col-lg-6">
+		<div class="col-md-6">
 			<div class="text-justify">
 				<p>Κύριος σκοπός της Πρακτικής Ασκησης είναι η εξάσκηση τους στα πλαίσια του γνωστικού αντικειμένου του Τμήματος 
 					σε φορέα (Ιδιωτικό ή Δημόσιο) και σε θέση απασχόλησης σχετική με το γνωστικό αντικείμενο του Τμήματος.
@@ -73,62 +74,46 @@
 		</div>
 	</div>
 
-    <div class="section">
+    <div id="box-section" class="section">
         <div class="row">
-            <div class="col-lg-3 my-3">
-                <div class="box text-center">
-					<div class="box-gray">
-						<h5>Έντυπα</h5>
-						<div class="icon">
-							<img src="{{ asset('img/entypa.png') }}" class="img-fluid" alt="">
-						</div>
-						<p>Έντυπα σε ηλεκτρονική μορφή που αφορούν τη Πρακτική Άσκηση με ΕΣΠΑ,ΟΑΕΔ ή στο ΑΤΕΙ.</p>
+            <div class="col-md-6 col-lg-3 my-3">
+                <div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title">Έντυπα</h5>
+						<img src="{{ asset('img/entypa.png') }}" class="img-fluid" alt="">
+						<p class="card-text">Έντυπα σε ηλεκτρονική μορφή που αφορούν τη Πρακτική Άσκηση με ΕΣΠΑ,ΟΑΕΔ ή στο ΑΤΕΙ.</p>
 					</div>
-					<div class="box-bottom">
-						<a href="?p=praktiki_files">Δείτε Περισσότερα</a>
-					</div>
+					<a href="?p=praktiki_files" class="btn btn-info">Δείτε Περισσότερα</a>
 				</div>
             </div>
-            <div class="col-lg-3 my-3">
-                <div class="box text-center">
-					<div class="box-gray">
-						<h5>Νομοθεσία</h5>
-						<div class="icon">
-							<img src="{{ asset('img/nomothesia.jpg') }}" class="img-fluid" alt="">
-						</div>
-						<p>Νόμοι, Υπουργικές αποφάσεις και διατάγματα που αφορούν την Πρακτική Άσκηση.</p>
+            <div class="col-md-6 col-lg-3 my-3">
+                <div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title">Νομοθεσία</h5>
+						<img src="{{ asset('img/nomothesia.jpg') }}" class="img-fluid" alt="">
+						<p class="card-text">Νόμοι, Υπουργικές αποφάσεις και διατάγματα που αφορούν την Πρακτική Άσκηση.</p>
 					</div>
-					<div class="box-bottom">
-						<a href="?p=praktiki_files">Δείτε Περισσότερα</a>
-					</div>
+					<a href="?p=praktiki_files" class="btn btn-info">Δείτε Περισσότερα</a>
 				</div>
             </div>
-            <div class="col-lg-3 my-3">
-                <div class="box text-center">
-					<div class="box-gray">
-						<h5>Αξιολόγηση</h5>
-						<div class="icon">
-							<img src="{{ asset('img/axer.png') }}" class="img-fluid" alt="">
-						</div>
-						<p>Ερωτηματολόγια για επιβέποντες φορέων, φοιτητές και επόπτες καθηγητές για την αξιολόγηση Πρακτικής Άσκησης.</p>
+            <div class="col-md-6 col-lg-3 my-3">
+                <div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Αξιολόγηση</h5>
+						<img src="{{ asset('img/axer.png') }}" class="img-fluid" alt="">
+						<p class="card-text">Ερωτηματολόγια για επιβέποντες φορέων, φοιτητές και επόπτες καθηγητές για την αξιολόγηση Πρακτικής Άσκησης.</p>
 					</div>
-					<div class="box-bottom">
-						<a href="{{ route('questionnaires.index') }}">Δείτε Περισσότερα</a>
-					</div>
+					<a href="{{ route('questionnaires.index') }}" class="btn btn-info">Δείτε Περισσότερα</a>
 				</div>
             </div>
-            <div class="col-lg-3 my-3">
-                <div class="box text-center">
-					<div class="box-gray">
-						<h5>Χάρτης Αποφοίτων</h5>
-						<div class="icon">
-							<img src="{{ asset('img/world-globe.png') }}" class="img-fluid" alt="">
-						</div>
-						<p>Πού βρίσκονται και που εργάζονται οι απόφοιτοι του Τμήματος;</p>
+            <div class="col-md-6 col-lg-3 my-3">
+                <div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title">Χάρτης Αποφοίτων</h5>
+						<img src="{{ asset('img/world-globe.png') }}" class="img-fluid" alt="">
+						<p class="card-text">Πού βρίσκονται και που εργάζονται οι απόφοιτοι του Τμήματος;</p>
 					</div>
-					<div class="box-bottom">
-						<a href="?p=praktiki_files">Δείτε Περισσότερα</a>
-					</div>
+					<a href="?p=praktiki_files" class="btn btn-info">Δείτε Περισσότερα</a>
 				</div>
             </div>
         </div>
