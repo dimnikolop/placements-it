@@ -94268,6 +94268,8 @@ $(function () {
     //responsive: true
     "order": [[4, 'desc']]
   });
+  $('#graduatesTable').DataTable({//responsive: true
+  });
 });
 
 /***/ }),
@@ -94279,7 +94281,10 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Ajax Login Form
+$('#loginModal').on('shown.bs.modal', function () {
+  $('#inputUsername').trigger('focus');
+}); // Ajax Login Form
+
 $("#loginForm").on('submit', function (event) {
   event.preventDefault();
   var form_data = $(this).serialize();

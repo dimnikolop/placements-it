@@ -1,3 +1,7 @@
+$('#loginModal').on('shown.bs.modal', function () {
+    $('#inputUsername').trigger('focus')
+})
+
 // Ajax Login Form
 $("#loginForm").on('submit', function (event) {
     event.preventDefault();

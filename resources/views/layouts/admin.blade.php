@@ -48,41 +48,6 @@
         }
 
         /* Bootstrap Overwrite */
-
-        .text-primary {
-            color: #1abc9c !important;
-        }
-
-        a.text-primary:hover, 
-        a.text-primary:focus {
-            color: #117964 !important;
-        }
-
-        .btn-primary {
-            color: #fff;
-            background-color: #1abc9c;
-            border-color: #1abc9c;
-        }
-
-        .btn-primary:hover {
-            color: #fff;
-            background-color: #159a80;
-            border-color: #148f77;
-        }
-
-        .btn-primary:focus, .btn-primary.focus {
-            box-shadow: 0 0 0 0rem rgba(60, 198, 171, 0.5);
-        }
-
-        .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
-            box-shadow: 0 0 0 0rem rgba(60, 198, 171, 0.5);
-        }
-
-        .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
-            color: #fff;
-            background-color: #148f77;
-            border-color: #12846e;
-        }
         
         .table {
             color: #37474f;
@@ -151,7 +116,7 @@
                     <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Students Table</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Graduates Table</a>
+                    <a class="nav-link" href="{{ route('graduates.index') }}"><i class="fas fa-list-ul fa-fw"></i> Graduates Table</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-chart-bar fa-fw"></i> Evaluation Results</a>

@@ -57,8 +57,12 @@ Route::get('/companies/{company}/jobs/{job}', [JobController::class, 'show'])->n
 Route::patch('/jobs/{job}', [JobController::class, 'update'])->name('jobs.update')->middleware('auth');
 Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy')->middleware('auth');
 
+Route::get('/graduates', [GraduateController::class, 'index'])->name('graduates.index')->middleware(['auth','admin']);
 Route::get('/register/graduate', [GraduateController::class, 'create'])->name('graduates.create');
 Route::post('/register/graduate', [GraduateController::class, 'store'])->name('graduate.register');
+Route::get('/graduate/{id}', [GraduateController::class, 'show'])->name('graduate.show');
+Route::patch('/graduate/{id}', [GraduateController::class, 'update'])->name('graduate.update')->middleware(['auth','admin']);
+Route::delete('/graduate/{id}', [GraduateController::class, 'destroy'])->name('graduate.destroy')->middleware(['auth','admin']);
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 

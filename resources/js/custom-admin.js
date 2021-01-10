@@ -31,4 +31,8 @@ $(function () {
         //responsive: true
         "order": [[ 4, 'desc' ]]
     });
+
+    $('#graduatesTable').DataTable({
+        //responsive: true
+    });
 });
