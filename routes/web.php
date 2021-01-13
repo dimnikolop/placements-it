@@ -63,6 +63,7 @@ Route::post('/register/graduate', [GraduateController::class, 'store'])->name('g
 Route::get('/graduate/{id}', [GraduateController::class, 'show'])->name('graduate.show');
 Route::patch('/graduate/{id}', [GraduateController::class, 'update'])->name('graduate.update')->middleware(['auth','admin']);
 Route::delete('/graduate/{id}', [GraduateController::class, 'destroy'])->name('graduate.destroy')->middleware(['auth','admin']);
+Route::get('/graduates/map', [GraduateController::class, 'map'])->name('graduates.map');
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 

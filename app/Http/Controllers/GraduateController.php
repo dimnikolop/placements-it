@@ -52,7 +52,14 @@ class GraduateController extends Controller
             }
         }
         
-        $request->diploma = implode(',', $request->diploma);
+        $request->diploma = implode(', ', $request->diploma);
+
+        // Get coordinates according to full address
+        $addr = $request->work_address . " " . $request->city . " " . $request->postal_code;
+        $output = Graduate::getCoordinates($addr);
+        if ($output === false) {
+            $output['lat'] = $output['lng'] = 0;
+        }
         
         $graduate = Graduate::create([
             'surname' => $request->surname,
@@ -70,18 +77,18 @@ class GraduateController extends Controller
             'city' => $request->city,
             'notes' => $request->notes,
             'map' => $request->input('map', '0'),
-            'latitude' => $request->input('latitude', '1'),
-            'longitude' => $request->input('longitude', '1')
+            'lat' => $output['lat'],
+            'lng' => $output['lng']
         ]);
 
         if ($request->has('question2')) {
-            $questionnaire['question2'] = implode(',', $questionnaire['question2']);
+            $questionnaire['question2'] = implode(', ', $questionnaire['question2']);
         }
         if ($request->has('question8c')) {
-            $questionnaire['question8c'] = implode(',', $questionnaire['question8c']);
+            $questionnaire['question8c'] = implode(', ', $questionnaire['question8c']);
         }
         if ($request->has('question25')) {
-            $questionnaire['question25'] = implode(',', $questionnaire['question25']);
+            $questionnaire['question25'] = implode(', ', $questionnaire['question25']);
         }
         
         if (!empty(array_filter($questionnaire))) {
@@ -141,5 +148,16 @@ class GraduateController extends Controller
         $graduate = Graduate::find($id);
         $graduate->delete();
         return back()->with('success', 'Graduate has been successfully deleted.');
+    }
+
+    /**
+     * Display a listing of graduates on google map.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function map()
+    {
+        $graduates = Graduate::where('map', 1)->where('status', 'approved')->get();
+        return view('main.graduates_map', compact('graduates'));
     }
 }

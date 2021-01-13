@@ -108,7 +108,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-lg-3 col-form-label text-lg-right" for="inputWebsite">Ιστότοπος:</label>
                         <div class="col-md-8 col-lg-7">
-                            <input class="form-control @error('website') is-invalid @enderror" type="text" id="inputWebsite" name="website" value="{{ old('website') }}" placeholder="https://example.com"/>
+                            <input class="form-control @error('website') is-invalid @enderror" type="text" id="inputWebsite" name="website" value="{{ old('website') }}" placeholder="http://example.com"/>
                             @error('website')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

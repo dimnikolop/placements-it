@@ -113,7 +113,7 @@
 						<img src="{{ asset('img/world-globe.png') }}" class="img-fluid" alt="">
 						<p class="card-text">Πού βρίσκονται και που εργάζονται οι απόφοιτοι του Τμήματος;</p>
 					</div>
-					<a href="?p=praktiki_files" class="btn btn-info">Δείτε Περισσότερα</a>
+					<a href="{{ route('graduates.map') }}" class="btn btn-info">Δείτε Περισσότερα</a>
 				</div>
             </div>
         </div>

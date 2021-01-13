@@ -38,6 +38,7 @@ class StoreGraduateRequest extends FormRequest
             'work_address' => 'required',
             'postal_code' => 'required',
             'city' => 'required',
+            'map' => 'nullable|boolean',
             'question1' => 'nullable|digits_between:1,2',
             'question4' => 'nullable|digits_between:1,2',
             'other7' => 'required_if:question7,Άλλο',

@@ -192,7 +192,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
 
+    
     @if (session('openLogin'))
         //js function that will open hidden login modal
         <script>

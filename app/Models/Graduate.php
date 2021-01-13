@@ -30,8 +30,8 @@ class Graduate extends Model
         'city',
         'notes',
         'map',
-        'latitude',
-        'longitude'   
+        'lat',
+        'lng'
     ];
 
     /**
@@ -42,4 +42,39 @@ class Graduate extends Model
     protected $attributes = [
         'status' => 'pending'
     ];
+
+    /**
+     * Get coordinates (lat,lng) to use on google map.
+     * 
+     * @param  string $address
+     * @return array lat,lng
+     */ 
+    public static function getCoordinates($address) {
+        $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+        
+		$apiKey = 'AIzaSyAjbXXJdDO7NNfKOdzjkb12tmlPCRqUygM';
+		
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='.$address.'&key='.$apiKey;
+		
+		$ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        if ($response === false) return false;
+
+        $response = json_decode($response);
+        $lat = $response->results[0]->geometry->location->lat;
+        $lng = $response->results[0]->geometry->location->lng;
+ 
+        return [
+            'lat' => $lat,
+            'lng' => $lng
+        ];
+ 
+    }
 }

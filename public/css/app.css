@@ -11374,6 +11374,17 @@ form label:not(.custom-file-label):not(.custom-control-label) {
   background-color: #0077B5;
 }
 
+/* * * Map * * */
+
+#bodyContent {
+  font-weight: 500;
+}
+
+#bodyContent span {
+  font-size: 1rem;
+  color: #7094db;
+}
+
 /* Header - Navbar */
 
 .header-navbar {
