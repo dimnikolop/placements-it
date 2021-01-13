@@ -52,7 +52,7 @@ class Graduate extends Model
     public static function getCoordinates($address) {
         $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
         
-		$apiKey = 'AIzaSyAjbXXJdDO7NNfKOdzjkb12tmlPCRqUygM';
+		$apiKey = 'API_KEY';
 		
         $url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='.$address.'&key='.$apiKey;
 		
