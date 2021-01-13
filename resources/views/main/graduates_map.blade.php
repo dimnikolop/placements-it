@@ -82,5 +82,5 @@
         });
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjbXXJdDO7NNfKOdzjkb12tmlPCRqUygM&callback=initMap&libraries=&v=weekly"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap&libraries=&v=weekly"></script>
 @endpush
