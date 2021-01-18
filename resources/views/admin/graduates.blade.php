@@ -24,8 +24,8 @@
             @endif
             @if ($graduates->isNotEmpty())
                 <div class="table-responsive">
-                    <table id="graduatesTable" class="table table-bordered">
-                        <thead class="text-center">
+                    <table id="graduatesTable" class="table table-bordered custom-table">
+                        <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Επώνυμο</th>

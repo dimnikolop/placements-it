@@ -17,7 +17,7 @@ class GraduateController extends Controller
      */
     public function index()
     {
-        $graduates = Graduate::orderBy('created_at', 'desc')->get();
+        $graduates = Graduate::orderBy('status')->get();
         return view('admin.graduates', compact('graduates'));
     }
 

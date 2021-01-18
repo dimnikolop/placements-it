@@ -25,9 +25,10 @@
             @endif
             @if ($companies->isNotEmpty())
                 <div class="table-responsive">
-                    <table id="companiesTable" class="table table-bordered">
-                        <thead class="text-center">
+                    <table id="companiesTable" class="table table-bordered custom-table">
+                        <thead>
                             <tr>
+                                <th scope="col">#</th>
                                 <th scope="col">Επωνυμία</th>
                                 <th scope="col">Τομέας</th>
                                 <th scope="col">Στοιχεία εταιρείας</th>
@@ -38,6 +39,7 @@
                         <tbody>
                             @foreach ($companies as $company)
                                 <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->sector }}</td>
                                     <td><a href="{{ route('companies.show', $company->id) }}">Προβολή</a></td>
@@ -82,7 +84,7 @@
                     </div>
                 </div>
             @else
-                <h1 class="display-4 text-center">There are no employers registered in database!</h1>
+                <h1 class="display-4 text-center">Δεν υπάρχουν καταχωρημένοι φορείς απασχόλησης!</h1>
             @endif
         </div>
     </div>

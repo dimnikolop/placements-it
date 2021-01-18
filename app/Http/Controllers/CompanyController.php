@@ -17,7 +17,7 @@ class CompanyController extends Controller
     public function index()
     {
         if (auth()->check() && auth()->user()->role === 'admin') {
-            $companies = Company::all();
+            $companies = Company::orderBy('status', 'desc')->get();
             return view('admin.companies', [
                 'companies' => $companies
             ]);

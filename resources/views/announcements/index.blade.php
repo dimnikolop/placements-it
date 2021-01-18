@@ -25,7 +25,7 @@
             @endif
             @if ($announcements->isNotEmpty())
                 <div class="table-responsive">
-                    <table id="announcementsTable" class="table table-bordered text-center align-middle">
+                    <table id="announcementsTable" class="table table-bordered custom-table">
                         <thead>
                             <tr>
                                 <th scope="col">Προστέθηκε</th>
@@ -59,7 +59,7 @@
                     </table>
                 </div>
             @else
-                <h1 class="display-4 text-center">No announcements found.</h1>
+                <h1 class="display-4 text-center">Δεν υπάρχουν αναρτημένες ανακοινώσεις!</h1>
             @endif
         </div>
     </div>

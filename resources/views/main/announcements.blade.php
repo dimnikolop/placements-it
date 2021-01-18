@@ -6,8 +6,8 @@
         <div class="card-body">
             @if ($announcements->isNotEmpty())
                 <div class="table-responsive">
-                    <table id="announcementsTable" class="table table-bordered">
-                        <thead class="text-center">
+                    <table id="announcementsTable" class="table table-bordered table-hover">
+                        <thead class="thead-light text-center">
                             <tr>
                                 <th scope="col">Προστέθηκε</th>
                                 <th scope="col">Τίτλος</th>
@@ -16,9 +16,9 @@
                         </thead>
                         <tbody>
                             @foreach ($announcements as $announcement)
-                                <tr>
+                                <tr class="clickable-row" data-url="{{ route('announcement.show', $announcement->id) }}">
                                     <td>{{ $announcement->created_at->format('d/m/Y H:i') }}</td>
-                                    <td><a href="{{ route('announcement.show', $announcement->id) }}" target="_blank">{{ $announcement->title }}</a></td>
+                                    <td>{{ $announcement->title }}</td>
                                     <td>
                                         @if (Storage::disk('public')->exists($announcement->attachment))
                                             <a href="{{ Storage::url($announcement->attachment) }}" target="_blank">Προβολή</a>
@@ -31,7 +31,7 @@
                     </table>
                 </div>
             @else
-                <h1 class="display-4 text-center">No announcements found.</h1>
+                <h1 class="display-4 text-center">Δεν υπάρχουν αναρτημένες ανακοινώσεις!</h1>
             @endif
         </div>
     </div>

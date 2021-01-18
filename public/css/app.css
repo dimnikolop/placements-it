@@ -229,7 +229,7 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
   --cyan: #489fb5;
   --white: #fff;
   --gray: #6c757d;
-  --gray-dark: #222823;
+  --gray-dark: #37474f;
   --primary: #0C6170;
   --secondary: #6c757d;
   --success: #28a745;
@@ -2032,7 +2032,7 @@ pre code {
 
 .table-hover tbody tr:hover {
   color: #37474f;
-  background-color: rgba(0, 0, 0, 0.075);
+  background-color: #f5f5f5;
 }
 
 .table-primary,
@@ -2214,16 +2214,16 @@ pre code {
 .table-active,
 .table-active > th,
 .table-active > td {
-  background-color: rgba(0, 0, 0, 0.075);
+  background-color: #f5f5f5;
 }
 
 .table-hover .table-active:hover {
-  background-color: rgba(0, 0, 0, 0.075);
+  background-color: #e8e8e8;
 }
 
 .table-hover .table-active:hover > td,
 .table-hover .table-active:hover > th {
-  background-color: rgba(0, 0, 0, 0.075);
+  background-color: #e8e8e8;
 }
 
 .table .thead-dark th {
@@ -7655,6 +7655,22 @@ button.bg-dark:focus {
   padding-top: 100%;
 }
 
+.embed-responsive-21by9::before {
+  padding-top: 42.8571428571%;
+}
+
+.embed-responsive-16by9::before {
+  padding-top: 56.25%;
+}
+
+.embed-responsive-4by3::before {
+  padding-top: 75%;
+}
+
+.embed-responsive-1by1::before {
+  padding-top: 100%;
+}
+
 .flex-row {
   flex-direction: row !important;
 }
@@ -11126,10 +11142,9 @@ a.text-dark:focus {
 }
 
 .custom-main-card {
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
-  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
   border-top: 3px solid #3c6e71;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 .job-card {
@@ -11572,10 +11587,9 @@ form label:not(.custom-file-label):not(.custom-control-label) {
 /* General */
 
 .custom-admin-card {
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
-  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
   border-top: 3px solid #8CDDCD;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 .table-responsive {
@@ -11585,5 +11599,19 @@ form label:not(.custom-file-label):not(.custom-control-label) {
 .table > tbody > tr > td {
   text-align: center;
   vertical-align: middle;
+}
+
+.table .clickable-row {
+  cursor: pointer;
+}
+
+.custom-table thead th {
+  text-align: center;
+  border-bottom: 1px solid #e2e5e8;
+  background: #f6f6f6;
+}
+
+.table .thead-light th {
+  border-bottom: 1px solid #313259;
 }
 

@@ -7,7 +7,7 @@
             @if ($companies->isNotEmpty())
                 <div class="table-responsive">
                     <table id="companiesTable" class="table table-bordered">
-                        <thead class="text-center">
+                        <thead class="thead-light text-center">
                             <tr>
                                 <th scope="col">Επωνυμία</th>
                                 <th scope="col">Τομέας</th>
@@ -28,7 +28,7 @@
                     </table>
                 </div>
             @else
-                <h1 class="display-4 text-center">There are no employers registered in database!</h1>
+                <h1 class="display-4 text-center">Δεν υπάρχουν καταχωρημένοι φορείς απασχόλησης!</h1>
             @endif
         </div>
     </div>

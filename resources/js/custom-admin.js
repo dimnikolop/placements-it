@@ -17,7 +17,7 @@ $(function () {
         $('#deleteForm').attr('action', url);
     });
 
-    
+    // Modify DataTables
     $('#announcementsTable').DataTable({
         //responsive: true
         "order": [[ 0, 'desc' ]]
@@ -25,11 +25,6 @@ $(function () {
 
     $('#companiesTable').DataTable({
         //responsive: true
-    });
-
-    $('#companiesTableAdmin').DataTable({
-        //responsive: true
-        "order": [[ 4, 'desc' ]]
     });
 
     $('#graduatesTable').DataTable({

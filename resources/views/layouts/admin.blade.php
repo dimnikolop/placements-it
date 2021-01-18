@@ -46,18 +46,7 @@
             color: rgba(55, 58, 60, 0.6);
             font-size: 13px;
         }
-
-        /* Bootstrap Overwrite */
-        
-        .table {
-            color: #37474f;
-        }
-
-        .table thead th {
-            border-bottom: 1px solid #e2e5e8;
-            background: #f6f6f6;
-        }
-        
+          
     </style>
 </head>
 
@@ -89,7 +78,7 @@
                             <div class="dropdown-divider"></div>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <button type="submit" class="dropdown-item btn btn-link"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
                             </form>
                         </div>
                     </li>

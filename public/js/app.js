@@ -94257,16 +94257,13 @@ $(function () {
   $(".deleteBtn").on('click', function () {
     var url = $(this).data('url');
     $('#deleteForm').attr('action', url);
-  });
+  }); // Modify DataTables
+
   $('#announcementsTable').DataTable({
     //responsive: true
     "order": [[0, 'desc']]
   });
   $('#companiesTable').DataTable({//responsive: true
-  });
-  $('#companiesTableAdmin').DataTable({
-    //responsive: true
-    "order": [[4, 'desc']]
   });
   $('#graduatesTable').DataTable({//responsive: true
   });
@@ -94329,6 +94326,10 @@ $("#loginForm").on('submit', function (event) {
       });
     }
   });
+});
+$(".clickable-row").on('click', function () {
+  var url = $(this).data('url');
+  window.location.href = url;
 });
 $('.edit-job').on('click', function (event) {
   var button = $(event.relatedTarget); // Button that triggered the modal

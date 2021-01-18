@@ -50,6 +50,11 @@ $("#loginForm").on('submit', function (event) {
     });
 });
 
+$(".clickable-row").on('click', function() {
+    let url = $(this).data('url');
+    window.location.href = url;
+});
+
 $('.edit-job').on('click', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var job = $(this).data('job') // Extract info from data-* attributes
