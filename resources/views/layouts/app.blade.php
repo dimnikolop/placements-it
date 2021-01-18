@@ -21,11 +21,11 @@
             <div class="container px-2">
                 <div class="navbar-nav mx-auto mr-lg-0" id="secondaryNavbar">
                     @auth
-                        <div class="nav-item dropdown">
+                        <div class="nav-item dropdown mr-lg-0">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
                                 {{ auth()->user()->username }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                 <h6 class="dropdown-header">Manage Account</h6>
                                 @if (auth()->user()->role == 'admin')
                                     <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
