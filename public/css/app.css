@@ -11136,11 +11136,17 @@ a.text-dark:focus {
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
   margin-bottom: 2rem;
   transition: box-shadow 0.2s ease-in-out;
-  border-left: 5px solid #c4ede5;
+  border-left: 5px solid #a4e5e0;
 }
 
 .job-card:hover {
-  border-left-color: #62d0ba;
+  border-left-color: #37beb0;
+}
+
+.job-card-main:hover {
+  box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2);
+  top: -5px;
+  z-index: 2;
 }
 
 /* --- Header --- */
@@ -11317,12 +11323,34 @@ form label:not(.custom-file-label):not(.custom-control-label) {
 
 /* --- Company Dashboard --- */
 
-.nav-tabs {
-  background: #e0e1e7;
+.nav-pills .nav-link {
+  color: #fff;
+  padding: 0.875rem;
+  border-radius: 0;
 }
 
-.nav-tabs a {
-  color: #495057;
+.nav-pills .nav-link:hover,
+.nav-pills .nav-link:focus {
+  background-color: #247575;
+  transition: background-color 0.2s linear;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #247575;
+}
+
+.tab-content {
+  background: #fdfdfd;
+  padding: 1.25rem;
+  border-top: 5px solid #247575;
+  border-bottom: 5px solid #247575;
+}
+
+.tab-content h5,
+.tab-content h6 {
+  color: #323b6b;
 }
 
 /* --- Company info --- */

@@ -62,7 +62,8 @@ class CompanyController extends Controller
             'email' => 'required|email|unique:companies',
             'logo' => 'nullable|image',
             'username' => 'required|unique:users',
-            'password' => 'required|min:8|max:20|confirmed'
+            'password' => 'required|min:8|max:20|confirmed',
+            'password_confirmation' => 'required_with:password'
         ]);
 
         $user = User::create([
@@ -138,7 +139,7 @@ class CompanyController extends Controller
                 'website' => 'nullable|url',
                 'contact_person' => 'required',
                 'phone' => 'required',
-                'email' => 'required|email|unique:companies',
+                'email' => 'required|email|unique:companies,email,'.$company->id,
                 'logo' => 'image'
             ]);
             

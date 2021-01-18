@@ -2,19 +2,16 @@
 
 @section('content')
 <div class="container">
-    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+    <ul class="nav nav-pills nav-fill bg-dark" id="dashboard-tab" role="tablist">
         <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                aria-controls="profile" aria-selected="true">Προφίλ</a>
+            <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Στοιχεία Εταιρείας</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="jobs-tab" data-toggle="tab" href="#jobs" role="tab" aria-controls="jobs"
-                aria-selected="false">Θέσεις Απασχόλησης</a>
+            <a class="nav-link" id="jobs-tab" data-toggle="pill" href="#jobs" role="tab" aria-controls="jobs" aria-selected="false">Θέσεις Απασχόλησης</a>
         </li>
     </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active py-5" id="profile" role="tabpanel"
-            aria-labelledby="profile-tab">
+    <div class="tab-content shadow mt-2 mt-sm-0" id="dashboard-content">
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
                     <p class="mb-0"><i class="fas fa-check-circle"></i> <strong>Success!</strong>
@@ -23,8 +20,8 @@
                 </div>
             @endif
             <div class="row mb-5">
-                <div class="col-md-12">
-                    <h5 class="border-bottom py-3 text-primary">Γενικές Πληροφορίες</h5>
+                <div class="col-md-12 mb-2">
+                    <h5 class="border-bottom py-2 text-primary">Γενικές Πληροφορίες</h5>
                 </div>
                 <div class="col-md-6">
                     <h6>Επωνυμία</h6>
@@ -32,16 +29,18 @@
                 </div>
                 <div class="col-md-6">
                     <h6>Logo</h6>
-                    <img src="{{ asset('img/company-1-45x45.png') }}" width="30" height="30" alt="...">
+                    <img src="{{ asset('img/company-1-45x45.png') }}" class="mb-3" width="30" height="30" alt="...">
                 </div>
                 <div class="col-md-6">
                     <h6>Τομέας</h6>
                     <p>{{ $company->sector }}</p>
                 </div>
-                <div class="col-md-6">
+                @if (!empty($company->website))
+                <div class="col-md-6 mb-3">
                     <h6>Ιστότοπος</h6>
-                    <p>{{ $company->website }}</p>
+                    <a href="{{ $company->website }}" target="_blank">{{ $company->website }}</a>
                 </div>
+                @endif
                 <div class="col-md-6">
                     <h6>Διεύθυνση</h6>
                     <p>{{ $company->address }}, {{ $company->zip_code }}</p>
@@ -52,17 +51,19 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <h6>Περιγραφή</h6>
-                    <div class="shadow-sm p-3"><p>{{ $company->description }}</p></div>
+                    <div class="shadow p-3"><p>{{ $company->description }}</p></div>
                 </div>
-                <div class="col-md-12">
-                    <h6>Σημειώσεις / Σχόλια</h6>
-                    <div class="shadow-sm p-3"><p>{{ $company->notes }}</p></div>
-                </div>
+                @if (!empty($company->notes))
+                    <div class="col-md-12">
+                        <h6>Σημειώσεις / Σχόλια</h6>
+                        <div class="shadow-sm p-3"><p>{{ $company->notes }}</p></div>
+                    </div>
+                @endif
             </div>
 
             <div class="contact-info row mb-5">
-                <div class="col-md-12">
-                    <h5 class="border-bottom py-3 text-primary">Στοιχεία Επικοινωνίας</h5>
+                <div class="col-md-12 mb-2">
+                    <h5 class="border-bottom py-2 text-primary">Στοιχεία Επικοινωνίας</h5>
                 </div>
                 <div class="col-md-6">
                     <h6>Υπεύθυνος Επικοινωνίας</h6>
@@ -79,8 +80,8 @@
             </div>
 
             <div class="social-media-info row mb-5">
-                <div class="col-md-12">
-                    <h5 class="border-bottom py-3 text-primary">Σύνδεσμοι Social Media</h5>
+                <div class="col-md-12 mb-2">
+                    <h5 class="border-bottom py-2 text-primary">Σύνδεσμοι Social Media</h5>
                 </div>
                 <div class="col-md-6">
                     <h6>Facebook</h6>
@@ -97,41 +98,150 @@
             </div>
            
             <div class="d-flex justify-content-end">
-                <!-- Button trigger edit modal -->
-                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#editCompanyModal">
-                    <i class="far fa-edit"></i> Επεξεργασία
+                <!-- Button trigger edit company modal -->
+                <button type="button" class="btn btn-sm btn-outline-warning" data-toggle="modal" data-target="#editCompanyModal">
+                    <i class="fas fa-pencil-alt fa-sm"></i> Επεξεργασία
                 </button>
                 <!-- Button trigger delete modal -->
-                <button type="button" class="btn btn-danger btn-sm ml-3 deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('company.destroy', $company) }}">
-                    <i class="far fa-trash-alt"></i> Διαγραφή
+                <button type="button" class="btn btn-sm btn-outline-danger ml-3 deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('company.destroy', $company) }}">
+                    <i class="far fa-trash-alt fa-sm"></i> Διαγραφή
                 </button>
             </div>
         </div>
-        <div class="tab-pane fade py-5" id="jobs" role="tabpanel" aria-labelledby="jobs-tab">
-            @foreach ($jobs as $job)
-                <div class="card job-card">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="{{ route('companies.jobs.show', [$company, $job]) }}" class="text-reset">{{ $job->title }}</a></h5>
-                        <div class="d-flex">
-                            <!-- Button trigger edit modal -->
-                            <button type="button" class="btn btn-secondary btn-sm edit-job" data-toggle="modal" data-target="#editJobModal" data-job="{{ $job }}">
-                                <i class="fas fa-pencil-alt fa-sm"></i> Επεξεργασία
-                            </button>
-                            <!-- Button trigger delete modal -->
-                            <button type="button" class="btn btn-danger btn-sm ml-3 deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('jobs.destroy', $job) }}">
-                                <i class="far fa-trash-alt fa-sm"></i> Διαγραφή
-                            </button>
-                            <p class="card-text ml-auto"><small class="text-muted">Δημοσιεύτηκε: {{ $job->created_at->diffForHumans() }}</small></p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-            <div class="well d-flex flex-column justify-content-center align-items-center">
+        <div class="tab-pane fade" id="jobs" role="tabpanel" aria-labelledby="jobs-tab">
+            <div class="well d-flex flex-column align-items-center text-center">
                 <h6>Προσθέστε νέα θέση απασχόλησης</h6>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addJobModal">
                     <i class="fas fa-plus"></i> Προσθήκη
                 </button>
             </div>
+            <div class="row">
+                @foreach ($jobs as $job)
+                <div class="col-xl-6">
+                    <div class="card job-card">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ route('companies.jobs.show', [$company, $job]) }}" class="text-reset">{{ $job->title }}</a></h5>
+                            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mt-3 mt-sm-4">
+                                <div class="small text-muted"><i class="far fa-clock"></i> Δημοσιεύτηκε {{ $job->created_at->diffForHumans() }}</div>
+                                <div class="mt-3 mt-sm-0">
+                                    <!-- Button trigger edit job modal -->
+                                    <button type="button" class="btn btn-sm btn-outline-warning edit-job" data-toggle="modal" data-target="#editJobModal" data-job="{{ $job }}">
+                                        <i class="fas fa-pencil-alt fa-sm"></i> Επεξεργασία
+                                    </button>
+                                    <!-- Button trigger delete modal -->
+                                    <button type="button" class="btn btn-sm btn-outline-danger ml-3 deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('jobs.destroy', $job) }}">
+                                        <i class="far fa-trash-alt fa-sm"></i> Διαγραφή
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Company Modal -->
+<div class="modal fade" id="editCompanyModal" tabindex="-1" aria-labelledby="editCompanyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCompanyModalLabel">Επεξεργασία των στοιχείων της εταιρείας</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="companyEditForm" action="{{ route('company.update', $company->id) }}" method="post">
+                <div class="modal-body">
+                    @csrf
+                    @method('PATCH')
+                    <div class="form-froup">
+                        <label for="inputName">Επωνυμία:<span class="required">*</span></label>
+                        <input type="text" class="form-control" id="inputName" value="{{ $company->name }}" aria-describedby="nameHelp" disabled>
+                        <small id="nameHelp" class="form-text text-muted">Η επωνυμία της εταιρείας</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Περιγραφή:<span class="required">*</span></label>
+                        <textarea class="form-control @if($errors->company->has('description')) is-invalid @endif" id="inputDescription" name="description" rows="5">{{ old('description') ?? $company->description }}</textarea>
+                        @if($errors->company->has('description'))
+                            <div class="invalid-feedback">{{ $errors->company->first('description') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSector">Τομέας:<span class="required">*</span></label>
+                        <select class="custom-select" id="inputSector" name="sector">
+                            <option selected disabled>Παρακαλώ διαλέξτε μια από τις παρακάτω επιλογές</option>
+                            <option {{ (old('sector') ?? $company->sector) == 'Δημόσιος Τομέας - Περιφέρεια, Δήμος' ? 'selected' : '' }}>Δημόσιος Τομέας - Περιφέρεια, Δήμος</option>
+                            <option {{ (old('sector') ?? $company->sector) == 'Δημόσιος Τομέας - ΑΕΙ, ΤΕΙ' ? 'selected' : '' }}>Δημόσιος Τομέας - ΑΕΙ, ΤΕΙ</option>
+                            <option {{ (old('sector') ?? $company->sector) == 'Ιδιωτικός Τομέας - Σχετικό με τεχνολογίες Πληροφορικής' ? 'selected' : '' }}>Ιδιωτικός Τομέας - Σχετικό με τεχνολογίες Πληροφορικής</option>
+                            <option {{ (old('sector') ?? $company->sector) == 'Ιδιωτικός Τομέας - Μη σχετικό με τεχνολογίες Πληροφορικής' ? 'selected' : '' }}>Ιδιωτικός Τομέας - Μη σχετικό με τεχνολογίες Πληροφορικής</option>
+                            <option {{ (old('sector') ?? $company->sector) == 'Άλλο - Τράπεζα' ? 'selected' : '' }}>Άλλο - Τράπεζα</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Διεύθυνση <span class="text-muted">(Οδός & Αριθμός)</span>:<span class="required">*</span></label>
+                        <input type="text" class="form-control @if($errors->company->has('address')) is-invalid @endif" id="inputAddress" name="address" value="{{ old('address') ?? $company->address }}">
+                        @if($errors->company->has('address'))
+                            <div class="invalid-feedback">{{ $errors->company->first('address') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="inputZipCode">Ταχυδρομικός Κώδικας:<span class="required">*</span></label>
+                        <input type="text" class="form-control @if($errors->company->has('zip_code')) is-invalid @endif" id="inputZipCode" name="zip_code" value="{{ old('zip_code') ?? $company->zip_code }}"/>
+                        @if($errors->company->has('zip_code'))
+                            <div class="invalid-feedback">{{ $errors->company->first('zip_code') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLocation">Τοποθεσία:<span class="required">*</span></label>
+                        <select class="custom-select" id="inputLocation" name="location">
+                            <option selected disabled>Παρακαλώ διαλέξτε μια από τις παρακάτω επιλογές</option>
+                            <option {{ (old('location') ?? $company->location) == 'Θεσσαλονίκη' ? 'selected' : '' }}>Θεσσαλονίκη</option>
+                            <option {{ (old('location') ?? $company->location) == 'Αθήνα' ? 'selected' : '' }}>Αθήνα</option>
+                            <option {{ (old('location') ?? $company->location) == 'Υπόλοιπη Ελλάδα' ? 'selected' : '' }}>Υπόλοιπη Ελλάδα</option>
+                            <option {{ (old('location') ?? $company->location) == 'Εξωτερικό' ? 'selected' : '' }}>Εξωτερικό</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputWebsite">Ιστότοπος:</label>
+                        <input type="text" class="form-control @if($errors->company->has('website')) is-invalid @endif" id="inputWebsite" name="website" value="{{ old('website') ?? $company->website }}">
+                        @if($errors->company->has('website'))
+                            <div class="invalid-feedback">{{ $errors->company->first('website') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="inputContactPerson">Υπεύθυνος επικοινωνίας:<span class="required">*</span></label>
+                        <input type="text" class="form-control @if($errors->company->has('contact_person')) is-invalid @endif" id="inputContactPerson" name="contact_person" value="{{ old('contact_person') ?? $company->contact_person }}">
+                        @if($errors->company->has('contact_person'))
+                            <div class="invalid-feedback">{{ $errors->company->first('contact_person') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone">Τηλέφωνο:<span class="required">*</span></label>
+                        <input type="text" class="form-control @if($errors->company->has('phone')) is-invalid @endif" id="inputPhone" name="phone" value="{{ old('phone') ?? $company->phone }}">
+                        @if($errors->company->has('phone'))
+                            <div class="invalid-feedback">{{ $errors->company->first('phone') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">E-mail:<span class="required">*</span></label>
+                        <input type="email" class="form-control @if($errors->company->has('email')) is-invalid @endif" id="inputEmail" name="email" value="{{ old('email') ?? $company->email }}">
+                        @if($errors->company->has('email'))
+                            <div class="invalid-feedback">{{ $errors->company->first('email') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNotes">Σημειώσεις / Σχόλια:</label>
+                        <textarea class="form-control" id="inputNotes" name="notes" rows="5">{{ old('notes') ?? $company->notes }}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -214,109 +324,6 @@
                         @if ($errors->edit_job->has('requirements'))
                             <div class="invalid-feedback">{{ $errors->edit_job->first('requirements') }}</div>
                         @endif
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Αποθήκευση</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Edit Company Modal -->
-<div class="modal fade" id="editCompanyModal" tabindex="-1" aria-labelledby="editCompanyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editCompanyModalLabel">Επεξεργασία των στοιχείων της εταιρείας</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="companyEditForm" action="{{ route('company.update', $company->id) }}" method="post">
-                <div class="modal-body">
-                    @csrf
-                    @method('PATCH')
-                    <div class="form-froup">
-                        <label for="inputName">Επωνυμία:<span class="required">*</span></label>
-                        <input type="text" class="form-control" id="inputName" value="{{ $company->name }}" aria-describedby="nameHelp" disabled>
-                        <small id="nameHelp" class="form-text text-muted">Η επωνυμία της εταιρείας</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputDescription">Περιγραφή:<span class="required">*</span></label>
-                        <textarea class="form-control @if($errors->company->has('description')) is-invalid @endif" id="inputDescription" name="description" rows="5">{{ old('description') ?? $company->description }}</textarea>
-                        @if($errors->company->has('description'))
-                            <div class="invalid-feedback">{{ $errors->company->first('description') }}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSector">Τομέας:<span class="required">*</span></label>
-                        <select class="custom-select" id="inputSector" name="sector">
-                            <option selected disabled>Παρακαλώ διαλέξτε μια από τις παρακάτω επιλογές</option>
-                            <option {{ (old('sector') ?? $company->sector) == 'Δημόσιος Τομέας - Περιφέρεια, Δήμος' ? 'selected' : '' }}>Δημόσιος Τομέας - Περιφέρεια, Δήμος</option>
-                            <option {{ (old('sector') ?? $company->sector) == 'Δημόσιος Τομέας - ΑΕΙ, ΤΕΙ' ? 'selected' : '' }}>Δημόσιος Τομέας - ΑΕΙ, ΤΕΙ</option>
-                            <option {{ (old('sector') ?? $company->sector) == 'Ιδιωτικός Τομέας - Σχετικό με τεχνολογίες Πληροφορικής' ? 'selected' : '' }}>Ιδιωτικός Τομέας - Σχετικό με τεχνολογίες Πληροφορικής</option>
-                            <option {{ (old('sector') ?? $company->sector) == 'Ιδιωτικός Τομέας - Μη σχετικό με τεχνολογίες Πληροφορικής' ? 'selected' : '' }}>Ιδιωτικός Τομέας - Μη σχετικό με τεχνολογίες Πληροφορικής</option>
-                            <option {{ (old('sector') ?? $company->sector) == 'Άλλο - Τράπεζα' ? 'selected' : '' }}>Άλλο - Τράπεζα</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputAddress">Διεύθυνση:<span class="required">*</span></label>
-                        <input type="text" class="form-control @if($errors->company->has('address')) is-invalid @endif" id="inputAddress" name="address" value="{{ old('address') ?? $company->address }}">
-                        @if($errors->company->has('address'))
-                            <div class="invalid-feedback">{{ $errors->company->first('address') }}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="inputZipCode">Ταχυδρομικός Κώδικας:<span class="required">*</span></label>
-                        <input type="text" class="form-control @if($errors->company->has('zip_code')) is-invalid @endif" id="inputZipCode" name="zip_code" value="{{ old('zip_code') ?? $company->zip_code }}"/>
-                        @if($errors->company->has('zip_code'))
-                            <div class="invalid-feedback">{{ $errors->company->first('zip_code') }}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="inputLocation">Τοποθεσία:<span class="required">*</span></label>
-                        <select class="custom-select" id="inputLocation" name="location">
-                            <option selected disabled>Παρακαλώ διαλέξτε μια από τις παρακάτω επιλογές</option>
-                            <option {{ (old('location') ?? $company->location) == 'Θεσσαλονίκη' ? 'selected' : '' }}>Θεσσαλονίκη</option>
-                            <option {{ (old('location') ?? $company->location) == 'Αθήνα' ? 'selected' : '' }}>Αθήνα</option>
-                            <option {{ (old('location') ?? $company->location) == 'Υπόλοιπη Ελλάδα' ? 'selected' : '' }}>Υπόλοιπη Ελλάδα</option>
-                            <option {{ (old('location') ?? $company->location) == 'Εξωτερικό' ? 'selected' : '' }}>Εξωτερικό</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputWebsite">Ιστότοπος:</label>
-                        <input type="text" class="form-control @if($errors->company->has('website')) is-invalid @endif" id="inputWebsite" name="website" value="{{ old('website') ?? $company->website }}">
-                        @if($errors->company->has('website'))
-                            <div class="invalid-feedback">{{ $errors->company->first('website') }}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="inputContactPerson">Υπεύθυνος επικοινωνίας:<span class="required">*</span></label>
-                        <input type="text" class="form-control @if($errors->company->has('contact_person')) is-invalid @endif" id="inputContactPerson" name="contact_person" value="{{ old('contact_person') ?? $company->contact_person }}">
-                        @if($errors->company->has('contact_person'))
-                            <div class="invalid-feedback">{{ $errors->company->first('contact_person') }}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPhone">Τηλέφωνο:<span class="required">*</span></label>
-                        <input type="text" class="form-control @if($errors->company->has('phone')) is-invalid @endif" id="inputPhone" name="phone" value="{{ old('phone') ?? $company->phone }}">
-                        @if($errors->company->has('phone'))
-                            <div class="invalid-feedback">{{ $errors->company->first('phone') }}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail">E-mail:<span class="required">*</span></label>
-                        <input type="email" class="form-control @if($errors->company->has('email')) is-invalid @endif" id="inputEmail" name="email" value="{{ old('email') ?? $company->email }}">
-                        @if($errors->company->has('email'))
-                            <div class="invalid-feedback">{{ $errors->company->first('email') }}</div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="inputNotes">Σημειώσεις / Σχόλια:</label>
-                        <textarea class="form-control" id="inputNotes" name="notes" rows="5">{{ old('notes') ?? $company->notes }}</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
