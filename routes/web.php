@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GraduateController;
 use App\Http\Controllers\Auth\LoginController;
@@ -23,17 +24,11 @@ use App\Http\Controllers\Admin\AnnouncementController;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
-Route::get('/', function() {
-    return view('main.home');
-})->name('home');
-
-Route::get('/requirements', function() {
-    return view('main.requirements');
-})->name('requirements');
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/requirements', [PageController::class, 'requirements'])->name('requirements');
+Route::get('/guides', [PageController::class, 'guides'])->name('guides');
+Route::get('/documents', [PageController::class, 'documents'])->name('documents');
+Route::get('/legislation', [PageController::class, 'legislation'])->name('legislation');
 
 Route::get('/questionnaires', [QuestionnairesController::class, 'index'])->name('questionnaires.index');
 Route::get('/questionnaires/student', [QuestionnairesController::class, 'studentCreate'])->name('questionnaires.student.create');

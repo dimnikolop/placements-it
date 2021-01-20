@@ -94331,6 +94331,9 @@ $(".clickable-row").on('click', function () {
   var url = $(this).data('url');
   window.location.href = url;
 });
+$('.list-group-item').on('click', function () {
+  $(this).addClass('active').siblings().removeClass('active');
+});
 $('.edit-job').on('click', function (event) {
   var button = $(event.relatedTarget); // Button that triggered the modal
 

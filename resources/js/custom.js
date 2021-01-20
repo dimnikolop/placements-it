@@ -55,6 +55,10 @@ $(".clickable-row").on('click', function() {
     window.location.href = url;
 });
 
+$('.list-group-item').on('click', function() {
+    $(this).addClass('active').siblings().removeClass('active');
+});
+
 $('.edit-job').on('click', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var job = $(this).data('job') // Extract info from data-* attributes

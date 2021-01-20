@@ -71,7 +71,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item {{ request()->path() === 'requirements' ? 'active' : ''}}" href="{{ route('requirements') }}">Προϋποθέσεις</a>
-                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Οδηγοί Πρακτικής Άσκησης</a>
+                                <a class="dropdown-item {{ request()->path() === 'guides' ? 'active' : ''}}" href="{{ route('guides') }}">Οδηγοί Πρακτικής Άσκησης</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>

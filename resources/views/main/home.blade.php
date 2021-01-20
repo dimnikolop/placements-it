@@ -83,7 +83,7 @@
 						<img src="{{ asset('img/entypa.png') }}" class="img-fluid" alt="">
 						<p class="card-text">Έντυπα σε ηλεκτρονική μορφή που αφορούν τη Πρακτική Άσκηση με ΕΣΠΑ,ΟΑΕΔ ή στο ΑΤΕΙ.</p>
 					</div>
-					<a href="?p=praktiki_files" class="btn btn-info">Δείτε Περισσότερα</a>
+					<a href="{{ route('documents') }}" class="btn btn-info">Δείτε Περισσότερα</a>
 				</div>
             </div>
             <div class="col-md-6 col-lg-3 my-3">
@@ -93,7 +93,7 @@
 						<img src="{{ asset('img/nomothesia.jpg') }}" class="img-fluid" alt="">
 						<p class="card-text">Νόμοι, Υπουργικές αποφάσεις και διατάγματα που αφορούν την Πρακτική Άσκηση.</p>
 					</div>
-					<a href="?p=praktiki_files" class="btn btn-info">Δείτε Περισσότερα</a>
+					<a href="{{ route('legislation') }}" class="btn btn-info">Δείτε Περισσότερα</a>
 				</div>
             </div>
             <div class="col-md-6 col-lg-3 my-3">
