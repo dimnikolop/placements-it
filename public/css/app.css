@@ -11501,69 +11501,95 @@ form label:not(.custom-file-label):not(.custom-control-label) {
   color: #7094db;
 }
 
-/* Header - Navbar */
+/*  Header - Navbar  */
 
-.header-navbar {
+#headerNavbar {
   background: #2c3e50;
-  /* Flat able */
 }
 
-.mobile-header .navbar-toggler,
-.mobile-header #sidebarToggler {
-  color: #fff;
+#headerNavbar .navbar-brand img {
+  width: 45px;
+  height: 45px;
+}
+
+@media (max-width: 575.98px) {
+  #headerNavbar .navbar-brand img {
+    width: 35px;
+    height: 35px;
+  }
+
+  #headerNavbar .navbar-brand span {
+    font-size: 1rem;
+  }
+}
+
+#headerNavbar .logout {
+  color: #f2f2f2;
+  background: #4ECDC4;
+  border: 1px solid #64c3c2;
+}
+
+#headerNavbar .logout:hover,
+#headerNavbar .logout:focus {
+  color: #adb5bd;
+  background-color: transparent;
+  border: 1px solid #adb5bd;
+}
+
+#sidebarToggler {
+  padding-bottom: 10px;
   border: none;
   box-shadow: none;
 }
 
-.mobile-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+/*  Sidebar - Navbar  */
 
-@media (max-width: 991.98px) {
-  .mobile-header {
-    width: 100%;
-  }
-}
-
-/* Sidebar - Navbar */
-
-.sidebar {
-  background: #2c3e50;
+#sidebar {
   width: 235px;
-  min-height: calc(100vh - 71px);
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  background: #2c3e50;
+  transition: 0.5s;
 }
 
-.sidebar .nav-item .nav-link {
+#sidebar .nav-item .nav-link {
   padding: 1rem;
   color: #d0dcda;
 }
 
-.sidebar .nav-item .nav-link:hover {
+#sidebar .nav-item .nav-link:hover {
   color: #1abc9c;
 }
 
-.sidebar .nav-item .dropdown-menu {
+#sidebar .nav-item .dropdown-menu {
   background-color: #2c3e50;
   border: none;
   padding: 0;
   margin: 0;
 }
 
-.sidebar .nav-item .dropdown-item {
+#sidebar .nav-item .dropdown-item {
   color: #d0dcda;
 }
 
-.sidebar .nav-item .dropdown-item:hover,
-.sidebar .nav-item .dropdown-item:focus {
+#sidebar .nav-item .dropdown-item:hover,
+#sidebar .nav-item .dropdown-item:focus {
   color: #1abc9c;
   background: none;
 }
 
 @media (max-width: 991.98px) {
-  .sidebar {
-    display: none;
+  #sidebar {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    overflow: hidden;
+    z-index: 1001;
+  }
+
+  #main-container {
+    margin-left: 0px !important;
   }
 }
 
@@ -11571,6 +11597,8 @@ form label:not(.custom-file-label):not(.custom-control-label) {
 
 #main-container {
   display: flex;
+  margin-left: 235px;
+  transition: margin-left 0.5s;
 }
 
 #content-wrapper {

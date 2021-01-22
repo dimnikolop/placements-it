@@ -51,75 +51,64 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark header-navbar">
-        <div class="container-fluid">
-            <div class="mobile-header">
-                <a class="navbar-brand m-0 mr-lg-3" href="{{ route('admin.dashboard') }}">
-                    <img src="{{ asset('img/teithe_logo.png') }}" width="45" height="45" alt="" loading="lazy"> Placements Admin
-                </a>
-                <button id="sidebarToggler" class="btn order-first order-lg-0"><i class="fas fa-bars"></i></button>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainAdminNavbar"
-                    aria-controls="mainAdminNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="mainAdminNavbar">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-user"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">My Messages</a>
-                            <div class="dropdown-divider"></div>
-                            <form action="{{ route('logout') }}" method="post">
-                                @csrf
-                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <header id="headerNavbar">
+        <nav class="navbar navbar-expand navbar-dark">
+            <a class="navbar-brand m-0 mr-lg-3" href="{{ route('admin.dashboard') }}">
+                <img src="{{ asset('img/teithe_logo.png') }}" alt="" loading="lazy"> <span>Placements Admin</span>
+            </a>
+            <button type="button" id="sidebarToggler" class="btn order-first order-lg-0" data-toggle="tooltip" data-placement="right" title="Toggle Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form action="{{ route('logout') }}" method="post" class="ml-auto">
+                @csrf
+                <button type="submit" class="btn btn-sm logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </form>
+        </nav>
+    </header>
+    <div id="sidebar">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="fas fa-home fa-fw"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('announcement.create') }}"><i class="far fa-file-alt fa-fw"></i> New Announcement</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('announcements.index') }}"><i class="fas fa-list-ul fa-fw"></i> Announcements</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('companies.index') }}"><i class="fas fa-list-ul fa-fw"></i> Companies Table</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Students Table</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('graduates.index') }}"><i class="fas fa-list-ul fa-fw"></i> Graduates Table</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-chart-bar fa-fw"></i> Evaluation Results</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('statistics.student') }}"><i class="fas fa-chevron-right fa-xs"></i> Student</a>
+                    <a class="dropdown-item" href="{{ route('statistics.graduate') }}"><i class="fas fa-chevron-right fa-xs"></i> Graduate</a>
+                </div>
+            </li>
+        </ul>
+    </div>
     <div id="main-container">
-        <div class="sidebar">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="fas fa-home fa-fw"></i> Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('announcement.create') }}"><i class="far fa-file-alt fa-fw"></i> New Announcement</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('announcements.index') }}"><i class="fas fa-list-ul fa-fw"></i> Announcements</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('companies.index') }}"><i class="fas fa-list-ul fa-fw"></i> Companies Table</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Students Table</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('graduates.index') }}"><i class="fas fa-list-ul fa-fw"></i> Graduates Table</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-chart-bar fa-fw"></i> Evaluation Results</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('statistics.student') }}"><i class="fas fa-chevron-right fa-xs"></i> Student</a>
-                        <a class="dropdown-item" href="{{ route('statistics.graduate') }}"><i class="fas fa-chevron-right fa-xs"></i> Graduate</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
         <div id="content-wrapper">
             @yield('content')
         </div>
+        <!--<footer>
+            <div class="clearfix">
+                <p class="float-left">
+                    Copyright &copy; 2018 - <script>document.write(new Date().getFullYear());</script> <a href="http://www.it.teithe.gr" class="text-info">Τμήμα Μηχανικών Πληροφορικής ΑΤΕΙΘ</a>, All rights reserved.
+                </p>
+                <p class="float-right">Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset">Built with Bootstrap</a></p>
+            </div>
+        </footer>-->
     </div>
+
+    
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
