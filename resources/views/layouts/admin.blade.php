@@ -65,50 +65,48 @@
             </form>
         </nav>
     </header>
-    <div id="sidebar">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="fas fa-home fa-fw"></i> Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('announcement.create') }}"><i class="far fa-file-alt fa-fw"></i> New Announcement</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('announcements.index') }}"><i class="fas fa-list-ul fa-fw"></i> Announcements</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('companies.index') }}"><i class="fas fa-list-ul fa-fw"></i> Companies Table</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Students Table</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('graduates.index') }}"><i class="fas fa-list-ul fa-fw"></i> Graduates Table</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-chart-bar fa-fw"></i> Evaluation Results</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('statistics.student') }}"><i class="fas fa-chevron-right fa-xs"></i> Student</a>
-                    <a class="dropdown-item" href="{{ route('statistics.graduate') }}"><i class="fas fa-chevron-right fa-xs"></i> Graduate</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div id="main-container">
-        <div id="content-wrapper">
-            @yield('content')
+    <div id="wrapper">
+        <div id="sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="fas fa-home fa-fw"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('announcement.create') }}"><i class="far fa-file-alt fa-fw"></i> New Announcement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('announcements.index') }}"><i class="fas fa-list-ul fa-fw"></i> Announcements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('companies.index') }}"><i class="fas fa-list-ul fa-fw"></i> Companies Table</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Students Table</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('graduates.index') }}"><i class="fas fa-list-ul fa-fw"></i> Graduates Table</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-chart-bar fa-fw"></i> Evaluation Results</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('statistics.student') }}"><i class="fas fa-chevron-right fa-xs"></i> Student</a>
+                        <a class="dropdown-item" href="{{ route('statistics.graduate') }}"><i class="fas fa-chevron-right fa-xs"></i> Graduate</a>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <!--<footer>
-            <div class="clearfix">
-                <p class="float-left">
-                    Copyright &copy; 2018 - <script>document.write(new Date().getFullYear());</script> <a href="http://www.it.teithe.gr" class="text-info">Τμήμα Μηχανικών Πληροφορικής ΑΤΕΙΘ</a>, All rights reserved.
-                </p>
-                <p class="float-right">Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset">Built with Bootstrap</a></p>
+        <div id="main-container">
+            <div id="content-wrapper">
+                @yield('content')
             </div>
-        </footer>-->
+            <footer id="footer" class="clearfix py-2">
+                <div class="float-xl-left mb-2 mb-xl-0">
+                    Copyright &copy; 2018 - <script>document.write(new Date().getFullYear());</script> <a href="http://www.it.teithe.gr" class="text-info">Τμήμα Μηχανικών Πληροφορικής ΑΤΕΙΘ</a>, All rights reserved.
+                </div>
+                <div class="float-xl-right">Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset">Built with Bootstrap</a></div>
+            </footer>
+        </div>
     </div>
-
-    
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
