@@ -94243,11 +94243,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+// Open collapsed div with nav links if browser url is either of those links
+if (window.location.pathname === '/stats/student' || window.location.pathname === '/stats/graduate') {
+  $('#collapseEvaluation').collapse('show');
+  $('a[data-toggle="collapse"]').addClass('active');
+}
+
 $(function () {
   //    sidebar toggle
   function responsiveView() {
     var wSize = $(window).width();
-    console.log(wSize);
 
     if (wSize <= 991.98) {
       $('#sidebar > ul').hide();
