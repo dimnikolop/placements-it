@@ -172,3 +172,23 @@
 .table .thead-light th {
     border-bottom: 1px solid #313259;
 }
+
+/* Graduates */
+#graduatesTable tr[data-toggle="collapse"] {
+    cursor: pointer;
+}
+
+#graduatesTable td.details-control {
+    cursor: pointer;
+    color: $primary;
+}
+
+#graduatesTable h5 {
+    font-size: 1rem;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+#graduatesTable h6 {
+    display: inline;
+}

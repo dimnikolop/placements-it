@@ -58,7 +58,7 @@ $(function () {
     $('[data-toggle="popover"]').popover();
 
     //    On delete pass url to modal delete form
-    $(".deleteBtn").on('click', function () {
+    $(document).on('click', '.deleteBtn', function () {
         const url = $(this).data('url');
         $('#deleteForm').attr('action', url);
     });
@@ -71,10 +71,6 @@ $(function () {
     });
 
     $('#companiesTable').DataTable({
-        //responsive: true
-    });
-
-    $('#graduatesTable').DataTable({
         //responsive: true
     });
 });

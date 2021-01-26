@@ -11679,3 +11679,24 @@ form label:not(.custom-file-label):not(.custom-control-label) {
   border-bottom: 1px solid #313259;
 }
 
+/* Graduates */
+
+#graduatesTable tr[data-toggle=collapse] {
+  cursor: pointer;
+}
+
+#graduatesTable td.details-control {
+  cursor: pointer;
+  color: #0C6170;
+}
+
+#graduatesTable h5 {
+  font-size: 1rem;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+#graduatesTable h6 {
+  display: inline;
+}
+
