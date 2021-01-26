@@ -46,10 +46,10 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-info" href="{{ route('announcement.edit', $announcement->id) }}">
-                                            <i class="far fa-edit"></i> Edit
+                                        <a class="btn btn-sm btn-outline-info mb-3 mb-xl-0" href="{{ route('announcement.edit', $announcement->id) }}">
+                                        <i class="fas fa-pencil-alt"></i> Edit
                                         </a>
-                                        <button type="button" class="btn btn-sm btn-outline-danger ml-3 deleteBtn" data-toggle="modal" data-target="#deleteAnnouncementModal" data-url="{{ route('announcement.destroy', $announcement->id) }}">
+                                        <button type="button" class="btn btn-sm btn-outline-danger ml-xl-3 deleteBtn" data-toggle="modal" data-target="#deleteAnnouncementModal" data-url="{{ route('announcement.destroy', $announcement->id) }}">
                                             <i class="far fa-trash-alt"></i> Delete
                                         </button>
                                     </td>

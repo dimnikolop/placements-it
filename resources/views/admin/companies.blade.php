@@ -33,7 +33,7 @@
                                 <th scope="col">Τομέας</th>
                                 <th scope="col">Στοιχεία εταιρείας</th>
                                 <th scope="col">Θέσεις Απασχόλησης</th>
-                                <th scope="col">Έγκριση/Απόρριψη</th>
+                                <th scope="col">Αποδοχή/Απόρριψη</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,17 +42,19 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->sector }}</td>
-                                    <td><a href="{{ route('companies.show', $company->id) }}">Προβολή</a></td>
+                                    <td><a href="{{ route('companies.show', $company->id) }}" target="_blank">Προβολή</a></td>
                                     <td><a href="">Προβολή</a></td>
                                     <td class="d-flex justify-content-around">
                                         @if ($company->status == 'pending')
                                             <form action="{{ route('company.update', $company->id) }}" method="post">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="btn btn-success" name="status" value="approved"><i class="fas fa-check fa-fw"></i></button>
+                                                <button type="submit" class="btn btn-sm btn-outline-success" name="status" value="approved"><i class="fas fa-check fa-fw"></i> Accept</button>
                                             </form>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteCompanyModal"><i class="fas fa-times fa-fw"></i> Reject</button>
+                                        @else
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteCompanyModal"><i class="fas fa-times fa-fw"></i> Delete</button>
                                         @endif
-                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteCompanyModal"><i class="fas fa-times fa-fw"></i></button>
                                     </td>
                                 </tr>
                             @endforeach

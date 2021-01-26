@@ -15,7 +15,7 @@
     </div>
     <div class="card custom-admin-card">
         <div class="card-header">
-            <h5>New Announcement</h5>
+            <h5>Νέα Ανακοίνωση</h5>
         </div>
         <div class="card-body">
             @if (session('success'))
@@ -42,7 +42,7 @@
                     @enderror
                 </div>
                 <div class="form-group mb-5">
-                    <div class="custom-file w-50">
+                    <div class="custom-file w-auto">
                         <input type="file" class="custom-file-input @error('attachment') is-invalid @enderror" id="inputFile" name="attachment">
                         <label class="custom-file-label" for="inputFile">Choose file</label>
                         @error('attachment')
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">Save <i class="far fa-paper-plane"></i></button>
+                    <button type="submit" class="btn btn-sm btn-primary">Αποθήκευση <i class="far fa-paper-plane"></i></button>
                 </div>
             </form>
         </div>

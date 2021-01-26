@@ -122,8 +122,8 @@
 				<div class="col-md-12 text-center">
 					<div class="copyright">
 						<p class="mb-1">
-                            Copyright &copy; 2018 - <script>document.write(new Date().getFullYear());</script> <a href="http://www.it.teithe.gr" class="text-info">Τμήμα Μηχανικών Πληροφορικής ΑΤΕΙΘ</a>, All rights reserved.</p>
-						<p>Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset">Built with Bootstrap</a></p>
+                            Copyright &copy; 2018 - <script>document.write(new Date().getFullYear());</script> <a href="http://www.it.teithe.gr" class="text-info" target="_blank">Τμήμα Μηχανικών Πληροφορικής ΑΤΕΙΘ</a>, All rights reserved.</p>
+						<p>Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset" target="_blank">Built with Bootstrap</a></p>
 					</div>
 				</div>
 				<div class="col-lg-6">

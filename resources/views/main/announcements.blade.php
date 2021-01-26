@@ -7,7 +7,7 @@
             @if ($announcements->isNotEmpty())
                 <div class="table-responsive">
                     <table id="announcementsTable" class="table table-bordered table-hover">
-                        <thead class="thead-light text-center">
+                        <thead class="thead-light">
                             <tr>
                                 <th scope="col">Προστέθηκε</th>
                                 <th scope="col">Τίτλος</th>

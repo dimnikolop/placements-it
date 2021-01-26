@@ -112,7 +112,7 @@
 
 #content-wrapper {
     width: 100%;
-    min-height: calc(100vh - 112px);
+    min-height: calc(100vh - 113px);
     padding: 1rem;
 }
 
@@ -153,9 +153,11 @@
     padding: 0.25rem;
 }
 
-.table > tbody > tr > td {
+.table th, .table td {
+    padding: 0.75rem;
     text-align: center;
     vertical-align: middle;
+    border-top: 1px solid #dee2e6;
 }
 
 .table .clickable-row {
@@ -163,7 +165,6 @@
 }
 
 .custom-table thead th {
-    text-align: center;
     border-bottom: 1px solid #e2e5e8;
     background: #f6f6f6;
 }

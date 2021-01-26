@@ -13,7 +13,7 @@
             </ol>
         </nav>
     </div>
-    <div class="card">
+    <div class="card custom-admin-card">
         <div class="card-header">
             <h5>Update Announcement</h5>
         </div>
@@ -43,19 +43,19 @@
                     @enderror
                 </div>
                 <div class="form-group d-flex align-items-center mb-5">
-                    <div class="custom-file w-50">
+                    <div class="custom-file w-auto">
                         <input type="file" class="custom-file-input @error('attachment') is-invalid @enderror" id="inputFile" name="attachment">
                         <label class="custom-file-label" for="inputFile">Choose file</label>
                         @error('attachment')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <a tabindex="0" class="ml-3" role="button" data-toggle="popover" data-trigger="focus" data-placement="right" title="File input info" data-content="Choose a new file to replace the old one in database.">
+                    <a tabindex="0" class="ml-3" role="button" data-toggle="popover" data-trigger="focus" data-placement="right" title="File input info" data-content="Choose a new file if you want to replace the old one in database.">
                         <i class="far fa-question-circle fa-lg"></i>
                     </a>
                 </div>
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">Update <i class="far fa-paper-plane"></i></button>
+                    <button type="submit" class="btn btn-sm btn-primary">Update <i class="far fa-paper-plane"></i></button>
                 </div>
             </form>
         </div>

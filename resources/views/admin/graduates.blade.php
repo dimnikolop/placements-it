@@ -36,7 +36,7 @@
                                 <th scope="col">Θέση Απασχόλησης</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Στοιχεία Απόφοιτου</th>
-                                <th scope="col">Έγκριση/Απόρριψη</th>
+                                <th scope="col">Αποδοχή/Απόρριψη</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,14 +52,16 @@
                                     <td>{{ $graduate->email }}</td>
                                     <td><a href="{{ route('graduate.show', $graduate->id) }}">Προβολή</a></td>
                                     <td class="d-flex justify-content-around">
-                                        @if ($graduate->status == 'pending')
+                                        @if ($graduate->status === 'pending')
                                             <form action="{{ route('graduate.update', $graduate->id) }}" method="post">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="btn btn-success" name="status" value="approved"><i class="fas fa-check fa-fw"></i></button>
+                                                <button type="submit" class="btn btn-sm btn-outline-success" name="status" value="approved"><i class="fas fa-check fa-fw"></i> Accept</button>
                                             </form>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteGraduateModal"><i class="fas fa-times fa-fw"></i> Reject</button>
+                                        @else
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteGraduateModal"><i class="fas fa-times fa-fw"></i> Delete</button>
                                         @endif
-                                        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deletegraduateModal"><i class="fas fa-times fa-fw"></i></button>
                                     </td>
                                 </tr>
                             @endforeach

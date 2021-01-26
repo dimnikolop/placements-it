@@ -72,26 +72,26 @@
                     <a class="nav-link {{ request()->path() === 'admin/dashboard' ? 'active' : ''}}" href="{{ route('admin.dashboard') }}"><i class="fas fa-home fa-fw"></i> Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->path() === 'admin/announcement/create' ? 'active' : ''}}" href="{{ route('announcement.create') }}"><i class="far fa-file-alt fa-fw"></i> New Announcement</a>
+                    <a class="nav-link {{ request()->path() === 'admin/announcement/create' ? 'active' : ''}}" href="{{ route('announcement.create') }}"><i class="far fa-file-alt fa-fw"></i> Νέα Ανακοίνωση</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->path() === 'announcements' ? 'active' : ''}}" href="{{ route('announcements.index') }}"><i class="fas fa-list-ul fa-fw"></i> Announcements</a>
+                    <a class="nav-link {{ request()->path() === 'announcements' ? 'active' : ''}}" href="{{ route('announcements.index') }}"><i class="fas fa-list-ul fa-fw"></i> Ανακοινώσεις</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#collapseEvaluation" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseEvaluation"><i class="far fa-chart-bar fa-fw"></i> Evaluation Results</a>
+                    <a class="nav-link" href="#collapseEvaluation" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseEvaluation"><i class="far fa-chart-bar fa-fw"></i> Αποτελέσματα Αξιολόγησης</a>
                     <div class="collapse py-1" id="collapseEvaluation">
-                        <a class="nav-link offset-1 {{ request()->path() === 'stats/student' ? 'active' : ''}}" href="{{ route('statistics.student') }}"><i class="fas fa-angle-right"></i> <span>Student</span></a>
-                        <a class="nav-link offset-1 {{ request()->path() === 'stats/graduate' ? 'active' : ''}}" href="{{ route('statistics.graduate') }}"><i class="fas fa-angle-right"></i> Graduate</a>
+                        <a class="nav-link offset-1 {{ request()->path() === 'stats/student' ? 'active' : ''}}" href="{{ route('statistics.student') }}"><i class="fas fa-angle-right"></i> Φοιτητής</a>
+                        <a class="nav-link offset-1 {{ request()->path() === 'stats/graduate' ? 'active' : ''}}" href="{{ route('statistics.graduate') }}"><i class="fas fa-angle-right"></i> Απόφοιτος</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->path() === 'companies' ? 'active' : ''}}" href="{{ route('companies.index') }}"><i class="fas fa-list-ul fa-fw"></i> Companies Table</a>
+                    <a class="nav-link {{ request()->path() === 'companies' ? 'active' : ''}}" href="{{ route('companies.index') }}"><i class="far fa-building fa-fw"></i> Φορείς Απασχόλησης</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href=""><i class="fas fa-list-ul fa-fw"></i> Students Table</a>
+                    <a class="nav-link" href=""><i class="fas fa-user fa-fw"></i> Ασκούμενοι</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->path() === 'graduates' ? 'active' : ''}}" href="{{ route('graduates.index') }}"><i class="fas fa-list-ul fa-fw"></i> Graduates Table</a>
+                    <a class="nav-link {{ request()->path() === 'graduates' ? 'active' : ''}}" href="{{ route('graduates.index') }}"><i class="fas fa-user-graduate fa-fw"></i> Απόφοιτοι</a>
                 </li>
             </ul>
         </div>

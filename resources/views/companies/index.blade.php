@@ -7,7 +7,7 @@
             @if ($companies->isNotEmpty())
                 <div class="table-responsive">
                     <table id="companiesTable" class="table table-bordered">
-                        <thead class="thead-light text-center">
+                        <thead class="thead-light">
                             <tr>
                                 <th scope="col">Επωνυμία</th>
                                 <th scope="col">Τομέας</th>
