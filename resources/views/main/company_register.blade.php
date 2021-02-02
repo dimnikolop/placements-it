@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div id="" class="card custom-main-card">
+    <div class="card custom-main-card">
         <div class="card-body">
             <div class="card-title my-5 text-center"><h4>Εγγραφή Φορέα Απασχόλησης</h4></div>
             @if (session('success'))
@@ -39,29 +39,19 @@
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-8 col-lg-6">
                         <label for="inputAddress">Διεύθυνση <span class="text-muted">(Οδός & Αριθμός)</span>:<span class="required">*</span></label>
                         <input class="form-control @error('address') is-invalid @enderror" type="text" id="inputAddress" name="address" value="{{ old('address') }}"/>
                         @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="inputZipCode" data-toggle="tooltip" data-placement="right" title="Ταχυδρομικός Κώδικας">Τ.K:<span class="required">*</span></label>
+                    <div class="form-group col-auto col-md-4 col-lg-2">
+                        <label for="inputZipCode" tabindex="0" data-toggle="tooltip" data-placement="right" title="Ταχυδρομικός Κώδικας">Τ.K:<span class="required">*</span></label>
                         <input class="form-control @error('zip_code') is-invalid @enderror" type="text" id="inputZipCode" name="zip_code" value="{{ old('zip_code') }}"/>
                         @error('zip_code')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputLogo">Company logo:</label>
-                        <div id="inputLogo" class="custom-file">
-                            <input type="file" class="custom-file-input @error('logo') is-invalid @enderror" id="inputFile" name="logo">
-                            <label class="custom-file-label" for="inputFile">Choose file</label>
-                            @error('logo')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
                     </div>
                 </div>
                 
@@ -121,12 +111,52 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputNotes">Σημειώσεις / Σχόλια:</label>
+                    <label for="inputNotes">Σημειώσεις &mdash; Σχόλια:</label>
                     <textarea class="form-control @error('notes') is-invalid @enderror" id="inputNotes" name="notes" rows="5">{{ old('notes') }}</textarea>
                 </div>
 
-                <div class="d-flex justify-content-center align-items-center register-header m-5">
-                    <h5 class="font-weight-light mx-5">Στοιχεία Λογαριασμού</h5>
+                <div class="d-flex justify-content-center align-items-center register-header mx-lg-5 my-5">
+                    <h5 class="font-weight-light my-auto mx-2 mx-md-5">Social Media</h5>
+                </div>
+
+                <div class="row" id="social-form-control">
+                    <div class="form-group col-md-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text fb-icon" id="facebook-addon"><i class="fab fa-facebook-f"></i></span>
+                            </div>
+                            <input type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{ old('facebook') }}" placeholder="Facebook (προαιρετικό)" aria-label="Facebook" aria-describedby="facebook-addon">
+                            @error('facebook')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text tw-icon" id="twitter-addon"><i class="fab fa-twitter"></i></span>
+                            </div>
+                            <input type="text" class="form-control @error('twitter') is-invalid @enderror" name="twitter" value="{{ old('twitter') }}" placeholder="Twitter (προαιρετικό)" aria-label="Twitter" aria-describedby="twitter-addon">
+                            @error('twitter')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text li-icon" id="linkedin-addon"><i class="fab fa-linkedin-in"></i></span>
+                            </div>
+                            <input type="text" class="form-control @error('linkedin') is-invalid @enderror" name="linkedin" value="{{ old('linkedin') }}" placeholder="LinkedIn (προαιρετικό)" aria-label="linkedin" aria-describedby="linkedin-addon">
+                            @error('linkedin')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center register-header mx-lg-5 my-5">
+                    <h5 class="font-weight-light my-auto mx-2 mx-md-5">Στοιχεία Λογαριασμού</h5>
                 </div>
 
                 <div class="row">
@@ -147,15 +177,16 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-5">
-                    <label for="inputPasswordConfirmation">Επιβεβαίωση:<span class="required">*</span></label>
-                    <input class="form-control @error('password_confirmation') is-invalid @enderror" type="text" id="inputPasswordConfirmation" name="password_confirmation" value="{{ old('password_confirmation') }}"/>
-                    @error('password_confirmation')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                    <small id="passwordHelpBlock" class="form-text text-muted">Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.</small>
+                <div class="row mb-5">
+                    <div class="form-group col-md-6">
+                        <label for="inputPasswordConfirmation">Επιβεβαίωση:<span class="required">*</span></label>
+                        <input class="form-control @error('password_confirmation') is-invalid @enderror" type="text" id="inputPasswordConfirmation" name="password_confirmation" value="{{ old('password_confirmation') }}"/>
+                        @error('password_confirmation')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
-
+                    
                 <div class="text-center mb-4">
                     <button id="submitBtn" type="submit" name="submit_btn" class="btn btn-primary">Εγγραφή  <i class="far fa-paper-plane"></i></button>
                 </div>

@@ -28,19 +28,9 @@
                     <p>{{ $company->name }}</p>
                 </div>
                 <div class="col-md-6">
-                    <h6>Logo</h6>
-                    <img src="{{ asset('img/company-1-45x45.png') }}" class="mb-3" width="30" height="30" alt="...">
-                </div>
-                <div class="col-md-6">
                     <h6>Τομέας</h6>
                     <p>{{ $company->sector }}</p>
                 </div>
-                @if (!empty($company->website))
-                <div class="col-md-6 mb-3">
-                    <h6>Ιστότοπος</h6>
-                    <a href="{{ $company->website }}" target="_blank">{{ $company->website }}</a>
-                </div>
-                @endif
                 <div class="col-md-6">
                     <h6>Διεύθυνση</h6>
                     <p>{{ $company->address }}, {{ $company->zip_code }}</p>
@@ -49,14 +39,20 @@
                     <h6>Τοποθεσία</h6>
                     <p>{{ $company->location }}</p>
                 </div>
+                @if (!empty($company->website))
+                <div class="col-md-6 mb-3">
+                    <h6>Ιστότοπος</h6>
+                    <a href="{{ $company->website }}" target="_blank">{{ $company->website }}</a>
+                </div>
+                @endif
                 <div class="col-md-12 mb-3">
                     <h6>Περιγραφή</h6>
-                    <div class="shadow p-3"><p>{{ $company->description }}</p></div>
+                    <div class="desc-box"><p>{!! nl2br(e($company->description)) !!}</p></div>
                 </div>
                 @if (!empty($company->notes))
                     <div class="col-md-12">
-                        <h6>Σημειώσεις / Σχόλια</h6>
-                        <div class="shadow-sm p-3"><p>{{ $company->notes }}</p></div>
+                        <h6>Σημειώσεις &mdash; Σχόλια</h6>
+                        <div class="desc-box"><p>{!! nl2br(e($company->notes)) !!}</p></div>
                     </div>
                 @endif
             </div>
@@ -84,22 +80,19 @@
                     <h5 class="border-bottom py-2 text-primary">Σύνδεσμοι Social Media</h5>
                 </div>
                 <div class="col-md-6">
-                    <h6>Facebook</h6>
-                    <p></p>
+                    <a class="social-links" href="{{ $company->facebook }}" target="_blank"><i class="fab fa-facebook-f fb-icon"></i> {{ $company->facebook }}</a>
                 </div>
                 <div class="col-md-6">
-                    <h6>Twitter</h6>
-                    <p></p>
+                    <a class="social-links" href="{{ $company->twitter }}" target="_blank"><i class="fab fa-twitter tw-icon"></i> {{ $company->twitter }}</a>
                 </div>
                 <div class="col-md-6">
-                    <h6>LinkedIn</h6>
-                    <p></p>
+                    <a class="social-links" href="{{ $company->linkedin }}" target="_blank"><i class="fab fa-linkedin-in li-icon"></i> {{ $company->linkedin }}</a>
                 </div>
             </div>
            
             <div class="d-flex justify-content-end">
                 <!-- Button trigger edit company modal -->
-                <button type="button" class="btn btn-sm btn-outline-warning" data-toggle="modal" data-target="#editCompanyModal">
+                <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#editCompanyModal">
                     <i class="fas fa-pencil-alt fa-sm"></i> Επεξεργασία
                 </button>
                 <!-- Button trigger delete modal -->
@@ -111,7 +104,7 @@
         <div class="tab-pane fade" id="jobs" role="tabpanel" aria-labelledby="jobs-tab">
             <div class="well d-flex flex-column align-items-center text-center">
                 <h6>Προσθέστε νέα θέση απασχόλησης</h6>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addJobModal">
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addJobModal">
                     <i class="fas fa-plus"></i> Προσθήκη
                 </button>
             </div>
@@ -233,8 +226,29 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="inputNotes">Σημειώσεις / Σχόλια:</label>
+                        <label for="inputNotes">Σημειώσεις &mdash; Σχόλια:</label>
                         <textarea class="form-control" id="inputNotes" name="notes" rows="5">{{ old('notes') ?? $company->notes }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFacebook">Facebook:</label>
+                        <input type="text" class="form-control @if($errors->company->has('facebook')) is-invalid @endif" id="inputFacebook" name="facebook" value="{{ old('facebook') ?? $company->facebook }}">
+                        @if($errors->company->has('facebook'))
+                            <div class="invalid-feedback">{{ $errors->company->first('facebook') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTwitter">Twitter:</label>
+                        <input type="text" class="form-control @if($errors->company->has('twitter')) is-invalid @endif" id="inputTwitter" name="twitter" value="{{ old('twitter') ?? $company->twitter }}">
+                        @if($errors->company->has('twitter'))
+                            <div class="invalid-feedback">{{ $errors->company->first('twitter') }}</div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLinkedIn">LinkedIn:</label>
+                        <input type="text" class="form-control @if($errors->company->has('linkedin')) is-invalid @endif" id="inputLinkedIn" name="linkedin" value="{{ old('linkedin') ?? $company->linkedin }}">
+                        @if($errors->company->has('linkedin'))
+                            <div class="invalid-feedback">{{ $errors->company->first('linkedin') }}</div>
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">

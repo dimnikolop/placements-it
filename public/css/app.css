@@ -341,7 +341,7 @@ ul ol {
 }
 
 dt {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 dd {
@@ -763,7 +763,7 @@ kbd {
 kbd kbd {
   padding: 0;
   font-size: 100%;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 pre {
@@ -5517,7 +5517,7 @@ input[type=button].btn-block {
   display: inline-block;
   padding: 0.25em 0.4em;
   font-size: 75%;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
@@ -5720,7 +5720,7 @@ a.badge-dark.focus {
 }
 
 .alert-link {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .alert-dismissible {
@@ -6289,7 +6289,7 @@ a.badge-dark.focus {
 .close {
   float: right;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
@@ -10899,7 +10899,7 @@ button.bg-dark:focus {
 }
 
 .font-weight-bold {
-  font-weight: 700 !important;
+  font-weight: 600 !important;
 }
 
 .font-weight-bolder {
@@ -11158,12 +11158,6 @@ a.text-dark:focus {
   border-left-color: #37beb0;
 }
 
-.job-card-main:hover {
-  box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2);
-  top: -5px;
-  z-index: 2;
-}
-
 /* --- Header --- */
 
 #secondaryNavbar .nav-link {
@@ -11356,6 +11350,10 @@ a.text-dark:focus {
   background-color: #247575;
 }
 
+.sticky-top {
+  top: 20px;
+}
+
 /* --- Forms --- */
 
 .required {
@@ -11409,6 +11407,19 @@ form label:not(.custom-file-label):not(.custom-control-label) {
   display: none;
 }
 
+/* Register Forms  */
+
+#social-form-control .input-group-text {
+  color: #fff;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+#social-form-control .form-control {
+  border-top-right-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+}
+
 /* --- Company Dashboard --- */
 
 .nav-pills .nav-link {
@@ -11441,52 +11452,49 @@ form label:not(.custom-file-label):not(.custom-control-label) {
   color: #323b6b;
 }
 
-/* --- Company info --- */
-
-.heading-decorated_1::before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 16px;
-  width: 24px;
-  height: 3px;
-  background: #1087eb;
+.desc-box {
+  background: #fff;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e5e5;
+  padding: 1rem;
 }
 
-.social-media li a {
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  line-height: 2rem;
-  font-size: 1.2rem;
+.social-links {
+  width: 100%;
+  float: left;
+  background: #fff;
+  border-radius: 1.25rem;
+  border: 1px solid #e5e5e5;
+  color: #757575;
+  margin-bottom: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.social-links i {
+  width: 39px;
+  height: 39px;
+  line-height: 39px;
+  color: #fff;
   border-radius: 50%;
   text-align: center;
-  color: #fff;
-  background-color: #444;
-  transition: background-color 0.3s linear;
+  margin-right: 15px;
 }
 
-.facebook-icon {
-  background: #3b5998;
+.social-links:hover {
+  text-decoration: none;
 }
 
-.twitter-icon {
-  background-color: #1da1f2;
-}
-
-.linkedin-icon {
-  background-color: #0077B5;
-}
-
-.facebook-icon:hover {
+.fb-icon {
   background-color: #3b5998;
 }
 
-.twitter-icon:hover {
+.tw-icon {
   background-color: #1da1f2;
 }
 
-.linkedin-icon:hover {
+.li-icon {
   background-color: #0077B5;
 }
 

@@ -60,10 +60,12 @@ class CompanyController extends Controller
             'contact_person' => 'required',
             'phone' => 'required',
             'email' => 'required|email|unique:companies',
-            'logo' => 'nullable|image',
             'username' => 'required|unique:users',
             'password' => 'required|min:8|max:20|confirmed',
-            'password_confirmation' => 'required_with:password'
+            'password_confirmation' => 'required_with:password',
+            'facebook' => 'nullable|url',
+            'twitter' => 'nullable|url',
+            'linkedin' => 'nullable|url'
         ]);
 
         $user = User::create([
@@ -84,14 +86,17 @@ class CompanyController extends Controller
             'contact_person' => $request->contact_person,
             'phone' => $request->phone,
             'email' => $request->email,
-            'notes' => $request->notes
+            'notes' => $request->notes,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin
         ]);
 
         return redirect()->route('company.register')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
     }
 
     /**
-     * Display the specified company.
+     * Display the specified company and the jobs that offer.
      *
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
@@ -140,7 +145,10 @@ class CompanyController extends Controller
                 'contact_person' => 'required',
                 'phone' => 'required',
                 'email' => 'required|email|unique:companies,email,'.$company->id,
-                'logo' => 'image'
+                'notes' => 'present',
+                'facebook' => 'nullable|url',
+                'twitter' => 'nullable|url',
+                'linkedin' => 'nullable|url'
             ]);
             
             $company->update($validatedData);
@@ -158,7 +166,14 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect()->route('home');
+        $company->user->delete();
+
+        if (auth()->user()->role === 'admin') {
+            return back()->with('success', 'Ο φορέας απασχόλησης ' . $company->name . ' διαγράφηκε επιτυχώς.');
+        }
+        else {
+            return redirect()->route('home');
+        } 
     }
 
     /**

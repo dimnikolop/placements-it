@@ -26,7 +26,10 @@ class Company extends Model
         'contact_person',
         'phone',
         'email',
-        'notes'
+        'notes',
+        'facebook',
+        'twitter',
+        'linkedin'
         
     ];
 
