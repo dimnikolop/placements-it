@@ -132,14 +132,16 @@
                 { 
                     "data": null,
                     "render": function ( data, type, row, meta ) {
-                            return  data.status === 'pending' ? 
+                        return  data.status === 'pending' ? 
+                            '<div class="d-flex justify-content-between justify-content-lg-around">' +
                                 '<form action="/graduate/' + data.id + '" method="post">' +
                                     '<input type="hidden" name="_token" value="{{ csrf_token() }}">' +
                                     '<input type="hidden" name="_method" value="PATCH">' +
-                                    '<button type="submit" class="btn btn-sm btn-outline-success float-left" name="status" value="approved"><i class="fas fa-check fa-fw"></i> Accept</button>' +
+                                    '<button type="submit" class="btn btn-sm btn-outline-success" name="status" value="approved"><i class="fas fa-check fa-fw"></i> Accept</button>' +
                                 '</form>' +
-                                '<button type="button" class="btn btn-sm btn-outline-danger float-right deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="/graduate/'+data.id+'"><i class="fas fa-times fa-fw"></i> Reject</button>' :
-                                '<button type="button" class="btn btn-sm btn-outline-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="/graduate/'+data.id+'"><i class="fas fa-times fa-fw"></i> Delete</button>';
+                                '<button type="button" class="btn btn-sm btn-outline-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="/graduate/'+data.id+'"><i class="fas fa-times fa-fw"></i> Reject</button>' +
+                            '</div>' :
+                            '<button type="button" class="btn btn-sm btn-outline-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="/graduate/'+data.id+'"><i class="fas fa-times fa-fw"></i> Delete</button>';
                     }
                 }
             ],

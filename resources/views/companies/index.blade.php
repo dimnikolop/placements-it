@@ -11,8 +11,8 @@
                             <tr>
                                 <th scope="col">Επωνυμία</th>
                                 <th scope="col">Τομέας</th>
+                                <th scope="col">Τοποθεσία</th>
                                 <th scope="col">Στοιχεία εταιρείας</th>
-                                <th scope="col">Θέσεις Απασχόλησης</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -20,8 +20,8 @@
                                 <tr>
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->sector }}</td>
+                                    <td>{{ $company->location }}</td>
                                     <td><a href="{{ route('companies.show', $company->id) }}">Προβολή</a></td>
-                                    <td><a href="">Προβολή</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

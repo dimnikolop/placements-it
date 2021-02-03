@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div id="legislation" class="container">
     <div class="card custom-main-card">
         <h5 class="card-header">ΝΟΜΟΘΕΣΙΑ</h5>
         <div class="card-body">

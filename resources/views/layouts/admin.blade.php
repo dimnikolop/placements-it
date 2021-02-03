@@ -80,8 +80,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#collapseEvaluation" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseEvaluation"><i class="far fa-chart-bar fa-fw"></i> Αποτελέσματα Αξιολόγησης</a>
                     <div class="collapse py-1" id="collapseEvaluation">
-                        <a class="nav-link offset-1 {{ request()->path() === 'stats/student' ? 'active' : ''}}" href="{{ route('statistics.student') }}"><i class="fas fa-angle-right"></i> Φοιτητής</a>
-                        <a class="nav-link offset-1 {{ request()->path() === 'stats/graduate' ? 'active' : ''}}" href="{{ route('statistics.graduate') }}"><i class="fas fa-angle-right"></i> Απόφοιτος</a>
+                        <a class="nav-link offset-1 {{ request()->path() === 'stats/student' ? 'active' : ''}}" href="{{ route('statistics.student') }}"><i class="fas fa-angle-right"></i> Ασκούμενοι</a>
+                        <a class="nav-link offset-1 {{ request()->path() === 'stats/graduate' ? 'active' : ''}}" href="{{ route('statistics.graduate') }}"><i class="fas fa-angle-right"></i> Απόφοιτοι</a>
                     </div>
                 </li>
                 <li class="nav-item">

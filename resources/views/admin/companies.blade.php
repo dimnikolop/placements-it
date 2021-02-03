@@ -31,8 +31,8 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Επωνυμία</th>
                                 <th scope="col">Τομέας</th>
+                                <th scope="col">Τοποθεσία</th>
                                 <th scope="col">Στοιχεία εταιρείας</th>
-                                <th scope="col">Θέσεις Απασχόλησης</th>
                                 <th scope="col">Αποδοχή/Απόρριψη</th>
                             </tr>
                         </thead>
@@ -42,18 +42,26 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->sector }}</td>
+                                    <td>{{ $company->location }}</td>
                                     <td><a href="{{ route('companies.show', $company->id) }}" target="_blank">Προβολή</a></td>
-                                    <td><a href="">Προβολή</a></td>
-                                    <td class="d-flex justify-content-around">
+                                    <td>
                                         @if ($company->status == 'pending')
-                                            <form action="{{ route('company.update', $company->id) }}" method="post">
-                                                @csrf
-                                                @method('PATCH')
-                                                <button type="submit" class="btn btn-sm btn-outline-success" name="status" value="approved"><i class="fas fa-check fa-fw"></i> Accept</button>
-                                            </form>
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteCompanyModal"><i class="fas fa-times fa-fw"></i> Reject</button>
+                                            <div class="d-flex justify-content-between justify-content-lg-around">
+                                                <form action="{{ route('company.update', $company->id) }}" method="post">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-sm btn-outline-success" name="status" value="approved">
+                                                        <i class="fas fa-check fa-fw"></i> Accept
+                                                    </button>
+                                                </form>
+                                                <button type="button" class="btn btn-sm btn-outline-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('company.destroy', $company) }}">
+                                                    <i class="fas fa-times fa-fw"></i> Reject
+                                                </button>
+                                            </div>
                                         @else
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteCompanyModal"><i class="fas fa-times fa-fw"></i> Delete</button>
+                                            <button type="button" class="btn btn-sm btn-outline-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('company.destroy', $company) }}">
+                                                <i class="fas fa-times fa-fw"></i> Delete
+                                            </button>
                                         @endif
                                     </td>
                                 </tr>
@@ -61,33 +69,34 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- Delete Modal-->
-                <div class="modal fade" id="deleteCompanyModal" tabindex="-1" role="dialog" aria-labelledby="deleteCompanyModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteCompanyModalLabel">Are you sure?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Do you really want to delete these records? This process cannot be undone.
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <form action="{{ route('company.destroy', $company->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-primary">Delete</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             @else
                 <h1 class="display-4 text-center">Δεν υπάρχουν καταχωρημένοι φορείς απασχόλησης!</h1>
             @endif
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Are you sure?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete these records? This process cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form id="deleteForm" action="" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

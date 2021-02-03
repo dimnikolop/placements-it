@@ -410,11 +410,20 @@ form label:not(.custom-file-label):not(.custom-control-label) {
     background-color: #0077B5;
 }
 
-.list-group-item h5 {
+#companyDisplay .list-group-item h5 {
     color: #323b6b;
 }
 
-.list-group-item:hover {
+#companyDisplay .list-group-item.active h5 {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#companyDisplay .list-group-item.active .text-muted {
+    color: $gray-200 !important;
+}
+
+#companyDisplay .list-group-item:hover {
     box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2);
     top: -5px;
     z-index: 2;
