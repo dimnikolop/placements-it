@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\TraineeController;
 use App\Http\Controllers\GraduateController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\StatisticsController;
@@ -70,6 +71,9 @@ Route::get('/admin/announcement/{id}/edit', [AnnouncementController::class, 'edi
 Route::patch('/admin/announcement/{id}', [AnnouncementController::class, 'update'])->name('announcement.update')->middleware(['auth','admin']);
 Route::delete('/admin/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy')->middleware(['auth','admin']);
 Route::get('/announcements/download/file/{id}', [AnnouncementController::class, 'downloadFile'])->name('announcements.download.file');
+
+Route::get('/admin/trainee/create', [TraineeController::class, 'create'])->name('trainee.create')->middleware(['auth','admin']);
+Route::post('/admin/trainees', [TraineeController::class, 'store'])->name('trainee.store')->middleware(['auth','admin']);
 
 Route::get('/stats/student', [StatisticsController::class, 'indexStudent'])->name('statistics.student');
 Route::get('/stats/graduate', [StatisticsController::class, 'indexGraduate'])->name('statistics.graduate');
