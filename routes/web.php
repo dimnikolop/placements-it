@@ -72,6 +72,7 @@ Route::patch('/admin/announcement/{id}', [AnnouncementController::class, 'update
 Route::delete('/admin/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy')->middleware(['auth','admin']);
 Route::get('/announcements/download/file/{id}', [AnnouncementController::class, 'downloadFile'])->name('announcements.download.file');
 
+Route::get('/trainees', [TraineeController::class, 'index'])->name('trainees.index')->middleware(['auth','admin']);
 Route::get('/admin/trainee/create', [TraineeController::class, 'create'])->name('trainee.create')->middleware(['auth','admin']);
 Route::post('/admin/trainees', [TraineeController::class, 'store'])->name('trainee.store')->middleware(['auth','admin']);
 

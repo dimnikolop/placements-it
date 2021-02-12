@@ -91,7 +91,7 @@
                     <a class="nav-link {{ request()->path() === 'companies' ? 'active' : ''}}" href="{{ route('companies.index') }}"><i class="far fa-building fa-fw"></i> Φορείς Απασχόλησης</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href=""><i class="fas fa-user fa-fw"></i> Ασκούμενοι</a>
+                    <a class="nav-link {{ request()->path() === 'trainees' ? 'active' : ''}}" href="{{ route('trainees.index') }}"><i class="fas fa-user fa-fw"></i> Ασκούμενοι</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->path() === 'graduates' ? 'active' : ''}}" href="{{ route('graduates.index') }}"><i class="fas fa-user-graduate fa-fw"></i> Απόφοιτοι</a>
