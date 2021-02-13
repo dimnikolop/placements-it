@@ -56,7 +56,7 @@ class TraineeController extends Controller
 
         Trainee::create($validatedData);
 
-        return redirect()->route('trainees.index')->with('success', 'H εισαγωγή του νέου ασκούμενου ολοκληρώθηκε επιτυχώς.');
+        return redirect()->route('trainees.index')->with('success', 'Η εισαγωγή του ασκούμενου φοιτητή ολοκληρώθηκε επιτυχώς.');
     }
 
     /**
@@ -78,7 +78,13 @@ class TraineeController extends Controller
      */
     public function edit(Trainee $trainee)
     {
+        $trainee['year_from'] = Str::before($trainee->season, '-');
+        $trainee['year_to'] = Str::after($trainee->season, '-');
         
+        $trainee['year_from'] = Str::of($trainee['year_from'])->rtrim();
+        $trainee['year_to'] = Str::of($trainee['year_to'])->ltrim();
+
+        return view('trainees.edit', compact('trainee'));
     }
 
     /**
@@ -90,7 +96,26 @@ class TraineeController extends Controller
      */
     public function update(Request $request, Trainee $trainee)
     {
+        // Validate the request...
+        $validatedData = $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'am' => 'required|digits_between:5,7|unique:trainees,am,'.$trainee->id,
+            'phone' => 'required_without:email',
+            'email' => 'required|email|unique:trainees,email,'.$trainee->id,
+            'semester' => 'required',
+            'year_from' => 'required|date_format:"Y"|after:2010|before:2050',
+            'year_to' => 'required|date_format:"Y"|after:year_from|before:2050',
+            'supervisor' => 'required',
+            'company' => 'required',
+            'job' => 'required'
+        ]);
+
+        $validatedData['season'] = $validatedData['year_from'] . ' - ' . $validatedData['year_to'];
         
+        $trainee->update($validatedData);
+
+        return redirect()->route('trainees.index')->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
     }
 
     /**
@@ -101,6 +126,7 @@ class TraineeController extends Controller
      */
     public function destroy(Trainee $trainee)
     {
-        //
+        $trainee->delete();
+        return back()->with('success', 'Ο ασκούμενος φοιτητής διαγράφηκε επιτυχώς.');
     }
 }

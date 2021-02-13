@@ -75,6 +75,9 @@ Route::get('/announcements/download/file/{id}', [AnnouncementController::class, 
 Route::get('/trainees', [TraineeController::class, 'index'])->name('trainees.index')->middleware(['auth','admin']);
 Route::get('/admin/trainee/create', [TraineeController::class, 'create'])->name('trainee.create')->middleware(['auth','admin']);
 Route::post('/admin/trainees', [TraineeController::class, 'store'])->name('trainee.store')->middleware(['auth','admin']);
+Route::get('/admin/trainee/{trainee}/edit', [TraineeController::class, 'edit'])->name('trainee.edit')->middleware(['auth','admin']);
+Route::patch('/admin/trainee/{trainee}', [TraineeController::class, 'update'])->name('trainee.update')->middleware(['auth','admin']);
+Route::delete('/admin/trainee/{trainee}', [TraineeController::class, 'destroy'])->name('trainee.destroy')->middleware(['auth','admin']);
 
 Route::get('/stats/student', [StatisticsController::class, 'indexStudent'])->name('statistics.student');
 Route::get('/stats/graduate', [StatisticsController::class, 'indexGraduate'])->name('statistics.graduate');
