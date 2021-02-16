@@ -3,10 +3,8 @@
 @section('content')
 <div class="container">
     <div class="card custom-main-card">
-        <h5 class="card-header">Προϋποθέσεις για την πραγματοποίηση πρακτικής άσκησης</h5>
+        <h5 class="card-header bg-white">Προϋποθέσεις για την πραγματοποίηση πρακτικής άσκησης</h5>
         <div class="card-body">
-            <h5 class="card-title"></h5>
-            <h6 class="card-subtitle mb-2 text-muted"></h6>
             <div class="card-text">
                 <p><u>Για την πραγματοποίηση της Πρακτικής Ασκησης από κάποιον φοιτητή (-τρια), 
                 θα πρέπει να πληρούνται οι παρακάτω προϋποθέσεις:</u></p>

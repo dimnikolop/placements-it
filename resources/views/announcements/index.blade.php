@@ -18,9 +18,7 @@
         <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success w-50 mx-auto text-center" role="alert">
-                    <p class="mb-0"><i class="fas fa-check-circle"></i> <strong>Success!</strong>
-                        {{ session('success') }}
-                    </p>
+                    <i class="fas fa-check-circle"></i> <strong>Success!</strong> {{ session('success') }}
                 </div>
             @endif
             @if ($announcements->isNotEmpty())

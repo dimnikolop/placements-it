@@ -5,7 +5,7 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
         <div class="col mb-4">
             <div class="card custom-main-card h-100">
-                <h5 class="card-header">ΕΣΠΑ</h5>
+                <h5 class="card-header bg-white">ΕΣΠΑ</h5>
                 <div class="card-body">
                     <h5 class="card-title"></h5>
                     <h6 class="card-subtitle mb-2 text-muted"></h6>
@@ -20,7 +20,7 @@
         </div>
         <div class="col mb-4">
             <div class="card custom-main-card h-100">
-                <h5 class="card-header">ΟΑΕΔ</h5>
+                <h5 class="card-header bg-white">ΟΑΕΔ</h5>
                 <div class="card-body">
                     <h5 class="card-title"></h5>
                     <h6 class="card-subtitle mb-2 text-muted"></h6>
@@ -34,7 +34,7 @@
         </div>
         <div class="col mb-4">
             <div class="card custom-main-card h-100">
-                <h5 class="card-header">ΑΤΕΙΘ</h5>
+                <h5 class="card-header bg-white">ΑΤΕΙΘ</h5>
                 <div class="card-body">
                     <h5 class="card-title"></h5>
                     <h6 class="card-subtitle mb-2 text-muted"></h6>

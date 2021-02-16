@@ -18,13 +18,6 @@
             <h5>Νέα Ανακοίνωση</h5>
         </div>
         <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success w-75 mx-auto" role="alert">
-                    <p class="mb-0"><i class="fas fa-check-circle"></i> <strong>Success!</strong>
-                        {{ session('success') }}
-                    </p>
-                </div>
-            @endif
             <form action="{{ route('announcement.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="card border-0">
-                <div class="card-header px-0">
+                <div class="card-header bg-white px-0">
                     <div class="row">
                         <div class="col-md-8">
                             <h4>{{ $company->name }}</h4>
@@ -54,7 +54,7 @@
         </div>
         <div class="col-lg-4">
             <div class="card custom-main-card sticky-top">
-                <div class="card-header font-weight-bold">Επικοινωνία</div>
+                <div class="card-header font-weight-bold bg-white">Επικοινωνία</div>
                 <div class="card-body">
                     <p><i class="fas fa-map-marker-alt fa-fw"></i> {{ $company->address }}, {{ $company->zip_code }}, {{ $company->location }}</p>
                     <p><i class="fas fa-phone-alt fa-fw"></i> {{ $company->phone }}</p>

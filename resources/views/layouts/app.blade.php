@@ -82,8 +82,8 @@
                         <li class="nav-item {{ request()->path() === 'announcements' ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('announcements.index') }}">Ανακοινώσεις</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Επικοινωνία</a>
+                        <li class="nav-item {{ request()->path() === 'contact' ? 'active' : ''}}">
+                            <a class="nav-link" href="{{ route('contact') }}">Επικοινωνία</a>
                         </li>
                     </ul>
                 </div>
@@ -108,14 +108,15 @@
                 <div class="col-md-5 col-lg-4">
                     <h5 class="mb-3">Στοιχεία Eπικοινωνίας</h5>
                     <p class="lead">Γραφείο Πρακτικής Άσκησης</p>
-                    <p><strong>Διεύθυνση:</strong> Αλεξάνδρειο ΤΕΙ Θεσσαλονίκης
-                        Σχολή Τεχνολογικών Εφαρμογών
-                        Τμήμα Μηχανικών Πληροφορικής Τ.Ε - 1ος όροφος
-                        Τ.Θ. 141, Σίνδος
-                        Τ.Κ. 57400 - Θεσσαλονίκης
-                    </p> 
-                    <p><strong>Τηλέφωνο:</strong> 2310 - 013 414</p>
-                    <p><strong>E-mail:</strong> <a class="text-info" href="mailto:placemnt@it.teithe.gr" target="_top">placemnt@it.teithe.gr</a></p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt fa-fw"></i>  Αλεξάνδρειο ΤΕΙ Θεσσαλονίκης</li>
+                        <li class="ml-3">Σχολή Τεχνολογικών Εφαρμογών</li>
+                        <li class="ml-3">Τμήμα Μηχανικών Πληροφορικής Τ.Ε - 1ος όροφος</li>
+                        <li class="ml-3">Τ.Θ. 141, Σίνδος</li>
+                        <li class="ml-3">Τ.Κ. 57400 - Θεσσαλονίκης</li>
+                    </ul>
+                    <p><i class="fas fa-phone-alt fa-fw"></i><span class="ml-2">2310 - 013 414</span></p>
+                    <p><i class="far fa-envelope fa-fw"></i><span class="ml-2">placemnt@it.teithe.gr</span></p>
                 </div>
             </div>
             <div class="row" id="sub-footer">
@@ -123,7 +124,7 @@
 					<div class="copyright">
 						<p class="mb-1">
                             Copyright &copy; 2018 - <script>document.write(new Date().getFullYear());</script> <a href="http://www.it.teithe.gr" class="text-info" target="_blank">Τμήμα Μηχανικών Πληροφορικής ΑΤΕΙΘ</a>, All rights reserved.</p>
-						<p>Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset" target="_blank">Built with Bootstrap</a></p>
+						<p>Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset" target="_blank">Built with Bootstrap 4</a></p>
 					</div>
 				</div>
 				<div class="col-lg-6">

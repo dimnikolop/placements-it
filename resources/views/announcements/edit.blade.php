@@ -18,13 +18,6 @@
             <h5>Update Announcement</h5>
         </div>
         <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success w-75 mx-auto" role="alert">
-                    <p class="mb-0"><i class="fas fa-check-circle"></i> <strong>Success!</strong>
-                        {{ session('success') }}
-                    </p>
-                </div>
-            @endif
             <form action="{{ route('announcement.update', $announcement->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
@@ -50,12 +43,12 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <a tabindex="0" class="ml-3" role="button" data-toggle="popover" data-trigger="focus" data-placement="right" title="File input info" data-content="Choose a new file if you want to replace the old one in database.">
-                        <i class="far fa-question-circle fa-lg"></i>
+                    <a tabindex="0" class="text-info ml-3" role="button" data-toggle="tooltip" data-placement="right" title="Αν επιλέξετε νέο συνημμένο, τυχόν προηγούμενο αποθηκευμένο θα αντικατασταθεί!">
+                        <span style="font-size: 1.5em"><i class="far fa-question-circle"></i></span>
                     </a>
                 </div>
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-sm btn-primary">Update <i class="far fa-paper-plane"></i></button>
+                    <button type="submit" class="btn btn-primary">Αποθήκευση <i class="fas fa-file-upload"></i></button>
                 </div>
             </form>
         </div>

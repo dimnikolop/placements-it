@@ -16,7 +16,7 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::orderBy('created_at')->get();
+        $announcements = Announcement::all();
 
         if (auth()->check() && auth()->user()->role === 'admin') {
             return view('announcements.index', [
@@ -132,10 +132,10 @@ class AnnouncementController extends Controller
             $fileName = time() . '_' . $request->file('attachment')->getClientOriginalName();
             $filePath = $request->file('attachment')->storeAs('uploads', $fileName, 'public');
             $announcement->attachment = $filePath;
-            $request->session()->flash('success', 'Η ανακοίνωση και το αρχείο με όνομα ('.$request->file('attachment')->getClientOriginalName().') καταχωρήθηκαν επιτυχώς');
+            $request->session()->flash('success', 'Η ανακοίνωση και το αρχείο με όνομα ('.$request->file('attachment')->getClientOriginalName().') καταχωρήθηκαν επιτυχώς.');
         }
         else {
-            $request->session()->flash('success', 'Η ανακοίνωση ανανεώθηκε επιτυχώς');
+            $request->session()->flash('success', 'Η ανακοίνωση ενημερώθηκε επιτυχώς.');
         }
 
         $announcement->save();
@@ -160,7 +160,7 @@ class AnnouncementController extends Controller
 
         $announcement->delete();
 
-        return redirect()->route('announcements.index')->with('success', 'Announcement has been deleted successfully');
+        return redirect()->route('announcements.index')->with('success', 'Η ανακοίνωση διαγράφηκε επιτυχώς.');
     }
 
     /**

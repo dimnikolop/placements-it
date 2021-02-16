@@ -85,7 +85,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->path() === 'admin/trainee/create' ? 'active' : ''}}" href="{{ route('trainee.create') }}"><i class="fas fa-user-plus fa-fw"></i> Εισαγωγή νέου ασκούμενου</a>
+                    <a class="nav-link {{ request()->path() === 'admin/trainee/create' ? 'active' : ''}}" href="{{ route('trainee.create') }}"><i class="fas fa-user-plus fa-fw"></i> Νέος Ασκούμενος</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->path() === 'companies' ? 'active' : ''}}" href="{{ route('companies.index') }}"><i class="far fa-building fa-fw"></i> Φορείς Απασχόλησης</a>

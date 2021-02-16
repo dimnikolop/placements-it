@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card-deck">
         <div class="card custom-main-card">
-            <h5 class="card-header">Οδηγοί Πρακτικής Άσκησης</h5>
+            <h5 class="card-header bg-white">Οδηγοί Πρακτικής Άσκησης</h5>
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <h6 class="card-subtitle mb-2 text-muted"></h6>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="card custom-main-card">
-            <h5 class="card-header">Οδηγίες - Πληροφορίες για το σύστημα Πρακτικής Άσκησης ΑΤΛΑΣ</h5>
+            <h5 class="card-header bg-white">Οδηγίες - Πληροφορίες για το σύστημα Πρακτικής Άσκησης ΑΤΛΑΣ</h5>
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <h6 class="card-subtitle mb-2 text-muted"></h6>

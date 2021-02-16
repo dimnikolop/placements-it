@@ -3,7 +3,7 @@
 @section('content')
 <div id="legislation" class="container">
     <div class="card custom-main-card">
-        <h5 class="card-header">ΝΟΜΟΘΕΣΙΑ</h5>
+        <h5 class="card-header bg-white">ΝΟΜΟΘΕΣΙΑ</h5>
         <div class="card-body">
             <h5 class="card-title"></h5>
             <h6 class="card-subtitle mb-2 text-muted"></h6>
