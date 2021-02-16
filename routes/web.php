@@ -30,6 +30,7 @@ Route::get('/requirements', [PageController::class, 'requirements'])->name('requ
 Route::get('/guides', [PageController::class, 'guides'])->name('guides');
 Route::get('/documents', [PageController::class, 'documents'])->name('documents');
 Route::get('/legislation', [PageController::class, 'legislation'])->name('legislation');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
 Route::get('/questionnaires', [QuestionnairesController::class, 'index'])->name('questionnaires.index');
 Route::get('/questionnaires/student', [QuestionnairesController::class, 'studentCreate'])->name('questionnaires.student.create');

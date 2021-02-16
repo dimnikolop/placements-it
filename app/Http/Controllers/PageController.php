@@ -25,4 +25,8 @@ class PageController extends Controller
     public function legislation() {
         return view('main.legislation');
     }
+
+    public function contact() {
+        return view('main.contact');
+    }
 }
