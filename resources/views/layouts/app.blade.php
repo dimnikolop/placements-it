@@ -7,8 +7,8 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
     <link rel="stylesheet" href="{{ asset('fontawesome-free-5.15.1/css/all.min.css') }}">
 
     <!-- Styles -->
@@ -26,11 +26,11 @@
                                 {{ auth()->user()->username }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <h6 class="dropdown-header">Manage Account</h6>
+                                <h6 class="dropdown-header font-weight-normal">Manage Account</h6>
                                 @if (auth()->user()->role == 'admin')
                                     <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
                                 @else
-                                    <a class="dropdown-item" href="{{ route('company.dashboard') }}">Dashboard</a>
+                                    <a class="dropdown-item" href="{{ route('company.dashboard') }}">Προφίλ</a>
                                 @endif
                                 <div class="dropdown-divider"></div>
                                 <form action="{{ route('logout') }}" method="post">
@@ -93,9 +93,9 @@
     
     @yield('banner')
     
-    <div class="section flex-grow-1">
+    <main class="section flex-grow-1">
         @yield('content')
-    </div>
+    </main>
 
     <footer id="site-footer" class="bg-dark">
         <div class="container">
@@ -196,13 +196,13 @@
     @stack('scripts')
 
     
-    @if (session('openLogin'))
+    @if (session('authError'))
         //js function that will open hidden login modal
         <script>
             $('#loginModal').modal('show');
             var message =
-                "<div class='alert alert-danger w-100' role='alert'>" +
-                    "<i class='fas fa-times-circle'></i> {{ session('openLogin') }}" +
+                "<div class='alert alert-danger' role='alert'>" +
+                    "<i class='fas fa-times-circle'></i> {{ session('authError') }}" +
                 "</div>";
             $(".modal-body").prepend(message);
         </script>

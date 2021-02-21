@@ -2,7 +2,7 @@ $('#loginModal').on('shown.bs.modal', function () {
     $('#inputUsername').trigger('focus')
 })
 
-// Ajax Login Form
+// Ajax Login Authentication
 $("#loginForm").on('submit', function (event) {
     event.preventDefault();
     var form_data = $(this).serialize();

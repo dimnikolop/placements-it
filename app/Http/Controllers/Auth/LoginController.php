@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function index()
-    {
-        //return view('auth.login');
-    }
-
     /**
      * Handle an authentication attempt.
      *
@@ -20,6 +15,7 @@ class LoginController extends Controller
      */
     public function authenticate(Request $request)
     {
+        
         // validate login form credentials
         $request->validate([
             'username' => 'required|exists:users,username',
@@ -27,13 +23,13 @@ class LoginController extends Controller
         ]);
 
         // attempt to log in
-        if(auth()->attempt($request->only('username', 'password'), $request->remember)) {
+        if(auth()->attempt($request->only('username', 'password'), $request->filled('remember'))) {
             
             $request->session()->regenerate();
 
             // to admin dashboard
-            if (auth()->user()->role == 'admin') {
-                return response()->json(['success'=>'Admin is logged in!', 'url' => route('admin.dashboard')]);
+            if (auth()->user()->role === 'admin') {
+                return response()->json(['success'=>'Welcome Admin!', 'url' => route('admin.dashboard')]);
             }
             else {
                 return response()->json(['success'=>'Logged in!', 'url' => route('home')]);
@@ -41,5 +37,22 @@ class LoginController extends Controller
         }
         
         return response()->json(['error' => 'Password is incorrect']);
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        auth()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home');
     }
 }

@@ -8,7 +8,6 @@ use App\Http\Controllers\TraineeController;
 use App\Http\Controllers\GraduateController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\StatisticsController;
-use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\QuestionnairesController;
@@ -24,6 +23,9 @@ use App\Http\Controllers\Admin\AnnouncementController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/requirements', [PageController::class, 'requirements'])->name('requirements');
@@ -62,8 +64,6 @@ Route::patch('/graduate/{id}', [GraduateController::class, 'update'])->name('gra
 Route::delete('/graduate/{id}', [GraduateController::class, 'destroy'])->name('graduate.destroy')->middleware(['auth','admin']);
 Route::get('/graduates/map', [GraduateController::class, 'map'])->name('graduates.map');
 
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
-
 Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
 Route::get('/admin/announcement/create', [AnnouncementController::class, 'create'])->name('announcement.create')->middleware(['auth','admin']);
 Route::post('/admin/announcements', [AnnouncementController::class, 'store'])->name('announcement.store')->middleware(['auth','admin']);
@@ -84,7 +84,3 @@ Route::get('/stats/student', [StatisticsController::class, 'indexStudent'])->nam
 Route::get('/stats/graduate', [StatisticsController::class, 'indexGraduate'])->name('statistics.graduate');
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
