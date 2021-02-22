@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class StudentQuestionnaire extends Model
+class TraineeQuestionnaire extends Model
 {
     use HasFactory;
 

@@ -7,12 +7,10 @@
             <div class="card-title my-5 text-center"><h5>ΕΡΩΤΗΜΑΤΟΛΟΓΙΟ ΑΞΙΟΛΟΓΗΣΗΣ ΤΗΣ ΠΡΑΚΤΙΚΗΣ ΑΣΚΗΣΗΣ <br> ΑΠΟ ΤΟΝ ΑΣΚΟΥΜΕΝΟ ΦΟΙΤΗΤΗ</h5></div>
             @if (session('success'))
                 <div class="alert alert-success text-center" role="alert">
-                    <p class="mb-0"><i class="fas fa-check-circle"></i> <strong>Success!</strong>
-                        {{ session('success') }}
-                    </p>
+                    <i class="fas fa-check-circle"></i> <strong>Success!</strong> {{ session('success') }}
                 </div>
             @endif
-            <form id="studentQuestionnaireForm" action="{{ route('questionnaires.student.store') }}" method="post">
+            <form id="traineeQuestionnaireForm" action="{{ route('questionnaires.trainee.store') }}" method="post">
                 @csrf
                 <div class="form-group row">
                     <label class="col-md-4 col-lg-3 col-form-label text-lg-right" for="inputCompany">Φορέας Απασχόλησης :<span class="required">*</span></label>
@@ -183,7 +181,7 @@
                 </div>
             
                 <div class="form-group">
-                    <label class="d-block">4. Η τελική επιλογή του φορέα πραγματοποιήθηκε με βάση :</label>
+                    <label class="d-block">4. Η τελική επιλογή του φορέα πραγματοποιήθηκε με βάση:</label>
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" type="radio" id="radio1_4" name="question4" value="Προσωπικές γνωριμίες" @if (old('question4') == 'Προσωπικές γνωριμίες') checked @endif>
                         <label class="custom-control-label" for="radio1_4">Προσωπικές γνωριμίες</label>
@@ -470,7 +468,7 @@
                 </div>
             
                 <div class="form-group">
-                    <label class="d-block">15. Με ποια ιδιότητα απασχοληθήκατε :</label>
+                    <label class="d-block">15. Με ποια ιδιότητα απασχοληθήκατε:</label>
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" type="radio" id="radio1_15" name="question15" value="Αναλυτής Εφαρμογών" @if (old('question15') == 'Αναλυτής Εφαρμογών') checked @endif>
                         <label class="custom-control-label" for="radio1_15">Αναλυτής Εφαρμογών</label>
@@ -550,7 +548,7 @@
                 </div>
             
                 <div class="form-group">
-                    <label class="d-block">17. Θεωρείτε ότι οι θεωρητικές γνώσεις που λάβατε από το Τμήμα σας ήταν επαρκείς ώστε να αντεπεξέλθετε στις απαιτήσεις της εργασίας σας ;</label>
+                    <label class="d-block">17. Θεωρείτε ότι οι θεωρητικές γνώσεις που λάβατε από το Τμήμα σας ήταν επαρκείς ώστε να αντεπεξέλθετε στις απαιτήσεις της εργασίας σας;</label>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input class="custom-control-input" type="radio" id="radio17None" name="question17" value="Καθόλου" @if (old('question17') == 'Καθόλου') checked @endif>
                         <label class="custom-control-label" for="radio17None">Καθόλου</label>
@@ -869,7 +867,7 @@
                 </div>
             
                 <div class="text-center mb-4">
-                    <button id="submitBtn" type="submit" name="submit_btn" class="btn btn-success">Υποβολή  <i class="far fa-paper-plane"></i></button>
+                    <button id="submitBtn" type="submit" name="submit_btn" class="btn btn-primary">Υποβολή  <i class="far fa-paper-plane"></i></button>
                 </div>
                 
                 <h5 class="text-center">Σας ευχαριστούμε για τον χρόνο που διαθέσατε!</h5>

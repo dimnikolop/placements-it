@@ -35,10 +35,10 @@ Route::get('/legislation', [PageController::class, 'legislation'])->name('legisl
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
 Route::get('/questionnaires', [QuestionnairesController::class, 'index'])->name('questionnaires.index');
-Route::get('/questionnaires/student', [QuestionnairesController::class, 'studentCreate'])->name('questionnaires.student.create');
+Route::get('/questionnaires/trainee', [QuestionnairesController::class, 'traineeCreate'])->name('questionnaires.trainee.create');
 Route::get('/questionnaires/company', [QuestionnairesController::class, 'companyCreate'])->name('questionnaires.company.create');
 Route::get('/questionnaires/professor', [QuestionnairesController::class, 'professorCreate'])->name('questionnaires.professor.create');
-Route::post('/questionnaires/student', [QuestionnairesController::class, 'studentStore'])->name('questionnaires.student.store');
+Route::post('/questionnaires/trainee', [QuestionnairesController::class, 'traineeStore'])->name('questionnaires.trainee.store');
 Route::post('/questionnaires/company', [QuestionnairesController::class, 'companyStore'])->name('questionnaires.company.store');
 Route::post('/questionnaires/professor', [QuestionnairesController::class, 'professorStore'])->name('questionnaires.professor.store');
 
@@ -80,7 +80,7 @@ Route::get('/admin/trainee/{trainee}/edit', [TraineeController::class, 'edit'])-
 Route::patch('/admin/trainee/{trainee}', [TraineeController::class, 'update'])->name('trainee.update')->middleware(['auth','admin']);
 Route::delete('/admin/trainee/{trainee}', [TraineeController::class, 'destroy'])->name('trainee.destroy')->middleware(['auth','admin']);
 
-Route::get('/stats/student', [StatisticsController::class, 'indexStudent'])->name('statistics.student');
+Route::get('/stats/trainee', [StatisticsController::class, 'indexTrainee'])->name('statistics.trainee');
 Route::get('/stats/graduate', [StatisticsController::class, 'indexGraduate'])->name('statistics.graduate');
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');

@@ -445,7 +445,7 @@
                 </div>
                 
                 <div class="text-center mb-4">
-                    <button id="submitBtn" type="submit" name="submit_btn" class="btn btn-success">Υποβολή  <i class="far fa-paper-plane"></i></button>
+                    <button id="submitBtn" type="submit" name="submit_btn" class="btn btn-primary">Υποβολή  <i class="far fa-paper-plane"></i></button>
                 </div>
                 
                 <h5 class="text-center">Σας ευχαριστούμε για τον χρόνο που διαθέσατε!</h5>

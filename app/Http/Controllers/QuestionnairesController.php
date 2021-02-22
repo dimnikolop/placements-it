@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\CompanyQuestionnaire;
-use App\Models\StudentQuestionnaire;
+use App\Models\TraineeQuestionnaire;
 use App\Models\ProfessorQuestionnaire;
 
 class QuestionnairesController extends Controller
@@ -21,23 +21,24 @@ class QuestionnairesController extends Controller
     }
 
     /**
-     * Show the form for creating a new student questionnaire.
+     * Show the form for creating a new trainee questionnaire.
      *
      * @return \Illuminate\Http\Response
      */
-    public function studentCreate()
+    public function traineeCreate()
     {
-        return view('questionnaires.student');
+        return view('questionnaires.trainee');
     }
 
     /**
-     * Store a newly created student questionnaire in storage.
+     * Store a newly created trainee questionnaire in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function studentStore(Request $request)
+    public function traineeStore(Request $request)
     {
+        
         // Validate the request...
         $validatedData = $request->validate([
             'company' => 'required',
@@ -75,7 +76,7 @@ class QuestionnairesController extends Controller
             'question26' => 'required'
         ]);
 
-        $validatedData['season'] = $validatedData['year_from'] . ' &mdash; ' . $validatedData['year_to'];
+        $validatedData['season'] = $validatedData['year_from'] . ' - ' . $validatedData['year_to'];
 
         $validatedData = Arr::except($validatedData, ['year_from', 'year_to']);
         
@@ -85,7 +86,7 @@ class QuestionnairesController extends Controller
             $validatedData['question22'] = implode(',', $request->question22);
         }
         
-        StudentQuestionnaire::create($validatedData);
+        TraineeQuestionnaire::create($validatedData);
 
         return back()->with('success', 'Οι απαντήσεις του ερωτηματολόγιου καταχωρήθηκαν επιτυχώς.');
     }
@@ -111,7 +112,7 @@ class QuestionnairesController extends Controller
         // Validate the request...
         $validatedData = $request->validate([
             'supervisor' => 'required',
-            'student' => 'required',
+            'trainee' => 'required',
             'company' => 'required',
             'start_date' => 'required|date_format:"d/m/Y"|after:01/01/2010|before:31/12/2049',
             'end_date' => 'required|date_format:"d/m/Y"|after:start_date|before:31/12/2049',
@@ -156,7 +157,7 @@ class QuestionnairesController extends Controller
     {
         // Validate the request...
         $validatedData = $request->validate([
-            'student' => 'required',
+            'trainee' => 'required',
             'am' => 'required|digits_between:6,7|unique:professor_questionnaires',
             'company' => 'required',
             'supervisor' => 'required',

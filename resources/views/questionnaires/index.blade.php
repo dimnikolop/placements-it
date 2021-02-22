@@ -5,7 +5,7 @@
     <div class="card-deck">
         <div class="card custom-main-card">
             <div class="card-body">
-                Για να υποβάλετε το Ερωτηματολόγιο του Φοιτητή - Πατήστε&nbsp;  <a href="{{ route('questionnaires.student.create') }}">ΕΔΩ</a>
+                Για να υποβάλετε το Ερωτηματολόγιο του Ασκούμενου Φοιτητή - Πατήστε&nbsp;  <a href="{{ route('questionnaires.trainee.create') }}">ΕΔΩ</a>
             </div>
         </div>
         <div class="card custom-main-card">

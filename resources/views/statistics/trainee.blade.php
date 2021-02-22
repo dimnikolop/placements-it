@@ -4,13 +4,13 @@
 <div class="container-fluid">
     <div class="page-header">
         <div class="page-header-title">
-            <h6>Student Evaluation Results</h6>
+            <h6>Trainee Evaluation Results</h6>
         </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb p-0">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="fas fa-home fa-fw"></i></a></li>
                 <li class="breadcrumb-item" aria-current="page"><a href="">Evaluation Results</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('companies.index') }}">Student</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('companies.index') }}">Trainee</a></li>
             </ol>
         </nav>
     </div>

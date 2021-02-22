@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\StudentQuestionnaire;
+use App\Models\TraineeQuestionnaire;
 use App\Models\GraduateQuestionnaire;
 
 class StatisticsController extends Controller
@@ -14,29 +14,29 @@ class StatisticsController extends Controller
         $this->middleware(['auth', 'admin']);
     }
 
-    public function indexStudent()
+    public function indexTrainee()
     {
-        $question4 = StudentQuestionnaire::select(DB::raw('question4, COUNT(*) as count_answers'))->groupBy('question4')->get();
+        $question4 = TraineeQuestionnaire::select(DB::raw('question4, COUNT(*) as count_answers'))->groupBy('question4')->get();
         $labels = $question4->pluck('question4');
         $data = $question4->pluck('count_answers');
         $question4 = compact('labels','data');
 
-        $question10 = StudentQuestionnaire::select(DB::raw('question10, COUNT(*) as count_answers'))->groupBy('question10')->get();
+        $question10 = TraineeQuestionnaire::select(DB::raw('question10, COUNT(*) as count_answers'))->groupBy('question10')->get();
         $labels = $question10->pluck('question10');
         $data = $question10->pluck('count_answers');
         $question10 = compact('labels','data');
 
-        $question12 = StudentQuestionnaire::select(DB::raw('question12, COUNT(*) as count_answers'))->groupBy('question12')->get();
+        $question12 = TraineeQuestionnaire::select(DB::raw('question12, COUNT(*) as count_answers'))->groupBy('question12')->get();
         $labels = $question12->pluck('question12');
         $data = $question12->pluck('count_answers');
         $question12 = compact('labels','data');
 
-        $question15 = StudentQuestionnaire::select(DB::raw('question15, COUNT(*) as count_answers'))->groupBy('question15')->get();
+        $question15 = TraineeQuestionnaire::select(DB::raw('question15, COUNT(*) as count_answers'))->groupBy('question15')->get();
         $labels = $question15->pluck('question15');
         $data = $question15->pluck('count_answers');
         $question15 = compact('labels','data');
 
-        $question21 = StudentQuestionnaire::select('question21')->get();
+        $question21 = TraineeQuestionnaire::select('question21')->get();
         foreach ($question21 as $key => $value) {
             $question21[$key] = explode(',', $value->question21);
         }
@@ -48,19 +48,19 @@ class StatisticsController extends Controller
         }
         $question21 = compact('labels','data');
 
-        $question25 = StudentQuestionnaire::select(DB::raw('question25, COUNT(*) as count_answers'))->groupBy('question25')->get();
+        $question25 = TraineeQuestionnaire::select(DB::raw('question25, COUNT(*) as count_answers'))->groupBy('question25')->get();
         $labels = $question25->pluck('question25');
         $data = $question25->pluck('count_answers');
         $question25 = compact('labels','data');
 
-        $question26 = StudentQuestionnaire::select(DB::raw('question26, COUNT(*) as count_answers'))->groupBy('question26')->get();
+        $question26 = TraineeQuestionnaire::select(DB::raw('question26, COUNT(*) as count_answers'))->groupBy('question26')->get();
         $labels = $question26->pluck('question26');
         $data = $question26->pluck('count_answers');
         $question26 = compact('labels','data');
 
         $chart_data = compact('question4', 'question10', 'question12', 'question15', 'question21', 'question25', 'question26');
         
-        return view('statistics.student', ['chart_data' => $chart_data]);
+        return view('statistics.trainee', ['chart_data' => $chart_data]);
     }
 
     public function indexGraduate()
