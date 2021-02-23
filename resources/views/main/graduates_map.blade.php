@@ -34,7 +34,7 @@
 <script>
     // Graduates info turn to json
     var graduates = @json($graduates);
-    console.log(graduates);
+    
     let map;
 
     // Initialize and add the map
@@ -82,5 +82,5 @@
         });
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap&libraries=&v=weekly"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=PutYourKeyHere&callback=initMap&libraries=&v=weekly"></script>
 @endpush

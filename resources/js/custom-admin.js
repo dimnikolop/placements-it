@@ -1,13 +1,6 @@
-// Open collapsed div with nav links if browser url is either of those links
-if (window.location.pathname === '/stats/student' || window.location.pathname === '/stats/graduate') {
-    $('#collapseEvaluation').collapse('show');
-    $('a[data-toggle="collapse"]').addClass('active');
-}
-
 $(function () {
 
-    //    sidebar toggle
-
+    // Sidebar toggle
     function responsiveView() {
         var wSize = $(window).width();
         if (wSize <= 991.98) {
@@ -41,29 +34,24 @@ $(function () {
         }
     });
 
-    // Show on file input the name of the selected file
-    $(".custom-file-input").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-
-    //    tool tips
+    // Enable all tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
-    $('[data-toggle="tooltip"]').on('click', function() {
+    // Enable all popovers
+    $('[data-toggle="popover"]').popover();
+
+    // Hide sidebar toggler tooltip after clicked
+    $('#sidebarToggler').on('click', function() {
         $(this).tooltip('hide');
     });
 
-    //    popovers
-    $('[data-toggle="popover"]').popover();
-
-    //    On delete pass url to modal delete form
+    // Pass delete url to modal delete form
     $(document).on('click', '.deleteBtn', function () {
         const url = $(this).data('url');
         $('#deleteForm').attr('action', url);
     });
 
-    //    Modify DataTables
+    /* Enable DataTables */
 
     $('#announcementsTable').DataTable({
         //responsive: true
@@ -73,4 +61,18 @@ $(function () {
     $('#companiesTable').DataTable({
         //responsive: true
     });
+
+    // On file input display the name of the selected file
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
 });
+
+
+// Open collapsed div with nav links if browser url is either of those nav links
+if (window.location.pathname === '/stats/trainee' || window.location.pathname === '/stats/graduate') {
+    $('#collapseEvaluation').collapse('show');
+    $('a[data-toggle="collapse"]').addClass('active');
+}

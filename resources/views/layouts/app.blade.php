@@ -126,8 +126,6 @@
 						<p>Created by Νικολόπουλος Δημήτριος | <a href="https://getbootstrap.com/" class="text-reset" target="_blank">Built with Bootstrap 4</a></p>
 					</div>
 				</div>
-				<div class="col-lg-6">
-				</div>
 			</div>
         </div>
     </footer>
@@ -204,24 +202,6 @@
                     "<i class='fas fa-times-circle'></i> {{ session('authError') }}" +
                 "</div>";
             $(".modal-body").prepend(message);
-        </script>
-    @endif
-
-    @if ($errors->company->any())
-        <script>
-            $('#editCompanyModal').modal('show');
-        </script>
-    @endif
-
-    @if ($errors->job->any())
-        <script>
-            $('#addJobModal').modal('show');
-        </script>
-    @endif
-
-    @if ($errors->edit_job->any())
-        <script>
-            $('#editJobModal').modal('show');
         </script>
     @endif
 </body>

@@ -43,9 +43,9 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <a tabindex="0" class="text-info ml-3" role="button" data-toggle="tooltip" data-placement="right" title="Αν επιλέξετε νέο συνημμένο, τυχόν προηγούμενο αποθηκευμένο θα αντικατασταθεί!">
-                        <span style="font-size: 1.5em"><i class="far fa-question-circle"></i></span>
-                    </a>
+                    <button type="button" class="btn ml-3 border-0 shadow-none" data-toggle="tooltip" data-placement="right" title="Αν επιλέξετε νέο συνημμένο, τυχόν προηγούμενο αποθηκευμένο θα αντικατασταθεί!">
+                        <span class="text-info far fa-question-circle" style="font-size: 1.5em"></span>
+                    </button>
                 </div>
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-primary">Αποθήκευση <i class="fas fa-file-upload"></i></button>

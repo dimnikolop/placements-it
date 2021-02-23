@@ -94243,14 +94243,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Open collapsed div with nav links if browser url is either of those links
-if (window.location.pathname === '/stats/student' || window.location.pathname === '/stats/graduate') {
-  $('#collapseEvaluation').collapse('show');
-  $('a[data-toggle="collapse"]').addClass('active');
-}
-
 $(function () {
-  //    sidebar toggle
+  // Sidebar toggle
   function responsiveView() {
     var wSize = $(window).width();
 
@@ -94283,32 +94277,39 @@ $(function () {
         'margin-left': '0'
       });
     }
-  }); // Show on file input the name of the selected file
+  }); // Enable all tooltips
 
-  $(".custom-file-input").on("change", function () {
-    var fileName = $(this).val().split("\\").pop();
-    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-  }); //    tool tips
+  $('[data-toggle="tooltip"]').tooltip(); // Enable all popovers
 
-  $('[data-toggle="tooltip"]').tooltip();
-  $('[data-toggle="tooltip"]').on('click', function () {
+  $('[data-toggle="popover"]').popover(); // Hide sidebar toggler tooltip after clicked
+
+  $('#sidebarToggler').on('click', function () {
     $(this).tooltip('hide');
-  }); //    popovers
-
-  $('[data-toggle="popover"]').popover(); //    On delete pass url to modal delete form
+  }); // Pass delete url to modal delete form
 
   $(document).on('click', '.deleteBtn', function () {
     var url = $(this).data('url');
     $('#deleteForm').attr('action', url);
-  }); //    Modify DataTables
+  });
+  /* Enable DataTables */
 
   $('#announcementsTable').DataTable({
     //responsive: true
     "order": [[0, 'desc']]
   });
   $('#companiesTable').DataTable({//responsive: true
+  }); // On file input display the name of the selected file
+
+  $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
-});
+}); // Open collapsed div with nav links if browser url is either of those nav links
+
+if (window.location.pathname === '/stats/trainee' || window.location.pathname === '/stats/graduate') {
+  $('#collapseEvaluation').collapse('show');
+  $('a[data-toggle="collapse"]').addClass('active');
+}
 
 /***/ }),
 
@@ -94319,77 +94320,80 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$('#loginModal').on('shown.bs.modal', function () {
-  $('#inputUsername').trigger('focus');
-}); // Ajax Login Authentication
-
-$("#loginForm").on('submit', function (event) {
-  event.preventDefault();
-  var form_data = $(this).serialize();
-  $.ajax({
-    url: "/login",
-    method: "POST",
-    data: form_data,
-    dataType: "JSON",
-    success: function success(response) {
-      if (response.error) {
-        // Clean error message templates from previous errors
-        $(".invalid-feedback").text('');
-        $("#inputUsername").removeClass("is-invalid");
-        $("#inputPassword").addClass("is-invalid");
-        $("#inputPassword").next().text(response.error);
-      } else {
-        // console.log(response.success);
-        window.location.href = response.url;
-      }
-    },
-    error: function error(response) {
-      // console.log('Houston, we have a problem!');
-      var errors = response.responseJSON.errors; // Clean error message templates from previous errors
-
-      $(".invalid-feedback").text('');
-      $("#loginForm input").each(function () {
-        if ($(this).hasClass("is-invalid")) {
-          $(this).removeClass("is-invalid");
-        }
-      }); // loop through inputs with errors and show error msg
-
-      $.each(errors, function (fieldName, error) {
-        var field = $("#loginForm").find('[name="' + fieldName + '"]');
-        field.addClass("is-invalid");
-        var immediateSibling = field.next();
-
-        if (immediateSibling.hasClass('invalid-feedback')) {
-          immediateSibling.text(error[0]);
-        } else {
-          field.after("<div class='invalid-feedback'>" + error + "</div>");
-        }
-      });
-    }
-  });
-});
-$(".clickable-row").on('click', function () {
-  var url = $(this).data('url');
-  window.location.href = url;
-});
-$('.list-group-item').on('click', function () {
-  $(this).addClass('active').siblings().removeClass('active');
-});
-$('.edit-job').on('click', function (event) {
-  var button = $(event.relatedTarget); // Button that triggered the modal
-
-  var job = $(this).data('job'); // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-
-  $('#editJobForm').attr('action', '/jobs/' + job.id);
-  $('#jobTitle').val(job.title);
-  $('#jobDescription').val(job.description);
-  $('#jobRequirements').val(job.requirements);
-});
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});
+  // Username input focus on show login modal
+  $('#loginModal').on('shown.bs.modal', function () {
+    $('#inputUsername').trigger('focus');
+  }); // Ajax Login Authentication
+
+  $("#loginForm").on('submit', function (event) {
+    event.preventDefault();
+    var form_data = $(this).serialize();
+    $.ajax({
+      url: "/login",
+      method: "POST",
+      data: form_data,
+      dataType: "JSON",
+      success: function success(response) {
+        if (response.error) {
+          // Clean error message templates from previous errors
+          $(".invalid-feedback").text('');
+          $("#inputUsername").removeClass("is-invalid");
+          $("#inputPassword").addClass("is-invalid");
+          $("#inputPassword").next().text(response.error);
+        } else {
+          window.location.href = response.url;
+        }
+      },
+      error: function error(response) {
+        // console.log('Houston, we have a problem!');
+        var errors = response.responseJSON.errors; // Clean error message templates from previous errors
+
+        $(".invalid-feedback").text('');
+        $("#loginForm input").each(function () {
+          if ($(this).hasClass("is-invalid")) {
+            $(this).removeClass("is-invalid");
+          }
+        }); // loop through inputs with errors and show error msg
+
+        $.each(errors, function (fieldName, error) {
+          var field = $("#loginForm").find('[name="' + fieldName + '"]');
+          field.addClass("is-invalid");
+          var immediateSibling = field.next();
+
+          if (immediateSibling.hasClass('invalid-feedback')) {
+            immediateSibling.text(error[0]);
+          } else {
+            field.after("<div class='invalid-feedback'>" + error + "</div>");
+          }
+        });
+      }
+    });
+  }); // Make datatables rows clickable links
+
+  $(".clickable-row").on('click', function () {
+    var url = $(this).data('url');
+    window.location.href = url;
+  }); // Apply active class on clicked item and remove from others
+
+  $('.list-group-item').on('click', function () {
+    $(this).addClass('active').siblings().removeClass('active');
+  }); // Company Dashboard - Pass job data to edit job modal for display
+
+  $('.edit-job').on('click', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+
+    var job = $(this).data('job'); // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+
+    $('#editJobForm').attr('action', '/jobs/' + job.id);
+    $('#jobTitle').val(job.title);
+    $('#jobDescription').val(job.description);
+    $('#jobRequirements').val(job.requirements);
+  });
+}); // Multiple-step graduate register form
+
 $(function () {
   var sections = $('.form-section');
 

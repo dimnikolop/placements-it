@@ -1,79 +1,83 @@
-$('#loginModal').on('shown.bs.modal', function () {
-    $('#inputUsername').trigger('focus')
-})
+$(function () {
 
-// Ajax Login Authentication
-$("#loginForm").on('submit', function (event) {
-    event.preventDefault();
-    var form_data = $(this).serialize();
-    $.ajax({
-        url: "/login",
-        method: "POST",
-        data: form_data,
-        dataType: "JSON",
-        success: function (response) {
-            if (response.error) {
-                // Clean error message templates from previous errors
-                $(".invalid-feedback").text('');
-                $("#inputUsername").removeClass("is-invalid");
-                $("#inputPassword").addClass("is-invalid");
-                $("#inputPassword").next().text(response.error);
-            }
-            else {
-                // console.log(response.success);
-                window.location.href = response.url;
-            }
-        },
-        error: function (response) {
-            // console.log('Houston, we have a problem!');
-            const errors = response.responseJSON.errors;
+    // Username input focus on show login modal
+    $('#loginModal').on('shown.bs.modal', function () {
+        $('#inputUsername').trigger('focus')
+    })
 
-            // Clean error message templates from previous errors
-            $(".invalid-feedback").text('');
-            $("#loginForm input").each(function () {
-                if ($(this).hasClass("is-invalid")) { $(this).removeClass("is-invalid") }
-            });
-
-            // loop through inputs with errors and show error msg
-            $.each(errors, function (fieldName, error) {
-                let field = $("#loginForm").find('[name="' + fieldName + '"]');
-                field.addClass("is-invalid");
-                let immediateSibling = field.next();
-                if (immediateSibling.hasClass('invalid-feedback')) {
-                    immediateSibling.text(error[0]);
+    // Ajax Login Authentication
+    $("#loginForm").on('submit', function (event) {
+        event.preventDefault();
+        var form_data = $(this).serialize();
+        $.ajax({
+            url: "/login",
+            method: "POST",
+            data: form_data,
+            dataType: "JSON",
+            success: function (response) {
+                if (response.error) {
+                    // Clean error message templates from previous errors
+                    $(".invalid-feedback").text('');
+                    $("#inputUsername").removeClass("is-invalid");
+                    $("#inputPassword").addClass("is-invalid");
+                    $("#inputPassword").next().text(response.error);
                 }
                 else {
-                    field.after("<div class='invalid-feedback'>" + error + "</div>")
+                    window.location.href = response.url;
                 }
-            });
-        }
+            },
+            error: function (response) {
+                // console.log('Houston, we have a problem!');
+                const errors = response.responseJSON.errors;
+
+                // Clean error message templates from previous errors
+                $(".invalid-feedback").text('');
+                $("#loginForm input").each(function () {
+                    if ($(this).hasClass("is-invalid")) { $(this).removeClass("is-invalid") }
+                });
+
+                // loop through inputs with errors and show error msg
+                $.each(errors, function (fieldName, error) {
+                    let field = $("#loginForm").find('[name="' + fieldName + '"]');
+                    field.addClass("is-invalid");
+                    let immediateSibling = field.next();
+                    if (immediateSibling.hasClass('invalid-feedback')) {
+                        immediateSibling.text(error[0]);
+                    }
+                    else {
+                        field.after("<div class='invalid-feedback'>" + error + "</div>")
+                    }
+                });
+            }
+        });
     });
+
+    // Make datatables rows clickable links
+    $(".clickable-row").on('click', function() {
+        let url = $(this).data('url');
+        window.location.href = url;
+    });
+    
+    // Apply active class on clicked item and remove from others
+    $('.list-group-item').on('click', function() {
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+    
+    // Company Dashboard - Pass job data to edit job modal for display
+    $('.edit-job').on('click', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var job = $(this).data('job') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        $('#editJobForm').attr('action', '/jobs/' + job.id);
+        $('#jobTitle').val(job.title);
+        $('#jobDescription').val(job.description);
+        $('#jobRequirements').val(job.requirements);
+    });
+
 });
 
-$(".clickable-row").on('click', function() {
-    let url = $(this).data('url');
-    window.location.href = url;
-});
-
-$('.list-group-item').on('click', function() {
-    $(this).addClass('active').siblings().removeClass('active');
-});
-
-$('.edit-job').on('click', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var job = $(this).data('job') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#editJobForm').attr('action', '/jobs/' + job.id);
-    $('#jobTitle').val(job.title);
-    $('#jobDescription').val(job.description);
-    $('#jobRequirements').val(job.requirements);
-});
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-});
-
+// Multiple-step graduate register form
 $(function () {
     var sections = $('.form-section');
 
