@@ -30,10 +30,10 @@
                 </div>
                 <div class="card-body px-0 pt-4">
                     <h5 class="card-title heading-decorated_1">Σχετικά με την εταιρεία</h5>
-                    <p class="card-text mb-5">{!! nl2br(e($company->description)) !!}</p>
+                    <div class="card-text mb-5">{!! $company->description !!}</div>
                     @if (!empty($company->notes))
                         <h5 class="card-title heading-decorated_1">Επιπλέον Πληροφορίες</h5>
-                        <p class="card-text mb-5">{{ $company->notes }}</p>
+                        <div class="card-text mb-5">{!! $company->notes !!}</div>
                     @endif
                     @if ($jobs->isNotEmpty())
                         <h5 class="card-title heading-decorated_1 mb-3">Θέσεις Απασχόλησης</h5>
@@ -44,7 +44,7 @@
                                         <h5 class="mb-1">{{ $job->title }}</h5>
                                         <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>
                                     </div>
-                                    <p class="mb-1">{{ Str::words($job->description, 20, '...') }}</p>
+                                    <p class="mb-1">{!! Str::words($job->description, 20, '...') !!}</p>
                                 </a>
                             @endforeach
                         </div>

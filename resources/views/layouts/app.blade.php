@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+    <!-- ckEditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
+
 </head>
 <body class="d-flex flex-column min-vh-100">
     <header>

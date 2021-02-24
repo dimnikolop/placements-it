@@ -62,18 +62,15 @@ $(function () {
     $('.list-group-item').on('click', function() {
         $(this).addClass('active').siblings().removeClass('active');
     });
-    
-    // Company Dashboard - Pass job data to edit job modal for display
-    $('.edit-job').on('click', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var job = $(this).data('job') // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        $('#editJobForm').attr('action', '/jobs/' + job.id);
-        $('#jobTitle').val(job.title);
-        $('#jobDescription').val(job.description);
-        $('#jobRequirements').val(job.requirements);
-    });
+
+    // Make sure the modal does not steal the input focus (e.g. when editing a link).
+    // https://github.com/ckeditor/ckeditor5/issues/1147
+    $( '.modal' ).modal( {
+        focus: false,
+        
+        // Do not show modal when innitialized.
+        show: false
+    } );
 
 });
 

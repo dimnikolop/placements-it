@@ -379,13 +379,13 @@ sup {
 }
 
 a {
-  color: #0C6170;
+  color: #229bc3;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #05252b;
+  color: #176782;
   text-decoration: underline;
 }
 
@@ -3494,12 +3494,12 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: #0C6170;
+  color: #229bc3;
   text-decoration: none;
 }
 
 .btn-link:hover {
-  color: #05252b;
+  color: #176782;
   text-decoration: underline;
 }
 
@@ -5436,14 +5436,14 @@ input[type=button].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #0C6170;
+  color: #229bc3;
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
 
 .page-link:hover {
   z-index: 2;
-  color: #05252b;
+  color: #176782;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
@@ -17587,8 +17587,8 @@ form label:not(.custom-file-label):not(.custom-control-label) {
   border-bottom: 5px solid #247575;
 }
 
-.tab-content h5,
-.tab-content h6 {
+.tab-content h5:not(.formatted),
+.tab-content h6:not(.formatted) {
   color: #323b6b;
 }
 
@@ -17715,6 +17715,50 @@ form label:not(.custom-file-label):not(.custom-control-label) {
 #bodyContent span {
   font-size: 1rem;
   color: #7094db;
+}
+
+/*  ckEditor  */
+
+.ck-editor__editable {
+  min-height: 200px !important;
+}
+
+@media (max-width: 1199.98px) {
+  .ck-editor__editable {
+    min-height: 150px !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .ck-editor__editable {
+    min-height: 100px !important;
+  }
+}
+
+/*
+ * Configure the z-index of the editor UI, so when inside a Bootstrap
+ * modal, it will be rendered over the modal.
+ */
+
+body {
+  --ck-z-default: 100;
+  --ck-z-modal: calc( var(--ck-z-default) + 999 );
+}
+
+h4.formatted,
+h5.formatted {
+  font-weight: 400;
+  padding-top: 0.8rem;
+}
+
+h5.fancy {
+  font-weight: 300;
+  font-style: italic;
+  padding-top: 0.8rem;
+}
+
+h6.formatted {
+  padding-top: 0.8rem;
 }
 
 /*  Header - Navbar  */

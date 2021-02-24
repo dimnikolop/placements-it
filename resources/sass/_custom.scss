@@ -1,5 +1,6 @@
 /* Custom Styles */
 /* General */
+
 .section {
     padding: 5rem 0;
 }
@@ -20,7 +21,6 @@
 .job-card:hover {
     border-left-color: #37beb0;
 }
-
 
 /* --- Header --- */
 
@@ -306,8 +306,8 @@ form label:not(.custom-file-label):not(.custom-control-label) {
     border-bottom: 5px solid #247575;
 }
 
-.tab-content h5,
-.tab-content h6 {
+.tab-content h5:not(.formatted),
+.tab-content h6:not(.formatted) {
     color: #323b6b;
 }
 
@@ -434,4 +434,47 @@ form label:not(.custom-file-label):not(.custom-control-label) {
 #bodyContent span {
     font-size: 1rem;
     color: #7094db;
+}
+
+
+/*  ckEditor  */
+
+.ck-editor__editable {
+    min-height: 200px !important;
+}
+
+@media (max-width: 1199.98px) { 
+    .ck-editor__editable {
+        min-height: 150px !important;
+    }
+}
+
+@media (max-width: 767.98px) { 
+    .ck-editor__editable {
+        min-height: 100px !important;
+    }
+}
+
+/*
+ * Configure the z-index of the editor UI, so when inside a Bootstrap
+ * modal, it will be rendered over the modal.
+ */
+ body {
+    --ck-z-default: 100;
+    --ck-z-modal: calc( var(--ck-z-default) + 999 );
+}
+
+h4.formatted, h5.formatted {
+    font-weight: 400;
+    padding-top: 0.8rem;
+}
+
+h5.fancy {
+    font-weight: 300;
+    font-style: italic;
+    padding-top: 0.8rem;
+}
+
+h6.formatted {
+    padding-top: 0.8rem;
 }

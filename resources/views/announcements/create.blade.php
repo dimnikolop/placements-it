@@ -51,3 +51,58 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#inputContent' ), {
+            heading: {
+                options: [
+                    {   model: 'heading1',
+                        view: {
+                            name: 'h4',
+                            classes: 'formatted'
+                        },
+                        title: 'Heading 1',
+                        class: 'ck-heading_heading1'
+                    },
+                    {   model: 'heading2',
+                        view: {
+                            name: 'h5',
+                            classes: 'formatted'
+                        },
+                        title: 'Heading 2',
+                        class: 'ck-heading_heading2'
+                    },
+                    {   model: 'heading3',
+                        view: {
+                            name: 'h6',
+                            classes: 'formatted'
+                        },
+                        title: 'Heading 3',
+                        class: 'ck-heading_heading3'
+                    },
+                    {
+                        model: 'headingFancy',
+                        view: {
+                            name: 'h5',
+                            classes: 'fancy'
+                        },
+                        title: 'Heading 2 (fancy)',
+                        class: 'ck-heading_heading2_fancy',
+
+                        // It needs to be converted before the standard 'heading2'.
+                        converterPriority: 'high'
+                    }
+                ]
+            },
+            link: {
+                defaultProtocol: 'http://',
+                addTargetToExternalLinks: true
+            }
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+@endpush

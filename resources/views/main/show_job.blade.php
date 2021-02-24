@@ -14,9 +14,9 @@
                 </div>
                 <div class="card-body px-0">
                     <h5 class="card-title heading-decorated_1">Περιγραφή Θέσης</h5>
-                    <p class="card-text">{{ $job->description }}</p>
+                    <p class="card-text">{!! $job->description !!}</p>
                     <h5 class="card-title heading-decorated_1">Απαιτήσεις</h5>
-                    <p class="card-text">{{ $job->requirements }}</p>
+                    <p class="card-text">{!! $job->requirements !!}</p>
                 </div>
             </div>
         </div>

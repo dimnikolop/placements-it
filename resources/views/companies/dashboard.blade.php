@@ -47,12 +47,12 @@
                 @endif
                 <div class="col-md-12 mb-3">
                     <h6>Περιγραφή</h6>
-                    <div class="desc-box"><p>{!! nl2br(e($company->description)) !!}</p></div>
+                    <div class="desc-box"><p>{!! $company->description !!}</p></div>
                 </div>
                 @if (!empty($company->notes))
                     <div class="col-md-12">
                         <h6>Σημειώσεις &mdash; Σχόλια</h6>
-                        <div class="desc-box"><p>{!! nl2br(e($company->notes)) !!}</p></div>
+                        <div class="desc-box"><p>{!! $company->notes !!}</p></div>
                     </div>
                 @endif
             </div>
@@ -118,7 +118,7 @@
                                 <div class="small text-muted"><i class="far fa-clock"></i> Δημοσιεύτηκε {{ $job->created_at->diffForHumans() }}</div>
                                 <div class="mt-3 mt-sm-0">
                                     <!-- Button trigger edit job modal -->
-                                    <button type="button" class="btn btn-sm btn-outline-warning edit-job" data-toggle="modal" data-target="#editJobModal" data-job="{{ $job }}">
+                                    <button type="button" class="btn btn-sm btn-outline-info edit-job" data-toggle="modal" data-target="#editJobModal" data-job="{{ $job }}">
                                         <i class="fas fa-pencil-alt fa-sm"></i> Επεξεργασία
                                     </button>
                                     <!-- Button trigger delete modal -->
@@ -157,7 +157,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">Περιγραφή:<span class="required">*</span></label>
-                        <textarea class="form-control @if($errors->company->has('description')) is-invalid @endif" id="inputDescription" name="description" rows="5">{{ old('description') ?? $company->description }}</textarea>
+                        <textarea class="form-control editor @if($errors->company->has('description')) is-invalid @endif" id="inputDescription" name="description" rows="5">{{ old('description') ?? $company->description }}</textarea>
                         @if($errors->company->has('description'))
                             <div class="invalid-feedback">{{ $errors->company->first('description') }}</div>
                         @endif
@@ -227,7 +227,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputNotes">Σημειώσεις &mdash; Σχόλια:</label>
-                        <textarea class="form-control" id="inputNotes" name="notes" rows="5">{{ old('notes') ?? $company->notes }}</textarea>
+                        <textarea class="form-control editor" id="inputNotes" name="notes" rows="5">{{ old('notes') ?? $company->notes }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="inputFacebook">Facebook:</label>
@@ -252,8 +252,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+                    <button type="submit" class="btn btn-block btn-primary"><i class="fas fa-save"></i> Αποθήκευση</button>
                 </div>
             </form>
         </div>
@@ -282,22 +281,21 @@
                     </div>
                     <div class="form-group">
                         <label for="inputJobDescription">Περιγραφή:<span class="required">*</span></label>
-                        <textarea class="form-control @if($errors->job->has('description')) is-invalid @endif" id="inputJobDescription" name="description" rows="7">{{ old('description') }}</textarea>
+                        <textarea class="form-control editor @if($errors->job->has('description')) is-invalid @endif" id="inputJobDescription" name="description" rows="7">{{ old('description') }}</textarea>
                         @if ($errors->job->has('description'))
                             <div class="invalid-feedback">{{ $errors->job->first('description') }}</div>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="inputJobRequirements">Απαιτήσεις:<span class="required">*</span></label>
-                        <textarea class="form-control @if($errors->job->has('requirements')) is-invalid @endif" id="inputJobRequirements" name="requirements" rows="5">{{ old('requirements') }}</textarea>
+                        <textarea class="form-control editor @if($errors->job->has('requirements')) is-invalid @endif" id="inputJobRequirements" name="requirements" rows="5">{{ old('requirements') }}</textarea>
                         @if ($errors->job->has('requirements'))
                             <div class="invalid-feedback">{{ $errors->job->first('requirements') }}</div>
                         @endif
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-file-upload"></i> Προσθήκη</button>
+                    <button type="submit" class="btn btn-block btn-primary"><i class="fas fa-file-upload"></i> Προσθήκη</button>
                 </div>
             </form>
         </div>
@@ -327,22 +325,21 @@
                     </div>
                     <div class="form-group">
                         <label for="jobDescription">Περιγραφή:<span class="required">*</span></label>
-                        <textarea class="form-control @if($errors->edit_job->has('description')) is-invalid @endif" id="jobDescription" name="description" rows="7">{{ old('description') }}</textarea>
+                        <textarea class="form-control editor @if($errors->edit_job->has('description')) is-invalid @endif" id="jobDescription" name="description" rows="7">{{ old('description') }}</textarea>
                         @if ($errors->edit_job->has('description'))
                             <div class="invalid-feedback">{{ $errors->edit_job->first('description') }}</div>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="jobRequirements">Απαιτήσεις:<span class="required">*</span></label>
-                        <textarea class="form-control @if($errors->edit_job->has('requirements')) is-invalid @endif" id="jobRequirements" name="requirements" rows="5">{{ old('requirements') }}</textarea>
+                        <textarea class="form-control editor @if($errors->edit_job->has('requirements')) is-invalid @endif" id="jobRequirements" name="requirements" rows="5">{{ old('requirements') }}</textarea>
                         @if ($errors->edit_job->has('requirements'))
                             <div class="invalid-feedback">{{ $errors->edit_job->first('requirements') }}</div>
                         @endif
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+                    <button type="submit" class="btn btn-block btn-primary"><i class="fas fa-save"></i> Αποθήκευση</button>
                 </div>
             </form>
         </div>
@@ -374,3 +371,94 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        var editors = [];
+        
+        $(".editor").each(function (index, element) {
+            ClassicEditor
+                .create( element, {
+                    heading: {
+                        options: [
+                            {   model: 'heading1',
+                                view: {
+                                    name: 'h4',
+                                    classes: 'formatted'
+                                },
+                                title: 'Heading 1',
+                                class: 'ck-heading_heading1'
+                            },
+                            {   model: 'heading2',
+                                view: {
+                                    name: 'h5',
+                                    classes: 'formatted'
+                                },
+                                title: 'Heading 2',
+                                class: 'ck-heading_heading2'
+                            },
+                            {   model: 'heading3',
+                                view: {
+                                    name: 'h6',
+                                    classes: 'formatted'
+                                },
+                                title: 'Heading 3',
+                                class: 'ck-heading_heading3'
+                            },
+                            {
+                                model: 'headingFancy',
+                                view: {
+                                    name: 'h5',
+                                    classes: 'fancy'
+                                },
+                                title: 'Heading 2 (fancy)',
+                                class: 'ck-heading_heading2_fancy',
+
+                                // It needs to be converted before the standard 'heading2'.
+                                converterPriority: 'high'
+                            }
+                        ]
+                    },
+                    link: {
+                        defaultProtocol: 'http://',
+                        addTargetToExternalLinks: true
+                    }
+                } )
+                .then( editor => {
+                    editors[index] = editor;
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+        });
+
+        // Company Dashboard - Pass job data to edit job modal for display
+        $('.edit-job').on('click', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var job = $(this).data('job') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            $('#editJobForm').attr('action', '/jobs/' + job.id);
+            $('#jobTitle').val(job.title);
+            editors[4].setData(job.description);
+            editors[5].setData(job.requirements);
+        });
+    </script>
+    @if ($errors->company->any())
+        <script>
+            $('#editCompanyModal').modal('show');
+        </script>
+    @endif
+
+    @if ($errors->job->any())
+        <script>
+            $('#addJobModal').modal('show');
+        </script>
+    @endif
+
+    @if ($errors->edit_job->any())
+        <script>
+            $('#editJobModal').modal('show');
+        </script>
+    @endif
+@endpush

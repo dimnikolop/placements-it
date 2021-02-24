@@ -169,7 +169,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword">Κωδικός Πρόσβασης:<span class="required">*</span></label>
-                        <input class="form-control @error('password') is-invalid @enderror" type="text" id="inputPassword" name="password" value="{{ old('password') }}"/>
+                        <input class="form-control @error('password') is-invalid @enderror" type="password" id="inputPassword" name="password" value="{{ old('password') }}"/>
                         @error('password')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -180,7 +180,7 @@
                 <div class="row mb-5">
                     <div class="form-group col-md-6">
                         <label for="inputPasswordConfirmation">Επιβεβαίωση:<span class="required">*</span></label>
-                        <input class="form-control @error('password_confirmation') is-invalid @enderror" type="text" id="inputPasswordConfirmation" name="password_confirmation" value="{{ old('password_confirmation') }}"/>
+                        <input class="form-control @error('password_confirmation') is-invalid @enderror" type="password" id="inputPasswordConfirmation" name="password_confirmation" value="{{ old('password_confirmation') }}"/>
                         @error('password_confirmation')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -196,3 +196,112 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#inputDescription' ), {
+            heading: {
+                options: [
+                    {
+                        model: 'heading1',
+                        view: {
+                            name: 'h4',
+                            classes: 'formatted'
+                        },
+                        title: 'Heading 1',
+                        class: 'ck-heading_heading1'
+                    },
+                    {
+                        model: 'heading2',
+                        view: {
+                            name: 'h5',
+                            classes: 'formatted'
+                        },
+                        title: 'Heading 2',
+                        class: 'ck-heading_heading2'
+                    },
+                    {
+                        model: 'heading3',
+                        view: {
+                            name: 'h6',
+                            classes: 'formatted'
+                        },
+                        title: 'Heading 3',
+                        class: 'ck-heading_heading3'
+                    },
+                    {
+                        model: 'headingFancy',
+                        view: {
+                            name: 'h5',
+                            classes: 'fancy'
+                        },
+                        title: 'Heading 2 (fancy)',
+                        class: 'ck-heading_heading2_fancy',
+
+                        // It needs to be converted before the standard 'heading2'.
+                        converterPriority: 'high'
+                    }
+                ]
+            },
+            link: {
+                defaultProtocol: 'http://',
+                addTargetToExternalLinks: true
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    ClassicEditor
+        .create( document.querySelector( '#inputNotes' ), {
+            heading: {
+                options: [
+                    {   model: 'heading1',
+                        view: {
+                            name: 'h4',
+                            classes: 'formatted'
+                        },
+                        title: 'Heading 1',
+                        class: 'ck-heading_heading1'
+                    },
+                    {   model: 'heading2',
+                        view: {
+                            name: 'h5',
+                            classes: 'formatted'
+                        },
+                        title: 'Heading 2',
+                        class: 'ck-heading_heading2'
+                    },
+                    {   model: 'heading3',
+                        view: {
+                            name: 'h6',
+                            classes: 'formatted'
+                        },
+                        title: 'Heading 3',
+                        class: 'ck-heading_heading3'
+                    },
+                    {
+                        model: 'headingFancy',
+                        view: {
+                            name: 'h5',
+                            classes: 'fancy'
+                        },
+                        title: 'Heading 2 (fancy)',
+                        class: 'ck-heading_heading2_fancy',
+
+                        // It needs to be converted before the standard 'heading2'.
+                        converterPriority: 'high'
+                    }
+                ]
+            },
+            link: {
+                defaultProtocol: 'http://',
+                addTargetToExternalLinks: true
+            }
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+@endpush
