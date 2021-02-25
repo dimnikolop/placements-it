@@ -17,12 +17,15 @@
                         <tbody>
                             @foreach ($announcements as $announcement)
                                 <tr class="clickable-row" data-url="{{ route('announcement.show', $announcement->id) }}">
-                                    <td>{{ $announcement->created_at->format('d/m/Y H:i') }}</td>
+                                    <td>{{ $announcement->updated_at->format('d/m/Y H:i') }}</td>
                                     <td>{{ $announcement->title }}</td>
                                     <td>
                                         @if (Storage::disk('public')->exists($announcement->attachment))
-                                            <a href="{{ Storage::url($announcement->attachment) }}" target="_blank">Προβολή</a>
-                                            <a href="{{ route('announcements.download.file', $announcement->id) }}">Download</a>
+                                            @if(Str::of($announcement->attachment)->contains('zip') || Str::of($announcement->attachment)->contains('rar'))
+                                                <a href="{{ route('announcements.download.file', $announcement->id) }}">Download</a>
+                                            @else
+                                                <a href="{{ Storage::url($announcement->attachment) }}" target="_blank">Προβολή</a>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>

@@ -94297,7 +94297,9 @@ $(function () {
     //responsive: true
     "order": [[0, 'desc']]
   });
-  $('#companiesTable').DataTable({//responsive: true
+  $('#companiesTable').DataTable({
+    //responsive: true
+    "order": []
   }); // On file input display the name of the selected file
 
   $(".custom-file-input").on("change", function () {
@@ -94371,7 +94373,11 @@ $(function () {
     });
   }); // Make datatables rows clickable links
 
-  $(".clickable-row").on('click', function () {
+  $(".clickable-row").on('click', function (e) {
+    if ($(e.target).closest('td').is(':last-child')) {
+      return;
+    }
+
     var url = $(this).data('url');
     window.location.href = url;
   }); // Apply active class on clicked item and remove from others

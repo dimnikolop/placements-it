@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Str;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -173,6 +174,6 @@ class AnnouncementController extends Controller
     {
         $announcement = Announcement::find($id);
 
-        return Storage::disk('public')->download($announcement->attachment);
+        return Storage::disk('public')->download($announcement->attachment, Str::of($announcement->attachment)->after('_'));
     }
 }

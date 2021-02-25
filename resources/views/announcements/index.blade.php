@@ -17,7 +17,7 @@
     <div class="card custom-admin-card">
         <div class="card-body">
             @if (session('success'))
-                <div class="alert alert-success w-50 mx-auto text-center" role="alert">
+                <div class="alert alert-success w-75 mx-auto text-center" role="alert">
                     <i class="fas fa-check-circle"></i> <strong>Success!</strong> {{ session('success') }}
                 </div>
             @endif
@@ -35,7 +35,7 @@
                         <tbody>
                             @foreach ($announcements as $announcement)
                                 <tr>
-                                    <td>{{ $announcement->created_at->format('d/m/Y H:i') }}</td>
+                                    <td>{{ $announcement->updated_at->format('d/m/Y H:i') }}</td>
                                     <td><a class="text-primary" href="{{ route('announcement.show', $announcement->id) }}" target="_blank">{{ $announcement->title }}</a></td>
                                     <td>
                                         @if (Storage::disk('public')->exists($announcement->attachment))

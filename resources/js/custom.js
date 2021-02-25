@@ -53,7 +53,10 @@ $(function () {
     });
 
     // Make datatables rows clickable links
-    $(".clickable-row").on('click', function() {
+    $(".clickable-row").on('click', function(e) {
+        if ($(e.target).closest('td').is(':last-child')) {
+            return;
+        }
         let url = $(this).data('url');
         window.location.href = url;
     });
