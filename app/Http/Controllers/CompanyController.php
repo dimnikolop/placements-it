@@ -23,7 +23,7 @@ class CompanyController extends Controller
             ]);
         }
         else {
-            $companies = Company::where('status', 'approved')->get();
+            $companies = Company::where('status', 'approved')->orderBy('name')->get();
             return view('companies.index', [
                 'companies' => $companies
             ]);

@@ -60,6 +60,7 @@ $(function () {
 
     $('#companiesTable').DataTable({
         //responsive: true
+        "order": []
     });
 
     // On file input display the name of the selected file
