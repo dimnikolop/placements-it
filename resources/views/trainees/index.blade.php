@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Ασκούμενοι Φοιτητές')
+
 @section('content')
 <div class="container-fluid">
     <div class="page-header">

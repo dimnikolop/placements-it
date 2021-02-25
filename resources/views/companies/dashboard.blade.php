@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Προφίλ')
+
 @section('content')
 <div class="container">
     <ul class="nav nav-pills nav-fill bg-dark" id="dashboard-tab" role="tablist">

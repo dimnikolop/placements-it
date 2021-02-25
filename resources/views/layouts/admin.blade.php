@@ -5,7 +5,7 @@
     <!-- meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin Dashboard</title>
+    <title>@yield('title') | Placements Admin Dashboard</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -83,7 +83,7 @@
                     <a class="nav-link {{ request()->path() === 'announcements' ? 'active' : ''}}" href="{{ route('announcements.index') }}"><i class="fas fa-list-ul fa-fw"></i> Ανακοινώσεις</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#collapseEvaluation" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseEvaluation"><i class="far fa-chart-bar fa-fw"></i> Αποτελέσματα Αξιολόγησης</a>
+                    <a class="nav-link" href="#collapseEvaluation" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseEvaluation"><i class="far fa-chart-bar fa-fw"></i> Αξιολόγηση</a>
                     <div class="collapse py-1" id="collapseEvaluation">
                         <a class="nav-link offset-1 {{ request()->path() === 'stats/trainee' ? 'active' : ''}}" href="{{ route('statistics.trainee') }}"><i class="fas fa-angle-right"></i> Ασκούμενοι</a>
                         <a class="nav-link offset-1 {{ request()->path() === 'stats/graduate' ? 'active' : ''}}" href="{{ route('statistics.graduate') }}"><i class="fas fa-angle-right"></i> Απόφοιτοι</a>

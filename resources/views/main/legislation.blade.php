@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Νομοθεσία')
+
 @section('content')
 <div id="legislation" class="container">
     <div class="card custom-main-card">

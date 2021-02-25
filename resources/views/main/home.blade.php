@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Αρχική')
+
 @section('banner')
 <div id="mainCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000">
     <ol class="carousel-indicators">

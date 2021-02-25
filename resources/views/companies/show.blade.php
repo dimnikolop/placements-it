@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $company->name)
+
 @section('content')
 <div id="companyDisplay" class="container">
     <div class="row">

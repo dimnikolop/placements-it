@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Έντυπα')
+
 @section('content')
 <div id="documents" class="container">
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">

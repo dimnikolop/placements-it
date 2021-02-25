@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Επεξεργασία Ανακοίνωσης')
+
 @section('content')
 <div class="container">
     <div class="page-header">

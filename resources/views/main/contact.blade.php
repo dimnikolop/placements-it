@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Επικοινωνία')
+
 @section('content')
 <div class="container">
     <div class="row row-cols-1 row-cols-lg-2">

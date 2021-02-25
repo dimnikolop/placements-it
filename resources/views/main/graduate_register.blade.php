@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Εγγραφή Απόφοιτου')
+
 @section('content')
 <div class="container">
     <div id="" class="card custom-main-card">

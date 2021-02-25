@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Πρακτική Άσκηση ΑΤΕΙΘ Τμ. Πληροφορικής</title>
+    <title>@yield('title') | Πρακτική Άσκηση ΑΤΕΙΘ Τμ. Πληροφορικής</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -52,10 +52,10 @@
         </nav>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand d-lg-none" href="{{ route('home') }}">
+                <a class="navbar-brand d-lg-none" href="https://www.it.teithe.gr">
                     <img src="{{ asset('img/logo.png') }}" width="192" height="80" alt="" loading="lazy">
                 </a>
-                <a class="navbar-brand d-none d-lg-block" href="{{ route('home') }}">
+                <a class="navbar-brand d-none d-lg-block" href="https://www.it.teithe.gr">
                     <img src="{{ asset('img/logo.png') }}" alt="" loading="lazy">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,8 +74,6 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item {{ request()->path() === 'requirements' ? 'active' : ''}}" href="{{ route('requirements') }}">Προϋποθέσεις</a>
                                 <a class="dropdown-item {{ request()->path() === 'guides' ? 'active' : ''}}" href="{{ route('guides') }}">Οδηγοί Πρακτικής Άσκησης</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
                         <li class="nav-item {{ request()->path() === 'companies' ? 'active' : ''}}">
