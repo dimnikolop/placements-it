@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Graduate;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\GraduateQuestionnaire;
 use App\Http\Requests\StoreGraduateRequest;
 
@@ -54,47 +55,50 @@ class GraduateController extends Controller
         
         $request->diploma = implode(', ', $request->diploma);
 
-        // Get coordinates according to full address
-        $addr = $request->work_address . " " . $request->city . " " . $request->postal_code;
-        $output = Graduate::getCoordinates($addr);
-        if ($output === false) {
-            $output['lat'] = $output['lng'] = 0;
-        }
-        
-        $graduate = Graduate::create([
-            'surname' => $request->surname,
-            'name' => $request->name,
-            'father_name' => $request->father_name,
-            'graduation_year' => $request->graduation_year,
-            'diploma' => $request->diploma,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'website' => $request->website,
-            'job' => $request->job,
-            'employer' => $request->employer,
-            'work_address' => $request->work_address,
-            'postal_code' => $request->postal_code,
-            'city' => $request->city,
-            'notes' => $request->notes,
-            'map' => $request->input('map', '0'),
-            'lat' => $output['lat'],
-            'lng' => $output['lng']
-        ]);
-
-        if ($request->has('question2')) {
-            $questionnaire['question2'] = implode(', ', $questionnaire['question2']);
-        }
-        if ($request->has('question8c')) {
-            $questionnaire['question8c'] = implode(', ', $questionnaire['question8c']);
-        }
-        if ($request->has('question25')) {
-            $questionnaire['question25'] = implode(', ', $questionnaire['question25']);
-        }
-        
-        if (!empty(array_filter($questionnaire))) {
-            $questionnaire['graduate_id'] = $graduate->id;
-            GraduateQuestionnaire::create($questionnaire);
-        }
+        DB::transaction(function () use ($request, $questionnaire)
+        {
+            // Get coordinates according to full address
+            $addr = $request->work_address . " " . $request->city . " " . $request->postal_code;
+            $output = Graduate::getCoordinates($addr);
+            if ($output === false) {
+                $output['lat'] = $output['lng'] = 0;
+            }
+            
+            $graduate = Graduate::create([
+                'surname' => $request->surname,
+                'name' => $request->name,
+                'father_name' => $request->father_name,
+                'graduation_year' => $request->graduation_year,
+                'diploma' => $request->diploma,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'website' => $request->website,
+                'job' => $request->job,
+                'employer' => $request->employer,
+                'work_address' => $request->work_address,
+                'postal_code' => $request->postal_code,
+                'city' => $request->city,
+                'notes' => $request->notes,
+                'map' => $request->input('map', '0'),
+                'lat' => $output['lat'],
+                'lng' => $output['lng']
+            ]);
+    
+            if ($request->has('question2')) {
+                $questionnaire['question2'] = implode(', ', $questionnaire['question2']);
+            }
+            if ($request->has('question8c')) {
+                $questionnaire['question8c'] = implode(', ', $questionnaire['question8c']);
+            }
+            if ($request->has('question25')) {
+                $questionnaire['question25'] = implode(', ', $questionnaire['question25']);
+            }
+            
+            if (!empty(array_filter($questionnaire))) {
+                $questionnaire['graduate_id'] = $graduate->id;
+                GraduateQuestionnaire::create($questionnaire);
+            }
+        });
 
         return redirect()->route('graduates.create')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
     }

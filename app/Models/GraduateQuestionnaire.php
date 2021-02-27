@@ -15,4 +15,12 @@ class GraduateQuestionnaire extends Model
      * @var array
      */
     protected $guarded = [];
+
+    /**
+     * Get the graduate that owns the questionnaire.
+     */
+    public function graduate()
+    {
+        return $this->belongsTo('App\Models\Graduate');
+    }
 }

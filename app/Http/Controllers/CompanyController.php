@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class CompanyController extends Controller
@@ -68,29 +69,32 @@ class CompanyController extends Controller
             'linkedin' => 'nullable|url'
         ]);
 
-        $user = User::create([
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'role' => 'company',
-        ]);
+        DB::transaction(function () use ($request)
+        {
+            $user = User::create([
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+                'role' => 'company',
+            ]);
 
-        $company = Company::create([
-            'name' => $request->name,
-            'user_id' => $user->id,
-            'description' => $request->description,
-            'sector' => $request->sector,
-            'address' => $request->address,
-            'zip_code' => $request->zip_code,
-            'location' => $request->location,
-            'website' => $request->website,
-            'contact_person' => $request->contact_person,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'notes' => $request->notes,
-            'facebook' => $request->facebook,
-            'twitter' => $request->twitter,
-            'linkedin' => $request->linkedin
-        ]);
+            $company = Company::create([
+                'name' => $request->name,
+                'user_id' => $user->id,
+                'description' => $request->description,
+                'sector' => $request->sector,
+                'address' => $request->address,
+                'zip_code' => $request->zip_code,
+                'location' => $request->location,
+                'website' => $request->website,
+                'contact_person' => $request->contact_person,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'notes' => $request->notes,
+                'facebook' => $request->facebook,
+                'twitter' => $request->twitter,
+                'linkedin' => $request->linkedin
+            ]);
+        });
 
         return redirect()->route('company.register')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
     }
@@ -165,7 +169,6 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        $company->delete();
         $company->user->delete();
 
         if (auth()->user()->role === 'admin') {

@@ -44,6 +44,14 @@ class Graduate extends Model
     ];
 
     /**
+     * Get the questionnaire associated with the graduate.
+     */
+    public function graduateQuestionnaire()
+    {
+        return $this->hasOne('App\Models\GraduateQuestionnaire');
+    }
+
+    /**
      * Get coordinates (lat,lng) to use on google map.
      * 
      * @param  string $address
@@ -52,9 +60,9 @@ class Graduate extends Model
     public static function getCoordinates($address) {
         $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
         
-		$apiKey = 'API_KEY';
+		$apiKey = '';
 		
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='.$address.'&key='.$apiKey;
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key='.$apiKey;
 		
 		$ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -63,18 +71,19 @@ class Graduate extends Model
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch, CURLOPT_FAILONERROR, true);
         $response = curl_exec($ch);
+        $response = json_decode($response, true);
         curl_close($ch);
 
-        if ($response === false) return false;
-
-        $response = json_decode($response);
-        $lat = $response->results[0]->geometry->location->lat;
-        $lng = $response->results[0]->geometry->location->lng;
- 
-        return [
-            'lat' => $lat,
-            'lng' => $lng
-        ];
- 
+        if ($response['status'] === "OK") {
+            $lat = $response['results'][0]['geometry']['location']['lat'];
+            $lng = $response['results'][0]['geometry']['location']['lng'];
+    
+            return [
+                'lat' => $lat,
+                'lng' => $lng
+            ];
+        }
+        
+        return false;
     }
 }
