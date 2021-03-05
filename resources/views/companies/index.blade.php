@@ -23,7 +23,7 @@
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->sector }}</td>
                                     <td>{{ $company->location }}</td>
-                                    <td><a href="{{ route('companies.show', $company->id) }}">Προβολή</a></td>
+                                    <td><a href="{{ route('companies.show', $company->slug) }}">Προβολή</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

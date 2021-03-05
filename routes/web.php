@@ -44,11 +44,11 @@ Route::post('/questionnaires/professor', [QuestionnairesController::class, 'prof
 
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/register/company', [CompanyController::class, 'create'])->name('companies.create');
-Route::post('/register/company', [CompanyController::class, 'store'])->name('company.register');
+Route::post('/register/company', [CompanyController::class, 'store'])->name('companies.register');
 Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
-Route::patch('/company/{company}', [CompanyController::class, 'update'])->name('company.update')->middleware('auth');
-Route::delete('/company/{company}', [CompanyController::class, 'destroy'])->name('company.destroy')->middleware('auth');
-Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('auth');
+Route::patch('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update')->middleware('auth');
+Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy')->middleware('auth');
+Route::get('/dashboard/{company}', [CompanyController::class, 'dashboard'])->name('companies.dashboard')->middleware('auth');
 
 Route::get('/companies/{company}/jobs', [JobController::class, 'index'])->name('companies.jobs.index')->middleware('auth');
 Route::post('/companies/{company}/jobs', [JobController::class, 'store'])->name('companies.jobs.store')->middleware('auth');

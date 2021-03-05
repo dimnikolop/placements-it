@@ -98,7 +98,7 @@
                     <i class="fas fa-pencil-alt fa-sm"></i> Επεξεργασία
                 </button>
                 <!-- Button trigger delete modal -->
-                <button type="button" class="btn btn-sm btn-outline-danger ml-3 deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('company.destroy', $company) }}">
+                <button type="button" class="btn btn-sm btn-outline-danger ml-3 deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('companies.destroy', $company) }}">
                     <i class="far fa-trash-alt fa-sm"></i> Διαγραφή
                 </button>
             </div>
@@ -148,7 +148,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="companyEditForm" action="{{ route('company.update', $company->id) }}" method="post">
+            <form id="companyEditForm" action="{{ route('companies.update', $company->id) }}" method="post">
                 <div class="modal-body">
                     @csrf
                     @method('PATCH')

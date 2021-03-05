@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Company;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -78,8 +79,9 @@ class CompanyController extends Controller
             ]);
 
             $company = Company::create([
-                'name' => $request->name,
                 'user_id' => $user->id,
+                'name' => $request->name,
+                'slug' => Str::slug($request->name, '-'),
                 'description' => $request->description,
                 'sector' => $request->sector,
                 'address' => $request->address,
@@ -96,17 +98,18 @@ class CompanyController extends Controller
             ]);
         });
 
-        return redirect()->route('company.register')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
+        return redirect()->route('companies.register')->with('success', 'Η εγγραφή ολοκληρώθηκε επιτυχώς. Σας ευχαριστούμε για τον χρόνο που διαθέσατε!');
     }
 
     /**
      * Display the specified company and the jobs that offer.
      *
-     * @param  \App\Models\Company  $company
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company)
+    public function show($slug)
     {
+        $company = Company::where('slug', $slug)->firstOrFail();
         $jobs = $company->jobs;
         return view('companies.show', compact('company', 'jobs'));
     }
@@ -157,7 +160,7 @@ class CompanyController extends Controller
             
             $company->update($validatedData);
 
-            return redirect()->route('company.dashboard')->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
+            return redirect()->route('companies.dashboard', auth()->user()->company->slug)->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
         }  
     }
 

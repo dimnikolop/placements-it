@@ -45,23 +45,23 @@
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->sector }}</td>
                                     <td>{{ $company->location }}</td>
-                                    <td><a href="{{ route('companies.show', $company->id) }}" target="_blank">Προβολή</a></td>
+                                    <td><a href="{{ route('companies.show', $company->slug) }}" target="_blank">Προβολή</a></td>
                                     <td>
                                         @if ($company->status == 'pending')
                                             <div class="d-flex justify-content-between justify-content-lg-around">
-                                                <form action="{{ route('company.update', $company->id) }}" method="post">
+                                                <form action="{{ route('companies.update', $company->id) }}" method="post">
                                                     @csrf
                                                     @method('PATCH')
                                                     <button type="submit" class="btn btn-sm btn-outline-success" name="status" value="approved">
                                                         <i class="fas fa-check fa-fw"></i> Accept
                                                     </button>
                                                 </form>
-                                                <button type="button" class="btn btn-sm btn-outline-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('company.destroy', $company) }}">
+                                                <button type="button" class="btn btn-sm btn-outline-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('companies.destroy', $company) }}">
                                                     <i class="fas fa-times fa-fw"></i> Reject
                                                 </button>
                                             </div>
                                         @else
-                                            <button type="button" class="btn btn-sm btn-outline-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('company.destroy', $company) }}">
+                                            <button type="button" class="btn btn-sm btn-outline-danger deleteBtn" data-toggle="modal" data-target="#deleteModal" data-url="{{ route('companies.destroy', $company) }}">
                                                 <i class="fas fa-times fa-fw"></i> Delete
                                             </button>
                                         @endif
