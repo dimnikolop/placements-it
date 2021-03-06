@@ -9,11 +9,21 @@ use App\Models\GraduateQuestionnaire;
 
 class StatisticsController extends Controller
 {
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware(['auth', 'admin']);
     }
 
+    /**
+     * Display a listing of charts from trainee questionnaires results.
+     *
+     * @return \Illuminate\View\View
+     */
     public function indexTrainee()
     {
         $question4 = TraineeQuestionnaire::select(DB::raw('question4, COUNT(*) as count_answers'))->groupBy('question4')->get();
@@ -63,6 +73,11 @@ class StatisticsController extends Controller
         return view('statistics.trainee', ['chart_data' => $chart_data]);
     }
 
+    /**
+     * Display a listing of charts from graduate questionnaires results.
+     *
+     * @return \Illuminate\View\View
+     */
     public function indexGraduate()
     {
         $question2 = GraduateQuestionnaire::select('question2')->get();

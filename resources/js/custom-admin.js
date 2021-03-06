@@ -55,7 +55,7 @@ $(function () {
 
     $('#announcementsTable').DataTable({
         //responsive: true
-        "order": [[0, 'desc']]
+        "order": []
     });
 
     $('#companiesTable').DataTable({

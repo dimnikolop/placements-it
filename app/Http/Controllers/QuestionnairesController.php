@@ -158,7 +158,7 @@ class QuestionnairesController extends Controller
         // Validate the request...
         $validatedData = $request->validate([
             'trainee' => 'required',
-            'am' => 'required|digits_between:6,7|unique:professor_questionnaires',
+            'am' => 'required|digits_between:5,7|unique:professor_questionnaires',
             'company' => 'required',
             'supervisor' => 'required',
             'start_date' => 'required|date_format:"d/m/Y"|after:01/01/2010|before:31/12/2049',

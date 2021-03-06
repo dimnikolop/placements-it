@@ -62,7 +62,7 @@ class CompanyController extends Controller
             'contact_person' => 'required',
             'phone' => 'required',
             'email' => 'required|email|unique:companies',
-            'username' => 'required|unique:users',
+            'username' => 'required|alpha_num|max:50|unique:users',
             'password' => 'required|min:8|max:20|confirmed',
             'password_confirmation' => 'required_with:password',
             'facebook' => 'nullable|url',
@@ -160,7 +160,7 @@ class CompanyController extends Controller
             
             $company->update($validatedData);
 
-            return redirect()->route('companies.dashboard', auth()->user()->company->slug)->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
+            return redirect()->route('companies.dashboard', auth()->user()->username)->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
         }  
     }
 

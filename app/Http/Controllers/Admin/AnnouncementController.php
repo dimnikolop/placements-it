@@ -17,7 +17,7 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::all();
+        $announcements = Announcement::orderBy('updated_at', 'desc')->get();
 
         if (auth()->check() && auth()->user()->role === 'admin') {
             return view('announcements.index', [

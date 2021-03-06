@@ -27,10 +27,10 @@
                 </div>
     
                 <div class="form-group row align-items-center">
-                    <label class="col-md-4 col-lg-3 col-form-label text-md-right" for="studentName">Όνομα Ασκούμενου Φοιτητή :<span class="required">*</span></label>
+                    <label class="col-md-4 col-lg-3 col-form-label text-md-right" for="traineeName">Όνομα Ασκούμενου Φοιτητή :<span class="required">*</span></label>
                     <div class="col-md-7 col-lg-8">
-                        <input class="form-control @error('student') is-invalid @enderror" type="text" id="studentName" name="student" value="{{ old('student') }}"/>
-                        @error('student')
+                        <input class="form-control @error('trainee') is-invalid @enderror" type="text" id="traineeName" name="trainee" value="{{ old('trainee') }}"/>
+                        @error('trainee')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

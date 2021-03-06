@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 class JobController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of all jobs.
      *
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
     public function index(Company $company)
     {
-        return view('jobs.index', compact($company->jobs));
+        return view('jobs.index', ['jobs' => $company->jobs]);
     }
 
     /**
@@ -52,18 +52,20 @@ class JobController extends Controller
             'requirements' => $request->requirements
         ]);
 
-        return redirect()->route('company.dashboard')->with('success', 'H νέα θέση απασχόλησης δημιουργήθηκε επιτυχώς.');
+        return redirect()->route('companies.dashboard', auth()->user()->username)->with('success', 'H νέα θέση απασχόλησης δημιουργήθηκε επιτυχώς.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Company  $company
+     * @param  string  $slug
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(Company $company, Job $job)
+    public function show($slug, Job $job)
     {
+        $company = Company::where('slug', $slug)->firstOrFail();
+
         return view('main.show_job', compact('company', 'job'));
     }
 
@@ -97,7 +99,7 @@ class JobController extends Controller
 
         $job->update($validatedData);
 
-        return redirect()->route('company.dashboard')->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς.');
+        return redirect()->route('companies.dashboard', auth()->user()->username)->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς.');
     }
 
     /**
@@ -110,6 +112,6 @@ class JobController extends Controller
     public function destroy(Company $company, Job $job)
     {
         $job->delete();
-        return redirect()->route('company.dashboard')->with('success', 'Job with title: ' .$job->title. ' has been deleted successfully.');
+        return redirect()->route('companies.dashboard', auth()->user()->username)->with('success', 'H θέση απασχόλησης με τίτλο ' .$job->title. ' διαγράφηκε επιτυχώς.');
     }
 }

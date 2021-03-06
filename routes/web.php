@@ -48,7 +48,7 @@ Route::post('/register/company', [CompanyController::class, 'store'])->name('com
 Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
 Route::patch('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update')->middleware('auth');
 Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy')->middleware('auth');
-Route::get('/dashboard/{company}', [CompanyController::class, 'dashboard'])->name('companies.dashboard')->middleware('auth');
+Route::get('/dashboard/{user}', [CompanyController::class, 'dashboard'])->name('companies.dashboard')->middleware('auth');
 
 Route::get('/companies/{company}/jobs', [JobController::class, 'index'])->name('companies.jobs.index')->middleware('auth');
 Route::post('/companies/{company}/jobs', [JobController::class, 'store'])->name('companies.jobs.store')->middleware('auth');
@@ -73,12 +73,12 @@ Route::patch('/admin/announcement/{id}', [AnnouncementController::class, 'update
 Route::delete('/admin/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy')->middleware(['auth','admin']);
 Route::get('/announcements/download/file/{id}', [AnnouncementController::class, 'downloadFile'])->name('announcements.download.file');
 
-Route::get('/trainees', [TraineeController::class, 'index'])->name('trainees.index')->middleware(['auth','admin']);
-Route::get('/admin/trainee/create', [TraineeController::class, 'create'])->name('trainee.create')->middleware(['auth','admin']);
-Route::post('/admin/trainees', [TraineeController::class, 'store'])->name('trainee.store')->middleware(['auth','admin']);
-Route::get('/admin/trainee/{trainee}/edit', [TraineeController::class, 'edit'])->name('trainee.edit')->middleware(['auth','admin']);
-Route::patch('/admin/trainee/{trainee}', [TraineeController::class, 'update'])->name('trainee.update')->middleware(['auth','admin']);
-Route::delete('/admin/trainee/{trainee}', [TraineeController::class, 'destroy'])->name('trainee.destroy')->middleware(['auth','admin']);
+Route::get('/trainees', [TraineeController::class, 'index'])->name('trainees.index');
+Route::get('/admin/trainee/create', [TraineeController::class, 'create'])->name('trainee.create');
+Route::post('/admin/trainees', [TraineeController::class, 'store'])->name('trainee.store');
+Route::get('/admin/trainee/{trainee}/edit', [TraineeController::class, 'edit'])->name('trainee.edit');
+Route::patch('/admin/trainee/{trainee}', [TraineeController::class, 'update'])->name('trainee.update');
+Route::delete('/admin/trainee/{trainee}', [TraineeController::class, 'destroy'])->name('trainee.destroy');
 
 Route::get('/stats/trainee', [StatisticsController::class, 'indexTrainee'])->name('statistics.trainee');
 Route::get('/stats/graduate', [StatisticsController::class, 'indexGraduate'])->name('statistics.graduate');

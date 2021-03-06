@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 class TraineeController extends Controller
 {
     /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'admin']);
+    }
+
+    /**
      * Display a listing of all trainees students.
      *
      * @return \Illuminate\Http\Response

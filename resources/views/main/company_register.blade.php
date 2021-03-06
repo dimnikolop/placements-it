@@ -14,7 +14,7 @@
                     </p>
                 </div>
             @endif
-            <form id="companyRegisterForm" action="{{ route('company.register') }}" method="post">
+            <form id="companyRegisterForm" action="{{ route('companies.register') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="form-group col-md-6">
