@@ -41,7 +41,7 @@
                         <h5 class="card-title heading-decorated_1 mb-3">Θέσεις Απασχόλησης</h5>
                         <div class="list-group">
                             @foreach ($jobs as $job)
-                                <a href="{{ route('companies.jobs.show', [$company, $job]) }}" class="list-group-item list-group-item-action">
+                                <a href="{{ route('companies.jobs.show', [$company->slug, $job]) }}" class="list-group-item list-group-item-action">
                                     <div class="d-flex w-100 justify-content-between mb-3">
                                         <h5 class="mb-1">{{ $job->title }}</h5>
                                         <small class="text-muted">{{ $job->created_at->diffForHumans() }}</small>

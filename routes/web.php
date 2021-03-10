@@ -11,7 +11,7 @@ use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\QuestionnairesController;
-use App\Http\Controllers\Admin\AnnouncementController;
+use App\Http\Controllers\AnnouncementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,9 @@ use App\Http\Controllers\Admin\AnnouncementController;
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('/admin/dashboard', [DashboardController::class, 'admin'])->name('admin.dashboard')->middleware(['auth','admin']);
+Route::get('/dashboard/{user}', [DashboardController::class, 'company'])->name('company.dashboard')->middleware('auth');
+
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/requirements', [PageController::class, 'requirements'])->name('requirements');
 Route::get('/guides', [PageController::class, 'guides'])->name('guides');
@@ -36,33 +39,11 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
 Route::get('/questionnaires', [QuestionnairesController::class, 'index'])->name('questionnaires.index');
 Route::get('/questionnaires/trainee', [QuestionnairesController::class, 'traineeCreate'])->name('questionnaires.trainee.create');
-Route::get('/questionnaires/company', [QuestionnairesController::class, 'companyCreate'])->name('questionnaires.company.create');
-Route::get('/questionnaires/professor', [QuestionnairesController::class, 'professorCreate'])->name('questionnaires.professor.create');
 Route::post('/questionnaires/trainee', [QuestionnairesController::class, 'traineeStore'])->name('questionnaires.trainee.store');
+Route::get('/questionnaires/company', [QuestionnairesController::class, 'companyCreate'])->name('questionnaires.company.create');
 Route::post('/questionnaires/company', [QuestionnairesController::class, 'companyStore'])->name('questionnaires.company.store');
+Route::get('/questionnaires/professor', [QuestionnairesController::class, 'professorCreate'])->name('questionnaires.professor.create');
 Route::post('/questionnaires/professor', [QuestionnairesController::class, 'professorStore'])->name('questionnaires.professor.store');
-
-Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
-Route::get('/register/company', [CompanyController::class, 'create'])->name('companies.create');
-Route::post('/register/company', [CompanyController::class, 'store'])->name('companies.register');
-Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
-Route::patch('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update')->middleware('auth');
-Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy')->middleware('auth');
-Route::get('/dashboard/{user}', [CompanyController::class, 'dashboard'])->name('companies.dashboard')->middleware('auth');
-
-Route::get('/companies/{company}/jobs', [JobController::class, 'index'])->name('companies.jobs.index')->middleware('auth');
-Route::post('/companies/{company}/jobs', [JobController::class, 'store'])->name('companies.jobs.store')->middleware('auth');
-Route::get('/companies/{company}/jobs/{job}', [JobController::class, 'show'])->name('companies.jobs.show');
-Route::patch('/jobs/{job}', [JobController::class, 'update'])->name('jobs.update')->middleware('auth');
-Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy')->middleware('auth');
-
-Route::get('/graduates', [GraduateController::class, 'index'])->name('graduates.index')->middleware(['auth','admin']);
-Route::get('/register/graduate', [GraduateController::class, 'create'])->name('graduates.create');
-Route::post('/register/graduate', [GraduateController::class, 'store'])->name('graduate.register');
-Route::get('/graduate/{id}', [GraduateController::class, 'show'])->name('graduate.show');
-Route::patch('/graduate/{id}', [GraduateController::class, 'update'])->name('graduate.update')->middleware(['auth','admin']);
-Route::delete('/graduate/{id}', [GraduateController::class, 'destroy'])->name('graduate.destroy')->middleware(['auth','admin']);
-Route::get('/graduates/map', [GraduateController::class, 'map'])->name('graduates.map');
 
 Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
 Route::get('/admin/announcement/create', [AnnouncementController::class, 'create'])->name('announcement.create')->middleware(['auth','admin']);
@@ -72,6 +53,19 @@ Route::get('/admin/announcement/{id}/edit', [AnnouncementController::class, 'edi
 Route::patch('/admin/announcement/{id}', [AnnouncementController::class, 'update'])->name('announcement.update')->middleware(['auth','admin']);
 Route::delete('/admin/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy')->middleware(['auth','admin']);
 Route::get('/announcements/download/file/{id}', [AnnouncementController::class, 'downloadFile'])->name('announcements.download.file');
+
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
+Route::get('/register/company', [CompanyController::class, 'create'])->name('companies.create');
+Route::post('/register/company', [CompanyController::class, 'store'])->name('companies.register');
+Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
+Route::patch('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update')->middleware('auth');
+Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy')->middleware('auth');
+
+Route::get('/companies/{company}/jobs', [JobController::class, 'index'])->name('companies.jobs.index')->middleware('auth');
+Route::post('/companies/{company}/jobs', [JobController::class, 'store'])->name('companies.jobs.store')->middleware('auth');
+Route::get('/companies/{company}/jobs/{job}', [JobController::class, 'show'])->name('companies.jobs.show');
+Route::patch('/jobs/{job}', [JobController::class, 'update'])->name('jobs.update')->middleware('auth');
+Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy')->middleware('auth');
 
 Route::get('/trainees', [TraineeController::class, 'index'])->name('trainees.index');
 Route::get('/admin/trainee/create', [TraineeController::class, 'create'])->name('trainee.create');
@@ -83,4 +77,10 @@ Route::delete('/admin/trainee/{trainee}', [TraineeController::class, 'destroy'])
 Route::get('/stats/trainee', [StatisticsController::class, 'indexTrainee'])->name('statistics.trainee');
 Route::get('/stats/graduate', [StatisticsController::class, 'indexGraduate'])->name('statistics.graduate');
 
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/graduates', [GraduateController::class, 'index'])->name('graduates.index')->middleware(['auth','admin']);
+Route::get('/register/graduate', [GraduateController::class, 'create'])->name('graduates.create');
+Route::post('/register/graduate', [GraduateController::class, 'store'])->name('graduate.register');
+Route::get('/graduate/{id}', [GraduateController::class, 'show'])->name('graduate.show');
+Route::patch('/graduate/{id}', [GraduateController::class, 'update'])->name('graduate.update')->middleware(['auth','admin']);
+Route::delete('/graduate/{id}', [GraduateController::class, 'destroy'])->name('graduate.destroy')->middleware(['auth','admin']);
+Route::get('/graduates/map', [GraduateController::class, 'map'])->name('graduates.map');

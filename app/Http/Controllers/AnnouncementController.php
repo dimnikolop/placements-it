@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use App\Models\Announcement;
@@ -20,12 +20,12 @@ class AnnouncementController extends Controller
         $announcements = Announcement::orderBy('updated_at', 'desc')->get();
 
         if (auth()->check() && auth()->user()->role === 'admin') {
-            return view('announcements.index', [
+            return view('announcements.indexAdmin', [
                 'announcements' => $announcements
             ]);
         }
         else {
-            return view('main.announcements', [
+            return view('announcements.index', [
                 'announcements' => $announcements
             ]);
         }

@@ -84,5 +84,5 @@
         });
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=putKeyHere&callback=initMap&libraries=&v=weekly"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=yourKey&callback=initMap&libraries=&v=weekly"></script>
 @endpush

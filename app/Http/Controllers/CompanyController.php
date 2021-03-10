@@ -20,7 +20,7 @@ class CompanyController extends Controller
     {
         if (auth()->check() && auth()->user()->role === 'admin') {
             $companies = Company::orderBy('status', 'desc')->get();
-            return view('admin.companies', [
+            return view('companies.indexAdmin', [
                 'companies' => $companies
             ]);
         }
@@ -39,7 +39,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('main.company_register');
+        return view('companies.create');
     }
 
     /**
@@ -160,7 +160,7 @@ class CompanyController extends Controller
             
             $company->update($validatedData);
 
-            return redirect()->route('companies.dashboard', auth()->user()->username)->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
+            return redirect()->route('company.dashboard', auth()->user()->username)->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς!');
         }  
     }
 
@@ -180,21 +180,5 @@ class CompanyController extends Controller
         else {
             return redirect()->route('home');
         } 
-    }
-
-    /**
-     * Display the company dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function dashboard()
-    {
-        $company = auth()->user()->company;
-        $jobs = $company->jobs;
-
-        return view('companies.dashboard', [
-            'company' => $company,
-            'jobs' => $jobs
-        ]);
     }
 }

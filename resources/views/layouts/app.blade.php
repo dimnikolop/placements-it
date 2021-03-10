@@ -32,7 +32,7 @@
                                 @if (auth()->user()->role == 'admin')
                                     <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
                                 @else
-                                    <a class="dropdown-item" href="{{ route('companies.dashboard', auth()->user()->username) }}">Προφίλ</a>
+                                    <a class="dropdown-item" href="{{ route('company.dashboard', auth()->user()->username) }}">Προφίλ</a>
                                 @endif
                                 <div class="dropdown-divider"></div>
                                 <form action="{{ route('logout') }}" method="post">

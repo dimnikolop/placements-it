@@ -12,24 +12,24 @@ use App\Http\Requests\StoreGraduateRequest;
 class GraduateController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of all graduates.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $graduates = Graduate::orderBy('status')->get();
-        return view('admin.graduates', compact('graduates'));
+        return view('graduates.index', compact('graduates'));
     }
 
     /**
-     * Show the form for creating a new graduate.
+     * Show the form for creating a new graduate and fill the questionnaire.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('main.graduate_register');
+        return view('graduates.create');
     }
 
     /**
@@ -85,13 +85,13 @@ class GraduateController extends Controller
             ]);
     
             if ($request->has('question2')) {
-                $questionnaire['question2'] = implode(', ', $questionnaire['question2']);
+                $questionnaire['question2'] = implode(',', $questionnaire['question2']);
             }
             if ($request->has('question8c')) {
-                $questionnaire['question8c'] = implode(', ', $questionnaire['question8c']);
+                $questionnaire['question8c'] = implode(',', $questionnaire['question8c']);
             }
             if ($request->has('question25')) {
-                $questionnaire['question25'] = implode(', ', $questionnaire['question25']);
+                $questionnaire['question25'] = implode(',', $questionnaire['question25']);
             }
             
             if (!empty(array_filter($questionnaire))) {
@@ -162,6 +162,6 @@ class GraduateController extends Controller
     public function map()
     {
         $graduates = Graduate::where('map', 1)->where('status', 'approved')->get();
-        return view('main.graduates_map', compact('graduates'));
+        return view('graduates.map', compact('graduates'));
     }
 }

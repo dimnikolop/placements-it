@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class JobController extends Controller
 {
     /**
-     * Display a listing of all jobs.
+     * Display a listing of all jobs offered.
      *
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
@@ -31,7 +31,7 @@ class JobController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created job in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Company  $company
@@ -52,11 +52,11 @@ class JobController extends Controller
             'requirements' => $request->requirements
         ]);
 
-        return redirect()->route('companies.dashboard', auth()->user()->username)->with('success', 'H νέα θέση απασχόλησης δημιουργήθηκε επιτυχώς.');
+        return redirect()->route('company.dashboard', auth()->user()->username)->with('success', 'H νέα θέση απασχόλησης δημιουργήθηκε επιτυχώς.');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified job.
      *
      * @param  string  $slug
      * @param  \App\Models\Job  $job
@@ -66,7 +66,7 @@ class JobController extends Controller
     {
         $company = Company::where('slug', $slug)->firstOrFail();
 
-        return view('main.show_job', compact('company', 'job'));
+        return view('jobs.show', compact('company', 'job'));
     }
 
     /**
@@ -82,7 +82,7 @@ class JobController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified job in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Company  $company
@@ -99,11 +99,11 @@ class JobController extends Controller
 
         $job->update($validatedData);
 
-        return redirect()->route('companies.dashboard', auth()->user()->username)->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς.');
+        return redirect()->route('company.dashboard', auth()->user()->username)->with('success', 'Οι αλλαγές αποθηκεύτηκαν επιτυχώς.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified job from storage.
      *
      * @param  \App\Models\Company  $company
      * @param  \App\Models\Job  $job
@@ -112,6 +112,6 @@ class JobController extends Controller
     public function destroy(Company $company, Job $job)
     {
         $job->delete();
-        return redirect()->route('companies.dashboard', auth()->user()->username)->with('success', 'H θέση απασχόλησης με τίτλο ' .$job->title. ' διαγράφηκε επιτυχώς.');
+        return redirect()->route('company.dashboard', auth()->user()->username)->with('success', 'H θέση απασχόλησης με τίτλο ' .$job->title. ' διαγράφηκε επιτυχώς.');
     }
 }
